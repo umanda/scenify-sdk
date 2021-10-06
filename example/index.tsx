@@ -5,7 +5,17 @@ import Editor, { EditorProvider } from '../src';
 
 const App = () => {
   return (
-    <div style={{ height: '100vh', width: '100vw', display: 'flex' }}>
+    <div
+      style={{
+        height: '100vh',
+        width: '100vw',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <div style={{ height: '60px', flex: 'none' }}>
+        <button className="btn btn-primary">Download</button>
+      </div>
       <Editor />
     </div>
   );
