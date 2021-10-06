@@ -1,5 +1,5 @@
 import Editor from './editor';
-
+export * from './designManager';
 export * from './hooks';
-export default Editor;
 export * from './context';
+export default Editor;
