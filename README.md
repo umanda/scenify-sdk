@@ -12,4 +12,4 @@ yarn add @scenify/sdk
 npm install @scenify/sdk
 ```
 
-**View full documentation and examples on [docs.scenify.io](https//docs.scenify.io)**
+**View full documentation and examples on [Scenify SDK Docs](https//docs.scenify.io)**
