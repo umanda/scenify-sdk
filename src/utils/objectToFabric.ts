@@ -72,8 +72,8 @@ class ObjectToFabric {
 
         const element = new fabric.StaticImage(image, {
           ...baseOptions,
-          cropX: item.metadata.cropX,
-          cropY: item.metadata.cropY
+          cropX: item.metadata.cropX || 0,
+          cropY: item.metadata.cropY || 0
         })
 
         const { top, left } = element

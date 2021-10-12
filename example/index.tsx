@@ -57,6 +57,17 @@ const App = () => {
       handlers.templateHandler.importTemplate(template)
     }
   }
+
+  const addImage = () => {
+    const options = {
+      type: 'StaticImage',
+      metadata: {
+        src:
+          'https://pixabay.com/get/gbb0b07d5209d35482d415bc979a3b78087dab03e86f590cc3af0315eaca9077d3743fbd5aa28a418460c2833e6c4acd6_640.jpg'
+      }
+    }
+    handlers?.objectsHandler.create(options)
+  }
   return (
     <div
       style={{
@@ -67,6 +78,9 @@ const App = () => {
       }}
     >
       <div style={{ height: '60px', flex: 'none' }}>
+        <button onClick={addImage} className="btn btn-primary">
+          Add image
+        </button>
         <button onClick={handleImportTemplate} className="btn btn-primary">
           Import
         </button>
