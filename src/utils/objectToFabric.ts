@@ -70,7 +70,11 @@ class ObjectToFabric {
           baseOptions.height = image.height
         }
 
-        const element = new fabric.StaticImage(image, baseOptions)
+        const element = new fabric.StaticImage(image, {
+          ...baseOptions,
+          cropX: item.metadata.cropX,
+          cropY: item.metadata.cropY
+        })
 
         const { top, left } = element
 
@@ -79,7 +83,7 @@ class ObjectToFabric {
             top: options.top,
             left: options.left
           })
-          element.scaleToWidth(320)
+          element.scaleToWidth(480)
         }
         resolve(element)
       } catch (err) {

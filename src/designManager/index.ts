@@ -19,7 +19,6 @@ export class DesignManager {
 
     for (const object of template.objects) {
       const element = await objectToFabric.run(object)
-      console.log({ element })
       if (element) {
         this.canvas.add(element)
       } else {
@@ -42,7 +41,6 @@ export class DesignManager {
   }
 
   async toDataURL() {
-    console.log(this.canvas)
     const data = this.canvas.toDataURL({
       multiplier: 3,
       top: 0,
