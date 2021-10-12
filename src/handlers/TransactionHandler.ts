@@ -14,7 +14,7 @@ class TransactionHandler extends BaseHandler {
         const json = this.state
         this.undos.push({
           type,
-          json,
+          json
         })
         const canvasJSON = this.canvas.toJSON(this.root.propertiesToInclude)
         // @ts-ignore
@@ -22,7 +22,7 @@ class TransactionHandler extends BaseHandler {
           if (object.clipPath) {
             // @ts-ignore
 
-            fabric.util.enlivenObjects([object.clipPath], function (arg1) {
+            fabric.util.enlivenObjects([object.clipPath], function(arg1) {
               object.clipPath = arg1[0]
             })
           }
@@ -48,7 +48,7 @@ class TransactionHandler extends BaseHandler {
     }
     this.redos.push({
       type: 'redo',
-      json: this.state,
+      json: this.state
     })
     this.replay(undo)
   }, 100)
@@ -60,7 +60,7 @@ class TransactionHandler extends BaseHandler {
     }
     this.undos.push({
       type: 'undo',
-      json: this.state,
+      json: this.state
     })
     this.replay(redo)
   }, 100)
@@ -82,7 +82,7 @@ class TransactionHandler extends BaseHandler {
     return {
       undos: this.undos,
       redos: this.redos,
-      state: this.state,
+      state: this.state
     }
   }
 }

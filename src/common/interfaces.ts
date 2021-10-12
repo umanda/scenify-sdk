@@ -1,63 +1,62 @@
-import { IEditorContext } from '../context/editor';
-import Handlers from '../handlers';
+import { IEditorContext } from '../context/editor'
+import Handlers from '../handlers'
 
 export interface FabricWheelEvent {
-  e: WheelEvent;
-  target?: Object | undefined;
-  subTargets?: Object[] | undefined;
-  button?: number | undefined;
-  isClick?: boolean | undefined;
-  pointer?: fabric.IPoint | undefined;
-  absolutePointer?: fabric.IPoint | undefined;
+  e: WheelEvent
+  target?: Object | undefined
+  subTargets?: Object[] | undefined
+  button?: number | undefined
+  isClick?: boolean | undefined
+  pointer?: fabric.IPoint | undefined
+  absolutePointer?: fabric.IPoint | undefined
   transform?:
     | {
-        corner: string;
-        original: Object;
-        originX: string;
-        originY: string;
-        width: number;
+        corner: string
+        original: Object
+        originX: string
+        originY: string
+        width: number
       }
-    | undefined;
+    | undefined
 }
 
 export interface HandlerOptions {
-  root: Handlers;
-  context: IEditorContext;
-  canvas: FabricCanvas;
+  root: Handlers
+  context: IEditorContext
+  canvas: FabricCanvas
 }
 
 export interface RootHandlerOptions {
-  context: IEditorContext;
-  canvas: FabricCanvas;
+  context: IEditorContext
+  canvas: FabricCanvas
 }
 
 export interface EditorOptions {
-  id: string;
-  context: any;
+  id: string
+  context: any
 }
 
 export interface CanvasOptions {
-  width: number;
-  height: number;
+  width: number
+  height: number
 }
 
 export interface FabricCanvasOption {
-  wrapperEl: HTMLElement;
+  wrapperEl: HTMLElement
 }
 
-export type FabricCanvas<T extends any = fabric.Canvas> = T &
-  FabricCanvasOption;
+export type FabricCanvas<T extends any = fabric.Canvas> = T & FabricCanvasOption
 
 //  Template
 
 export interface Template {
-  id: string;
-  name: string;
-  preview: string;
-  background: any;
+  id: string
+  name: string
+  preview: string
+  background: any
   frame: {
-    width: number;
-    height: number;
-  };
-  objects: any[];
+    width: number
+    height: number
+  }
+  objects: any[]
 }

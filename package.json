@@ -27,11 +27,13 @@
     }
   },
   "prettier": {
-    "printWidth": 80,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5"
-  },
+    "tabWidth": 2,
+    "printWidth": 110,
+    "arrowParens": "avoid"
+  }
+  ,
   "name": "@scenify/sdk",
   "author": "Dany Boza <db@backium.co>",
   "homepage": "https://github.com/scenify/scenify-sdk",

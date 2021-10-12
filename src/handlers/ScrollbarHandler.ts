@@ -103,14 +103,14 @@ class ScrollbarHandler extends BaseHandler {
       right: '5px',
       height: '100%',
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'center'
     })
     this.setElementStyle(scrollbarWrapper, {
       position: 'relative',
       height: 'calc(100% - 30px)',
       width: '6px',
       overflow: 'hidden',
-      margin: 'auto',
+      margin: 'auto'
     })
 
     this.setElementStyle(scrollbar, {
@@ -119,7 +119,7 @@ class ScrollbarHandler extends BaseHandler {
       background: 'rgba(0,0,0,0.4)',
       height: '0px',
       top: '125px',
-      borderRadius: '5px',
+      borderRadius: '5px'
     })
 
     scrollbarContainer.appendChild(scrollbarWrapper)
@@ -157,7 +157,7 @@ class ScrollbarHandler extends BaseHandler {
       bottom: '5px',
       width: '100%',
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'center'
     })
 
     this.setElementStyle(scrollbarWrapper, {
@@ -165,7 +165,7 @@ class ScrollbarHandler extends BaseHandler {
       width: 'calc(100% - 30px)',
       height: '6px',
       overflow: 'hidden',
-      margin: 'auto',
+      margin: 'auto'
     })
 
     this.setElementStyle(scrollbar, {
@@ -174,7 +174,7 @@ class ScrollbarHandler extends BaseHandler {
       background: 'rgba(0,0,0,0.4)',
       height: '6px',
       left: '125px',
-      borderRadius: '5px',
+      borderRadius: '5px'
     })
 
     scrollbarContainer.appendChild(scrollbarWrapper)
@@ -213,13 +213,13 @@ class ScrollbarHandler extends BaseHandler {
         this.setElementStyle(scrollbarY, {
           bottom: 'auto',
           top: 0 + 'px',
-          height: calculatedSize + 'px',
+          height: calculatedSize + 'px'
         })
       } else {
         this.setElementStyle(scrollbarY, {
           bottom: 'auto',
           top: bottom + 'px',
-          height: calculatedSize + 'px',
+          height: calculatedSize + 'px'
         })
       }
     } else if (diffTop < 0 && diffBottom < 0) {
@@ -228,14 +228,14 @@ class ScrollbarHandler extends BaseHandler {
       this.setElementStyle(scrollbarY, {
         bottom: 'auto',
         top: Math.abs(diffTop) + 'px',
-        height: calculatedSize + 'px',
+        height: calculatedSize + 'px'
       })
     } else if (diffTop < 0 && diffBottom > 0) {
       let calculatedSize = canvasHeight + diffTop
       this.setElementStyle(scrollbarY, {
         top: 'auto',
         bottom: diffTop + 'px',
-        height: calculatedSize + 'px',
+        height: calculatedSize + 'px'
       })
     }
   }
@@ -274,13 +274,13 @@ class ScrollbarHandler extends BaseHandler {
         this.setElementStyle(scrollbarX, {
           right: 'auto',
           left: 0 + 'px',
-          width: calculatedSize + 'px',
+          width: calculatedSize + 'px'
         })
       } else {
         this.setElementStyle(scrollbarX, {
           right: 'auto',
           left: diffRight + 'px',
-          width: calculatedSize + 'px',
+          width: calculatedSize + 'px'
         })
       }
     } else if (diffLeft < 0 && diffRight < 0) {
@@ -289,14 +289,14 @@ class ScrollbarHandler extends BaseHandler {
       this.setElementStyle(scrollbarX, {
         right: 'auto',
         left: Math.abs(diffLeft) + 'px',
-        width: calculatedSize + 'px',
+        width: calculatedSize + 'px'
       })
     } else if (diffLeft < 0 && diffRight > 0) {
       let calculatedSize = canvasWidth + diffLeft
       this.setElementStyle(scrollbarX, {
         left: 'auto',
         right: diffLeft + 'px',
-        width: calculatedSize + 'px',
+        width: calculatedSize + 'px'
       })
     }
   }

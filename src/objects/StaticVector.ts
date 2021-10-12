@@ -15,13 +15,13 @@ class StaticVectorObject extends fabric.Group {
   toObject(propertiesToInclude = []) {
     // @ts-ignore
     return super.toObject(propertiesToInclude, {
-      src: this.src,
+      src: this.src
     })
   }
   toJSON(propertiesToInclude = []) {
     // @ts-ignore
     return super.toObject(propertiesToInclude, {
-      src: this.src,
+      src: this.src
     })
   }
 
@@ -33,7 +33,7 @@ class StaticVectorObject extends fabric.Group {
 }
 
 fabric.StaticVector = fabric.util.createClass(StaticVectorObject, {
-  type: StaticVectorObject.type,
+  type: StaticVectorObject.type
 })
 
 fabric.StaticVector.fromObject = StaticVectorObject.fromObject

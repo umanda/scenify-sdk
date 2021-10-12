@@ -22,7 +22,7 @@ export class StaticTextObject extends fabric.Textbox {
 }
 
 fabric.StaticText = fabric.util.createClass(StaticTextObject, {
-  type: StaticTextObject.type,
+  type: StaticTextObject.type
 })
 fabric.StaticText.fromObject = StaticTextObject.fromObject
 

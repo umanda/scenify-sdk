@@ -1,4 +1,3 @@
-import { SCALE_FACTOR } from '../common/constants'
 import { Template } from '../common/interfaces'
 import { fabric } from 'fabric'
 import objectToFabric from './objectToFabric'
@@ -30,7 +29,7 @@ export class DesignManager {
   }
 
   setDimensions({ width, height }: { width: number; height: number }) {
-    this.canvas.setWidth(width * SCALE_FACTOR).setHeight(height * SCALE_FACTOR)
+    this.canvas.setWidth(width).setHeight(height)
   }
 
   setBackground(background: { type: string; value: string }) {
@@ -49,7 +48,7 @@ export class DesignManager {
       top: 0,
       left: 0,
       height: this.canvas.getHeight(),
-      width: this.canvas.getWidth(),
+      width: this.canvas.getWidth()
     })
     return data
   }

@@ -9,6 +9,6 @@ export function useEditorContext() {
     canvas,
     activeObject,
     setActiveObject,
-    zoomRatio,
+    zoomRatio
   }
 }

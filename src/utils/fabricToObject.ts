@@ -1,4 +1,4 @@
-import { ObjectType, SCALE_FACTOR } from '../common/constants'
+import { ObjectType } from '../common/constants'
 
 class ExportObject {
   run(item, options) {
@@ -23,7 +23,7 @@ class ExportObject {
   [ObjectType.STATIC_TEXT](item, options) {
     const baseOptions = this.getBaseOptions(item, options)
     const { fontFamily, textAlign, fontSize, fontWeight, charSpacing, lineHeight, fill, text, angle } = item
-    const scaledFontSize = fontSize / SCALE_FACTOR
+    const scaledFontSize = fontSize
     const metadata = {
       ...item.metadata,
       angle,
@@ -35,12 +35,12 @@ class ExportObject {
       fontFamily,
       textAlign,
       lineheight: lineHeight,
-      text: item.text,
+      text: item.text
     }
 
     const object = {
       ...baseOptions,
-      metadata,
+      metadata
     }
 
     return object
@@ -51,8 +51,8 @@ class ExportObject {
     const object = {
       ...baseOptions,
       metadata: {
-        src: item.src,
-      },
+        src: item.src
+      }
     }
 
     return object
@@ -64,8 +64,8 @@ class ExportObject {
     const object = {
       ...baseOptions,
       metadata: {
-        src: item.src,
-      },
+        src: item.src
+      }
     }
 
     return object
@@ -78,8 +78,8 @@ class ExportObject {
       ...baseOptions,
       metadata: {
         value: item.path,
-        fill: item.fill,
-      },
+        fill: item.fill
+      }
     }
 
     return object
@@ -88,15 +88,15 @@ class ExportObject {
   getBaseOptions(item, options) {
     const { top, left, width, height, scaleX, scaleY, originX, originY, type } = item
     const baseOptions = {
-      left: left / SCALE_FACTOR - options.left / SCALE_FACTOR,
-      top: top / SCALE_FACTOR - options.top / SCALE_FACTOR,
-      width: width / SCALE_FACTOR,
-      height: height / SCALE_FACTOR,
+      left: left - options.left,
+      top: top - options.top,
+      width: width,
+      height: height,
       originX,
       originY,
       scaleX,
       scaleY,
-      type,
+      type
     }
     return baseOptions
   }
