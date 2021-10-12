@@ -76,11 +76,17 @@ class FrameHandler extends BaseHandler {
     // })
     // this.sizeFormat = options
     // const scaledSize = this.scaleDimension(this.sizeFormat)
-    // const frame = new fabric.Frame({ ...defaultFrameOptions, ...scaledSize, shadow })
-    // this.canvas.add(frame)
-    // frame.center()
+    const frame = new fabric.Frame({
+      id: '',
+      name: 'Initial Frame',
+      fill: '#ffffff',
+      hoverCursor: 'default',
+      ...this.options
+    })
+    this.canvas.add(frame)
+    frame.center()
     // this.options = Object.assign(this.options, scaledSize)
-    // this.context.setSizeFormat(options)
+    // this.context.(options)
   }
 
   getBackgroundImage = () => {

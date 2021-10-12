@@ -7,30 +7,54 @@ const template = {
   name: 'Untitled design',
   objects: [
     {
-      left: 254.5,
-      top: 32.7,
-      width: 1311.5,
-      height: 814,
+      left: 598.5,
+      top: 212.67000000000002,
+      width: 800,
+      height: 72.32,
       originX: 'left',
       originY: 'top',
-      scaleX: 0.54,
-      scaleY: 0.54,
-      type: 'StaticImage',
+      scaleX: 1,
+      scaleY: 1,
+      type: 'StaticText',
       metadata: {
-        src: 'https://i.ibb.co/RNvBJhf/1633810829286.png',
-        cropX: 193.5,
-        cropY: 141
+        angle: 0,
+        fill: '#ffffff',
+        fontWeight: 700,
+        charspacing: 0,
+        fontSize: 64,
+        template: 'Hello world',
+        fontFamily: 'Lexend',
+        textAlign: 'center',
+        lineheight: 1.16,
+        text: 'Hello world'
+      }
+    },
+    {
+      left: 164.87,
+      top: 135.32999999999998,
+      width: 3800,
+      height: 3000,
+      originX: 'left',
+      originY: 'top',
+      scaleX: 0.08,
+      scaleY: 0.08,
+      type: 'StaticVector',
+      metadata: {
+        src:
+          'https://d2g16cura83u2t.cloudfront.net/illustration/free/additional-file/3360863/3.svg?token=eyJhbGciOiJoczI1NiIsImtpZCI6ImRlZmF1bHQifQ__.eyJpc3MiOiJkMmcxNmN1cmE4M3UydC5jbG91ZGZyb250Lm5ldCIsImV4cCI6MTYzNDMyMTAxNSwicSI6bnVsbCwiaWF0IjoxNjM0MDYxODE1fQ__.938877ba5f6be19884da9de6758554d5de2644e8ab3ccebe60965b55578f9bda'
       }
     }
   ],
   background: {
     type: 'color',
-    value: '#ffffff'
+    value: '#e15f41'
   },
   frame: {
-    width: 1280,
-    height: 720
-  }
+    width: 1500,
+    height: 500
+  },
+  preview: 'https://d3q7mfli5umxdg.cloudfront.net/1634061854515_337318.png',
+  id: 'oqGAd5hZeUAH3_-SSvT1w'
 }
 const App = () => {
   const handlers = useHandlers()
@@ -68,6 +92,7 @@ const App = () => {
     }
     handlers?.objectsHandler.create(options)
   }
+  
   return (
     <div
       style={{
