@@ -1,8 +1,4 @@
-import {
-  // FabricCanvas,
-  HandlerOptions,
-  RootHandlerOptions
-} from '../common/interfaces'
+import { HandlerOptions, RootHandlerOptions } from '../common/interfaces'
 import { PROPERTIES_TO_INCLUDE } from '../common/constants'
 import CanvasHandler from './CanvasHandler'
 import EventsHandler from './EventsHandler'
@@ -13,6 +9,8 @@ import ZoomHandler from './ZoomHandler'
 import PersonalizationHandler from './PersonalizationHandler'
 import TemplateHandler from './TemplateHandler'
 import ScrollbarHandler from './ScrollbarHandler'
+import DesignHandler from './design-handler/design-handler'
+
 class Handlers {
   public frameHandler: FrameHandler
   public eventsHandler: EventsHandler
@@ -22,9 +20,10 @@ class Handlers {
   public templateHandler: TemplateHandler
   public zoomHandler: ZoomHandler
   public scrollbarHandler: ScrollbarHandler
-  // public canvas: FabricCanvas;
   public propertiesToInclude: string[]
   public personalizationHandler: PersonalizationHandler
+  public designHandler: DesignHandler
+
   constructor(props: RootHandlerOptions) {
     this.propertiesToInclude = PROPERTIES_TO_INCLUDE
     const handlerOptions: HandlerOptions = {
@@ -41,6 +40,7 @@ class Handlers {
     this.personalizationHandler = new PersonalizationHandler(handlerOptions)
     this.templateHandler = new TemplateHandler(handlerOptions)
     this.scrollbarHandler = new ScrollbarHandler(handlerOptions)
+    this.designHandler = new DesignHandler(handlerOptions)
   }
 
   destroy = () => {}

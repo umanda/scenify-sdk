@@ -45,10 +45,10 @@ const App = () => {
   //     handlers.objectsHandler.create(object)
   //   }
   // }, [handlers])
-  const handlerDownload = () => {
+  const handlerDownload = async () => {
     if (handlers) {
-      const template = handlers.templateHandler.exportTemplate()
-      console.log({ template })
+      const template = await handlers.designHandler.toDataURL()
+      console.log(template)
     }
   }
 
