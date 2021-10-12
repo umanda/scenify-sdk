@@ -51,7 +51,9 @@ class ExportObject {
     const object = {
       ...baseOptions,
       metadata: {
-        src: item.src
+        src: item.src,
+        cropX: item.cropX,
+        cropY: item.cropY
       }
     }
 

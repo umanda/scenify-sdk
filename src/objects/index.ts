@@ -1,5 +1,5 @@
 export * from './Frame'
 export * from './StaticText'
-export * from './StaticImage'
+export * from './static-image'
 export * from './StaticVector'
 export * from './StaticPath'
