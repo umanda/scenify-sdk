@@ -22,7 +22,7 @@ export class StaticPathObject extends fabric.Path {
 }
 
 fabric.StaticPath = fabric.util.createClass(StaticPathObject, {
-  type: StaticPathObject.type,
+  type: StaticPathObject.type
 })
 fabric.StaticPath.fromObject = StaticPathObject.fromObject
 

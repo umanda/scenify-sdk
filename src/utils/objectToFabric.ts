@@ -1,5 +1,5 @@
 import { fabric } from 'fabric'
-import { ObjectType, SCALE_FACTOR } from '../common/constants'
+import { ObjectType } from '../common/constants'
 import { loadImageFromURL } from './image-loader'
 import isNaN from 'lodash/isNaN'
 
@@ -34,10 +34,10 @@ class ObjectToFabric {
           text: text ? text : 'Default Text',
           ...(textAlign && { textAlign }),
           ...(fontFamily && { fontFamily }),
-          ...(fontSize && { fontSize: SCALE_FACTOR * fontSize }),
+          ...(fontSize && { fontSize }),
           ...(fontWeight && { fontWeight }),
           ...(charSpacing && { charSpacing }),
-          ...(lineheight && { lineheight }),
+          ...(lineheight && { lineheight })
         }
         const element = new fabric.StaticText(textOptions)
 
@@ -46,7 +46,7 @@ class ObjectToFabric {
         if (isNaN(top) || isNaN(left)) {
           element.set({
             top: options.top + options.height / 2 - height / 2,
-            left: options.left + options.width / 2 - width / 2,
+            left: options.left + options.width / 2 - width / 2
           })
         }
 
@@ -77,7 +77,7 @@ class ObjectToFabric {
         if (isNaN(top) || isNaN(left)) {
           element.set({
             top: options.top,
-            left: options.left,
+            left: options.left
           })
           element.scaleToWidth(320)
         }
@@ -101,7 +101,7 @@ class ObjectToFabric {
         if (isNaN(top) || isNaN(left)) {
           element.set({
             top: options.top,
-            left: options.left,
+            left: options.left
           })
           element.scaleToWidth(320)
         }
@@ -129,7 +129,7 @@ class ObjectToFabric {
           if (isNaN(top) || isNaN(left)) {
             object.set({
               top: options.top,
-              left: options.left,
+              left: options.left
             })
             object.scaleToWidth(320)
           }
@@ -147,16 +147,16 @@ class ObjectToFabric {
     const { fill, angle, originX, originY } = metadata
     let baseOptions = {
       angle: angle ? angle : 0,
-      top: options.top + top * SCALE_FACTOR,
-      left: options.left + left * SCALE_FACTOR,
-      width: width * SCALE_FACTOR,
-      height: height * SCALE_FACTOR,
+      top: options.top + top,
+      left: options.left + left,
+      width: width,
+      height: height,
       originX: originX || 'left',
       originY: originY || 'top',
       scaleX: scaleX || 1,
       scaleY: scaleY || 1,
       fill: fill || '#000000',
-      metadata: metadata,
+      metadata: metadata
     }
     return baseOptions
   }

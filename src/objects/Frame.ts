@@ -10,7 +10,7 @@ export class FrameObject extends fabric.Rect {
       lockMovementY: true,
       lockMovementX: true,
       strokeWidth: 0,
-      padding: 0,
+      padding: 0
     })
     return this
   }
@@ -28,7 +28,7 @@ export class FrameObject extends fabric.Rect {
 }
 
 fabric.Frame = fabric.util.createClass(FrameObject, {
-  type: FrameObject.type,
+  type: FrameObject.type
 })
 fabric.Frame.fromObject = FrameObject.fromObject
 

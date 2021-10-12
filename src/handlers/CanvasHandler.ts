@@ -8,7 +8,7 @@ class CanvasHandler extends BaseHandler {
     super(props)
     this.options = {
       width: props.canvas.width,
-      height: props.canvas.height,
+      height: props.canvas.height
     }
   }
   resize(nextWidth, nextHeight) {

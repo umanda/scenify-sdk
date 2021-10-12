@@ -14,13 +14,13 @@ class BackgroundObject extends fabric.Image {
       hoverCursor: 'default',
       strokeWidth: 0,
       selectable: false,
-      evented: false,
+      evented: false
     })
     return this
   }
 
   static fromObject(options: BackgroundOptions, callback) {
-    fabric.util.loadImage(options.src, function (img) {
+    fabric.util.loadImage(options.src, function(img) {
       //   @ts-ignore
       return callback && callback(new fabric.Background(img, options))
     })
@@ -35,7 +35,7 @@ class BackgroundObject extends fabric.Image {
 }
 
 fabric.Background = fabric.util.createClass(BackgroundObject, {
-  type: BackgroundObject.type,
+  type: BackgroundObject.type
 })
 fabric.Background.fromObject = BackgroundObject.fromObject
 

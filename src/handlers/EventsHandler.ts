@@ -19,7 +19,7 @@ class EventsHandler extends BaseHandler {
       'selection:updated': this.handleSelection,
       'mouse:wheel': this.onMouseWheel,
       'mouse:out': this.onMouseOut,
-      'object:modified': this.objectModified,
+      'object:modified': this.objectModified
     })
 
     this.canvas.wrapperEl.addEventListener('keydown', this.onKeyDown.bind(this), false)
@@ -32,7 +32,7 @@ class EventsHandler extends BaseHandler {
       'selection:updated': this.handleSelection,
       'mouse:wheel': this.onMouseWheel,
       'mouse:out': this.onMouseOut,
-      'object:modified': this.objectModified,
+      'object:modified': this.objectModified
     })
 
     this.canvas.wrapperEl.removeEventListener('keydown', this.onKeyDown.bind(this))

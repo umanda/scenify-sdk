@@ -28,7 +28,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawCircleIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.tl = new fabric.Control({
@@ -39,7 +39,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawCircleIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.bl = new fabric.Control({
@@ -50,7 +50,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawCircleIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.br = new fabric.Control({
@@ -61,7 +61,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawCircleIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.ml = new fabric.Control({
@@ -72,7 +72,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawVerticalLineIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.mt = new fabric.Control({
@@ -83,7 +83,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawHorizontalLineIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.mb = new fabric.Control({
@@ -94,7 +94,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawHorizontalLineIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.mr = new fabric.Control({
@@ -105,7 +105,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: fabric.controlsUtils.scaleOrSkewActionName,
       render: drawVerticalLineIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Object.prototype.controls.mtr = new fabric.Control({
@@ -117,7 +117,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: 'rotate',
       render: drawRotateIcon,
       cornerSize: 28,
-      withConnection: false,
+      withConnection: false
     })
 
     // Texbox controls
@@ -127,7 +127,7 @@ class PersonalizationHandler extends BaseHandler {
     fabric.Textbox.prototype.controls.br = fabric.Object.prototype.controls.br
 
     fabric.Textbox.prototype.controls.mt = new fabric.Control({
-      render: () => false,
+      render: () => false
     })
 
     fabric.Textbox.prototype.controls.mb = fabric.Textbox.prototype.controls.mt
@@ -140,7 +140,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: 'resizing',
       render: drawVerticalLineIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Textbox.prototype.controls.ml = new fabric.Control({
@@ -151,7 +151,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: 'resizing',
       render: drawVerticalLineIcon,
       cornerSize: 28,
-      withConnection: true,
+      withConnection: true
     })
 
     fabric.Textbox.prototype.controls.mtr = new fabric.Control({
@@ -163,7 +163,7 @@ class PersonalizationHandler extends BaseHandler {
       actionName: 'rotate',
       render: drawRotateIcon,
       cornerSize: 28,
-      withConnection: false,
+      withConnection: false
     })
 
     this.canvas.selectionColor = 'rgba(52, 231, 228, 0.15)'
@@ -176,7 +176,7 @@ class PersonalizationHandler extends BaseHandler {
           mt: false,
           mb: false,
           mr: false,
-          ml: false,
+          ml: false
         })
         ev.target.borderDashArray = [7]
       }
