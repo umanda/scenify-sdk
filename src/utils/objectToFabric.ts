@@ -68,13 +68,21 @@ class ObjectToFabric {
       try {
         const baseOptions = this.getBaseOptions(item, options)
         const metadata = item.metadata
-        const text = metadata.template ? metadata.template : 'Default text'
-        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, keyValues } = metadata
+        const {
+          textAlign,
+          fontFamily,
+          fontSize,
+          fontWeight,
+          charSpacing,
+          lineheight,
+          keyValues,
+          text
+        } = metadata
 
         const textOptions = {
           ...baseOptions,
           keyValues: keyValues ? keyValues : [],
-          ...(text && { text }),
+          text: text ? text : 'Default Text',
           ...(textAlign && { textAlign }),
           ...(fontFamily && { fontFamily }),
           ...(fontSize && { fontSize }),
