@@ -11,6 +11,7 @@ class ObjectHandler extends BaseHandler {
     const options = this.root.frameHandler.getOptions()
     const object: fabric.Object = await objectToFabric.run(item, options)
     canvas.add(object)
+    object.center()
     canvas.setActiveObject(object)
   }
 

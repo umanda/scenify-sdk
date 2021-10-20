@@ -6,6 +6,7 @@ import isNaN from 'lodash/isNaN'
 class ObjectToFabric {
   async run(item, options) {
     let object
+    console.log(options)
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
         object = await this[ObjectType.STATIC_TEXT](item, options)
@@ -18,6 +19,12 @@ class ObjectToFabric {
         break
       case ObjectType.STATIC_PATH:
         object = await this[ObjectType.STATIC_PATH](item, options)
+        break
+      case ObjectType.DYNAMIC_TEXT:
+        object = await this[ObjectType.DYNAMIC_TEXT](item, options)
+        break
+      case ObjectType.DYNAMIC_IMAGE:
+        object = await this[ObjectType.DYNAMIC_IMAGE](item, options)
         break
     }
     return object
@@ -50,6 +57,62 @@ class ObjectToFabric {
           })
         }
 
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.DYNAMIC_TEXT](item, options) {
+    return new Promise((resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item, options)
+        const metadata = item.metadata
+        const text = metadata.template ? metadata.template : 'Default text'
+        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, keyValues } = metadata
+
+        const textOptions = {
+          ...baseOptions,
+          keyValues: keyValues ? keyValues : [],
+          ...(text && { text }),
+          ...(textAlign && { textAlign }),
+          ...(fontFamily && { fontFamily }),
+          ...(fontSize && { fontSize }),
+          ...(fontWeight && { fontWeight }),
+          ...(charSpacing && { charSpacing }),
+          ...(lineheight && { lineheight })
+        }
+        const element = new fabric.DynamicText(textOptions)
+
+        const { top, left, width, height } = element
+
+        if (isNaN(top) || isNaN(left)) {
+          element.set({
+            top: options.top + options.height / 2 - height / 2,
+            left: options.left + options.width / 2 - width / 2
+          })
+        }
+
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.DYNAMIC_IMAGE](item, options) {
+    return new Promise((resolve, reject) => {
+      try {
+        const { metadata } = item
+        const baseOptions = this.getBaseOptions(item, options)
+        const { keyValues } = metadata
+        // @ts-ignore
+        const element = new fabric.DynamicImage({
+          ...baseOptions,
+          keys: item.keys,
+          keyValues: keyValues ? keyValues : []
+        })
         resolve(element)
       } catch (err) {
         reject(err)
