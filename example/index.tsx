@@ -99,8 +99,9 @@ const App = () => {
         type: 'DynamicText',
         width: 120,
         fontSize: 27,
-        text: 'Add some {{cc}} body text',
-        metadata: {}
+        metadata: {
+          text: 'Add some {{cc}} body text'
+        }
       }
       handlers.objectsHandler.create(objectOptions)
     }
