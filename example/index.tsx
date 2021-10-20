@@ -92,7 +92,20 @@ const App = () => {
     }
     handlers?.objectsHandler.create(options)
   }
-  
+
+  const addDynamicText = React.useCallback(() => {
+    if (handlers) {
+      const objectOptions = {
+        type: 'DynamicText',
+        width: 120,
+        fontSize: 27,
+        text: 'Add some body text',
+        metadata: {}
+      }
+      handlers.objectsHandler.create(objectOptions)
+    }
+  }, [handlers])
+
   return (
     <div
       style={{
@@ -103,6 +116,9 @@ const App = () => {
       }}
     >
       <div style={{ height: '60px', flex: 'none' }}>
+        <button onClick={addDynamicText} className="btn btn-primary">
+          Add dynamic text
+        </button>
         <button onClick={addImage} className="btn btn-primary">
           Add image
         </button>

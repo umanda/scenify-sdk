@@ -19,6 +19,9 @@ class ObjectToFabric {
       case ObjectType.STATIC_PATH:
         object = await this[ObjectType.STATIC_PATH](item, options)
         break
+      case ObjectType.DYNAMIC_TEXT:
+        object = await this[ObjectType.DYNAMIC_TEXT](item, options)
+        break
     }
     return object
   }
@@ -50,6 +53,52 @@ class ObjectToFabric {
           })
         }
 
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.DYNAMIC_TEXT](item, options) {
+    return new Promise((resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item, options)
+        const metadata = item.metadata
+        const text = metadata.template ? metadata.template : 'Default text'
+        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, keyValues } = metadata
+
+        const textOptions = {
+          ...baseOptions,
+          keyValues: keyValues ? keyValues : [],
+          ...(text && { text }),
+          ...(textAlign && { textAlign }),
+          ...(fontFamily && { fontFamily }),
+          ...(fontSize && { fontSize }),
+          ...(fontWeight && { fontWeight }),
+          ...(charSpacing && { charSpacing }),
+          ...(lineheight && { lineheight })
+        }
+        const element = new fabric.DynamicText(textOptions)
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.DYNAMIC_IMAGE](item, options) {
+    return new Promise((resolve, reject) => {
+      try {
+        const { metadata } = item
+        const baseOptions = this.getBaseOptions(item, options)
+        const { keyValues } = metadata
+        // @ts-ignore
+        const element = new fabric.DynamicImage({
+          ...baseOptions,
+          keys: item.keys,
+          keyValues: keyValues ? keyValues : []
+        })
         resolve(element)
       } catch (err) {
         reject(err)
