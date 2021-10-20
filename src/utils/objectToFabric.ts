@@ -6,7 +6,6 @@ import isNaN from 'lodash/isNaN'
 class ObjectToFabric {
   async run(item, options) {
     let object
-    console.log(options)
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
         object = await this[ObjectType.STATIC_TEXT](item, options)

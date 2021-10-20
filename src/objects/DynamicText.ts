@@ -36,9 +36,11 @@ export class DynamicTextObject extends fabric.Textbox {
       const value = keyValue.value
       const key = keyValue.key
       const regex = new RegExp(key, 'g')
-      const matches = [...(this.text.matchAll(regex) as any)]
+      const matches = this.text.matchAll(regex)
+
       let params = []
-      matches.forEach(match => {
+
+      for (const match of matches) {
         const matchWord = match['0']
         const startIndex = match['index']
         params = params.concat({
@@ -47,7 +49,8 @@ export class DynamicTextObject extends fabric.Textbox {
           endIndex: startIndex + matchWord.length,
           id: uniqueId(matchWord)
         })
-      })
+      }
+
       params.forEach(param => {
         const id = uniqueId(param.key)
         const keyParam = this.replaceKeyWithValue(key, value, id)
@@ -59,8 +62,8 @@ export class DynamicTextObject extends fabric.Textbox {
 
   getParamsFromKeys(text) {
     let params = []
-    const matches = [...text.matchAll(REGEX_VAR)]
-    matches.forEach(match => {
+    const matches = text.matchAll(REGEX_VAR)
+    for (const match of matches) {
       const matchWord = match['0']
       const startIndex = match['index']
       params = params.concat({
@@ -69,7 +72,7 @@ export class DynamicTextObject extends fabric.Textbox {
         endIndex: startIndex + matchWord.length,
         id: uniqueId(matchWord)
       })
-    })
+    }
     return params
   }
 

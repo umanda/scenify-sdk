@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Editor, { EditorProvider, useHandlers } from '../src'
+import Editor, { EditorProvider, useHandlers } from '../dist'
 
 const template = {
   name: 'Untitled design',
@@ -99,7 +99,7 @@ const App = () => {
         type: 'DynamicText',
         width: 120,
         fontSize: 27,
-        text: 'Add some body text',
+        text: 'Add some {{cc}} body text',
         metadata: {}
       }
       handlers.objectsHandler.create(objectOptions)
