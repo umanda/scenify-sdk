@@ -6,6 +6,7 @@ import isNaN from 'lodash/isNaN'
 class ObjectToFabric {
   async run(item, options) {
     let object
+    console.log(options)
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
         object = await this[ObjectType.STATIC_TEXT](item, options)
@@ -21,6 +22,9 @@ class ObjectToFabric {
         break
       case ObjectType.DYNAMIC_TEXT:
         object = await this[ObjectType.DYNAMIC_TEXT](item, options)
+        break
+      case ObjectType.DYNAMIC_IMAGE:
+        object = await this[ObjectType.DYNAMIC_IMAGE](item, options)
         break
     }
     return object
@@ -80,6 +84,16 @@ class ObjectToFabric {
           ...(lineheight && { lineheight })
         }
         const element = new fabric.DynamicText(textOptions)
+
+        const { top, left, width, height } = element
+
+        if (isNaN(top) || isNaN(left)) {
+          element.set({
+            top: options.top + options.height / 2 - height / 2,
+            left: options.left + options.width / 2 - width / 2
+          })
+        }
+
         resolve(element)
       } catch (err) {
         reject(err)

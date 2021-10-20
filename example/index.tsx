@@ -106,6 +106,22 @@ const App = () => {
     }
   }, [handlers])
 
+  const addDynamicImage = React.useCallback(() => {
+    console.log('ff')
+    if (handlers) {
+      const objectOptions = {
+        width: 100,
+        height: 100,
+        backgroundColor: '#bdc3c7',
+        type: 'DynamicImage',
+
+        metadata: {
+          keyValues: [{ key: '{{' + 'image' + '}}', value: '' }]
+        }
+      }
+      handlers.objectsHandler.create(objectOptions)
+    }
+  }, [handlers])
   return (
     <div
       style={{
@@ -118,6 +134,9 @@ const App = () => {
       <div style={{ height: '60px', flex: 'none' }}>
         <button onClick={addDynamicText} className="btn btn-primary">
           Add dynamic text
+        </button>
+        <button onClick={addDynamicImage} className="btn btn-primary">
+          Add dynamic image
         </button>
         <button onClick={addImage} className="btn btn-primary">
           Add image
