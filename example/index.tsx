@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Editor, { EditorProvider, useHandlers } from '../dist'
+import Editor, { EditorProvider, useHandlers } from '../src'
 
 const template = {
   name: 'Untitled design',
@@ -60,7 +60,7 @@ const App = () => {
   // }, [handlers])
   const handlerDownload = async () => {
     if (handlers) {
-      const template = await handlers.designHandler.toDataURL()
+      const template = await handlers.designHandler.toDataURL({ text: 'Hello moon' })
       console.log(template)
     }
   }
