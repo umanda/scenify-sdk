@@ -4,10 +4,10 @@ import { fabric } from 'fabric'
 import { Template } from '../../common/interfaces'
 
 class DesignHandler extends BaseHandler {
-  public async toDataURL() {
+  public async toDataURL(params: any) {
     const staticCanvas = new fabric.StaticCanvas(null)
     const template = this.root.templateHandler.exportTemplate() as Template
-    await this.loadTemplate(staticCanvas, template)
+    await this.loadTemplate(staticCanvas, template, params)
     const data = staticCanvas.toDataURL({
       multiplier: 3,
       top: 0,
@@ -18,13 +18,13 @@ class DesignHandler extends BaseHandler {
     return data
   }
 
-  private async loadTemplate(staticCanvas: fabric.StaticCanvas, template: Template) {
+  private async loadTemplate(staticCanvas: fabric.StaticCanvas, template: Template, params) {
     const { frame, background } = template
     this.setDimensions(staticCanvas, frame)
     this.setBackground(staticCanvas, background)
 
     for (const object of template.objects) {
-      const element = await objectToFabric.run(object)
+      const element = await objectToFabric.run(object, params)
       if (element) {
         staticCanvas.add(element)
       } else {

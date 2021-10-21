@@ -1,13 +1,17 @@
 import { ObjectType } from '../../common/constants'
 import { fabric } from 'fabric'
 import { loadImageFromURL } from '../../utils/image-loader'
+import { replaceKeyWithValue } from '../../utils/text'
 
 class ObjectToFabric {
-  async run(item: any): Promise<fabric.Object> {
+  async run(item: any, params: any): Promise<fabric.Object> {
     let object
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
         object = await this[ObjectType.STATIC_TEXT](item)
+        break
+      case ObjectType.DYNAMIC_TEXT:
+        object = await this[ObjectType.DYNAMIC_TEXT](item, params)
         break
       case ObjectType.STATIC_IMAGE:
         object = await this[ObjectType.STATIC_IMAGE](item)
@@ -31,6 +35,33 @@ class ObjectToFabric {
         const textOptions = {
           ...baseOptions,
           text: text ? text : 'Default Text',
+          ...(textAlign && { textAlign }),
+          ...(fontFamily && { fontFamily }),
+          ...(fontSize && { fontSize }),
+          ...(fontWeight && { fontWeight }),
+          ...(charSpacing && { charSpacing }),
+          ...(lineheight && { lineheight })
+        }
+        const element = new fabric.StaticText(textOptions)
+
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.DYNAMIC_TEXT](item: any, params: any) {
+    return new Promise((resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item)
+        const metadata = item.metadata
+        const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, text, keys } = metadata
+        const updatedText = replaceKeyWithValue(text, keys, params)
+
+        const textOptions = {
+          ...baseOptions,
+          text: updatedText ? updatedText : 'Default Text',
           ...(textAlign && { textAlign }),
           ...(fontFamily && { fontFamily }),
           ...(fontSize && { fontSize }),
