@@ -1,4 +1,4 @@
-export const PROPERTIES_TO_INCLUDE = ['id', 'name', 'description', 'src']
+export const PROPERTIES_TO_INCLUDE = ['id', 'name', 'description', 'src', 'keys', 'keyValues']
 
 export enum ObjectType {
   STATIC_VECTOR = 'StaticVector',

@@ -7,54 +7,43 @@ const template = {
   name: 'Untitled design',
   objects: [
     {
-      left: 598.5,
-      top: 212.67000000000002,
-      width: 800,
-      height: 72.32,
+      left: 546.5,
+      top: 200.04000000000002,
+      width: 278.5,
+      height: 97.63,
       originX: 'left',
       originY: 'top',
       scaleX: 1,
       scaleY: 1,
-      type: 'StaticText',
+      type: 'DynamicText',
       metadata: {
+        text: 'Add some {{cc}} body text',
         angle: 0,
-        fill: '#ffffff',
-        fontWeight: 700,
-        charspacing: 0,
-        fontSize: 64,
-        template: 'Hello world',
-        fontFamily: 'Lexend',
-        textAlign: 'center',
-        lineheight: 1.16,
-        text: 'Hello world'
-      }
-    },
-    {
-      left: 164.87,
-      top: 135.32999999999998,
-      width: 3800,
-      height: 3000,
-      originX: 'left',
-      originY: 'top',
-      scaleX: 0.08,
-      scaleY: 0.08,
-      type: 'StaticVector',
-      metadata: {
-        src:
-          'https://d2g16cura83u2t.cloudfront.net/illustration/free/additional-file/3360863/3.svg?token=eyJhbGciOiJoczI1NiIsImtpZCI6ImRlZmF1bHQifQ__.eyJpc3MiOiJkMmcxNmN1cmE4M3UydC5jbG91ZGZyb250Lm5ldCIsImV4cCI6MTYzNDMyMTAxNSwicSI6bnVsbCwiaWF0IjoxNjM0MDYxODE1fQ__.938877ba5f6be19884da9de6758554d5de2644e8ab3ccebe60965b55578f9bda'
+        fill: '#000000',
+        fontWeight: 'normal',
+        charSpacing: 0,
+        fontSize: 40,
+        fontFamily: 'Times New Roman',
+        textAlign: 'left',
+        lineHeight: 1.16,
+        keyValues: [
+          {
+            key: '{{cc}}',
+            value: 'cc'
+          }
+        ],
+        keys: ['cc']
       }
     }
   ],
   background: {
     type: 'color',
-    value: '#e15f41'
+    value: '#ffffff'
   },
   frame: {
-    width: 1500,
-    height: 500
-  },
-  preview: 'https://d3q7mfli5umxdg.cloudfront.net/1634061854515_337318.png',
-  id: 'oqGAd5hZeUAH3_-SSvT1w'
+    width: 1280,
+    height: 720
+  }
 }
 const App = () => {
   const handlers = useHandlers()
@@ -108,7 +97,6 @@ const App = () => {
   }, [handlers])
 
   const addDynamicImage = React.useCallback(() => {
-    console.log('ff')
     if (handlers) {
       const objectOptions = {
         width: 100,
@@ -123,6 +111,14 @@ const App = () => {
       handlers.objectsHandler.create(objectOptions)
     }
   }, [handlers])
+
+  const exportTemplate = React.useCallback(() => {
+    if (handlers) {
+      const template = handlers.templateHandler.exportTemplate()
+      console.log({ template })
+    }
+  }, [handlers])
+
   return (
     <div
       style={{
@@ -144,6 +140,9 @@ const App = () => {
         </button>
         <button onClick={handleImportTemplate} className="btn btn-primary">
           Import
+        </button>
+        <button onClick={exportTemplate} className="btn btn-primary">
+          Export to JSON
         </button>
         <button onClick={handlerDownload} className="btn btn-primary">
           Download

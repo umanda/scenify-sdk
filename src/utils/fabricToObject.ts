@@ -16,6 +16,9 @@ class ExportObject {
       case ObjectType.STATIC_PATH:
         object = this[ObjectType.STATIC_PATH](item, options)
         break
+      case ObjectType.DYNAMIC_TEXT:
+        object = this[ObjectType.DYNAMIC_TEXT](item, options)
+        break
     }
     return object
   }
@@ -23,19 +26,56 @@ class ExportObject {
   [ObjectType.STATIC_TEXT](item, options) {
     const baseOptions = this.getBaseOptions(item, options)
     const { fontFamily, textAlign, fontSize, fontWeight, charSpacing, lineHeight, fill, text, angle } = item
-    const scaledFontSize = fontSize
     const metadata = {
       ...item.metadata,
       angle,
       fill,
       fontWeight,
       charspacing: charSpacing,
-      fontSize: scaledFontSize,
+      fontSize: fontSize,
       template: text,
       fontFamily,
       textAlign,
       lineheight: lineHeight,
       text: item.text
+    }
+
+    const object = {
+      ...baseOptions,
+      metadata
+    }
+
+    return object
+  }
+
+  [ObjectType.DYNAMIC_TEXT](item, options) {
+    const baseOptions = this.getBaseOptions(item, options)
+    const {
+      fontFamily,
+      textAlign,
+      fontSize,
+      fontWeight,
+      charSpacing,
+      lineHeight,
+      fill,
+      angle,
+      originalText,
+      keyValues
+    } = item
+
+    const metadata = {
+      ...item.metadata,
+      angle,
+      fill,
+      fontWeight,
+      charSpacing,
+      fontSize,
+      text: originalText,
+      fontFamily,
+      textAlign,
+      lineHeight,
+      keyValues,
+      keys: item.keys ? item.keys : []
     }
 
     const object = {
