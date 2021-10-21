@@ -76,13 +76,15 @@ class ObjectToFabric {
           charSpacing,
           lineheight,
           keyValues,
-          text
+          text,
+          keys
         } = metadata
 
         const textOptions = {
           ...baseOptions,
           keyValues: keyValues ? keyValues : [],
           text: text ? text : 'Default Text',
+          keys: keys ? keys : [],
           ...(textAlign && { textAlign }),
           ...(fontFamily && { fontFamily }),
           ...(fontSize && { fontSize }),
