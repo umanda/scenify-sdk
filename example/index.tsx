@@ -60,7 +60,9 @@ const App = () => {
   // }, [handlers])
   const handlerDownload = async () => {
     if (handlers) {
-      const template = await handlers.designHandler.toDataURL({ text: 'Hello moon' })
+      const template = await handlers.designHandler.toDataURL({
+        image: 'https://i.ibb.co/RNvBJhf/1633810829286.png'
+      })
       console.log(template)
     }
   }

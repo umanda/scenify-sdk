@@ -19,6 +19,9 @@ class ExportObject {
       case ObjectType.DYNAMIC_TEXT:
         object = this[ObjectType.DYNAMIC_TEXT](item, options)
         break
+      case ObjectType.DYNAMIC_IMAGE:
+        object = this[ObjectType.DYNAMIC_IMAGE](item, options)
+        break
     }
     return object
   }
@@ -95,6 +98,26 @@ class ExportObject {
         cropX: item.cropX,
         cropY: item.cropY
       }
+    }
+
+    return object
+  }
+
+  [ObjectType.DYNAMIC_IMAGE](item, options) {
+    const { width, height, angle, keyValues } = item
+    const baseOptions = this.getBaseOptions(item, options)
+    const metadata = {
+      originX: item.originX,
+      originY: item.originY,
+      angle,
+      width,
+      height,
+      keyValues,
+      keys: item.keys ? item.keys : []
+    }
+    const object = {
+      ...baseOptions,
+      metadata
     }
 
     return object

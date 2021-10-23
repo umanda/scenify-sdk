@@ -16,6 +16,9 @@ class ObjectToFabric {
       case ObjectType.STATIC_IMAGE:
         object = await this[ObjectType.STATIC_IMAGE](item)
         break
+      case ObjectType.DYNAMIC_IMAGE:
+        object = await this[ObjectType.DYNAMIC_IMAGE](item, params)
+        break
       case ObjectType.STATIC_VECTOR:
         object = await this[ObjectType.STATIC_VECTOR](item)
         break
@@ -88,8 +91,28 @@ class ObjectToFabric {
 
         const element = new fabric.StaticImage(image, {
           ...baseOptions,
-          cropX: item.metadata.cropX,
+          cropX: 0,
           cropY: item.metadata.cropY
+        })
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.DYNAMIC_IMAGE](item: any, params: any) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item)
+        const src = params.image
+
+        const image = await loadImageFromURL(src)
+
+        const element = new fabric.StaticImage(image, {
+          ...baseOptions,
+          cropX: 0,
+          cropY: 0
         })
         resolve(element)
       } catch (err) {
