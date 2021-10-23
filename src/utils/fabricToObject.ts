@@ -104,7 +104,7 @@ class ExportObject {
   }
 
   [ObjectType.DYNAMIC_IMAGE](item, options) {
-    const { width, height, angle, keyValues } = item
+    const { width, height, angle, keyValues, scaleX, scaleY } = item
     const baseOptions = this.getBaseOptions(item, options)
     const metadata = {
       originX: item.originX,
@@ -117,6 +117,10 @@ class ExportObject {
     }
     const object = {
       ...baseOptions,
+      width: width * scaleX,
+      height: height * scaleY,
+      scaleX: 1,
+      scaleY: 1,
       metadata
     }
 
