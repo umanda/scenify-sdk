@@ -34,13 +34,17 @@ class TemplateHandler extends BaseHandler {
 
   async importTemplate(template) {
     this.root.objectsHandler.clear(false)
-    const frame = template.frame
-    this.root.frameHandler.update(frame)
+    const frameParams = template.frame
+    this.root.frameHandler.update(frameParams)
 
     const frameOptions = this.root.frameHandler.getOptions()
     for (const object of template.objects) {
       const element = await objectToFabric.run(object, frameOptions)
       if (element) {
+        if (this.config.clipToFrame) {
+          const frame = this.root.frameHandler.get()
+          element.clipPath = frame
+        }
         this.canvas.add(element)
       } else {
         console.log('UNABLE TO LOAD OBJECT: ', object)
