@@ -2,10 +2,10 @@ import { fabric } from 'fabric'
 import BaseHandler from './BaseHandler'
 
 class ScrollbarHandler extends BaseHandler {
-  diffTop
-  diffBottom
-  diffRight
-  diffLeft
+  private diffTop: number
+  private diffBottom: number
+  private diffRight: number
+  private diffLeft: number
   constructor(props) {
     super(props)
     this.initialize()
@@ -48,11 +48,11 @@ class ScrollbarHandler extends BaseHandler {
 
   handleScrollX = (delta: number) => {
     if (delta > 0) {
-      if (this.diffRight > 200) {
+      if (this.diffRight > this.config.scrollLimit) {
         return
       }
     } else {
-      if (this.diffLeft > 200) {
+      if (this.diffLeft > this.config.scrollLimit) {
         return
       }
     }
@@ -65,11 +65,11 @@ class ScrollbarHandler extends BaseHandler {
 
   handleScrollY = (delta: number) => {
     if (delta > 0) {
-      if (this.diffBottom > 200) {
+      if (this.diffBottom > this.config.scrollLimit) {
         return
       }
     } else {
-      if (this.diffTop > 200) {
+      if (this.diffTop > this.config.scrollLimit) {
         return
       }
     }
@@ -89,7 +89,7 @@ class ScrollbarHandler extends BaseHandler {
   }
 
   initializeScrollY = () => {
-    const container = document.getElementById('uibox-editor-container')
+    const container = document.getElementById('scenify-editor-container')
     const scrollbarContainer = document.createElement('div')
     const scrollbarWrapper = document.createElement('div')
     const scrollbar = document.createElement('div')
@@ -144,7 +144,7 @@ class ScrollbarHandler extends BaseHandler {
   }
 
   initializeScrollX = () => {
-    const container = document.getElementById('uibox-editor-container')
+    const container = document.getElementById('scenify-editor-container')
     const scrollbarContainer = document.createElement('div')
     const scrollbarWrapper = document.createElement('div')
     const scrollbar = document.createElement('div')

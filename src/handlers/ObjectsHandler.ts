@@ -10,6 +10,10 @@ class ObjectHandler extends BaseHandler {
     const { canvas } = this
     const options = this.root.frameHandler.getOptions()
     const object: fabric.Object = await objectToFabric.run(item, options)
+    if (this.config.clipToFrame) {
+      const frame = this.root.frameHandler.get()
+      object.clipPath = frame
+    }
     canvas.add(object)
     object.center()
     canvas.setActiveObject(object)

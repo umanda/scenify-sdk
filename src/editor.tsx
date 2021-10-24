@@ -1,17 +1,19 @@
 import { fabric } from 'fabric'
 import React, { useContext, useEffect, useRef } from 'react'
-import { FabricCanvas } from './common/interfaces'
+import { EditorProps, FabricCanvas } from './common/interfaces'
 import { EditorContext } from './context'
 import Handlers from './handlers'
 import ResizeObserver from 'resize-observer-polyfill'
 import './objects'
+import { defaultEditorConfig } from './common/constants'
 
-function Editor() {
+function Editor({ config }: EditorProps) {
   const containerRef = useRef(null)
   const context = useContext(EditorContext)
   const { setHandlers } = context
 
   useEffect(() => {
+    const editorConfig = Object.assign(defaultEditorConfig, config)
     const container = (containerRef.current as unknown) as HTMLDivElement
     const { clientHeight, clientWidth } = container
 
@@ -24,7 +26,8 @@ function Editor() {
 
     const handlers = new Handlers({
       canvas: canvas,
-      context: context
+      context: context,
+      config: editorConfig
     })
     setHandlers(handlers)
     context.setCanvas(canvas)
@@ -44,7 +47,7 @@ function Editor() {
   }, [])
   return (
     <div
-      id="uibox-editor-container"
+      id="scenify-editor-container"
       ref={containerRef}
       style={{ flex: 1, position: 'relative', overflow: 'hidden' }}
     >

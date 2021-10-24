@@ -24,11 +24,13 @@ export interface HandlerOptions {
   root: Handlers
   context: IEditorContext
   canvas: FabricCanvas
+  config: EditorConfig
 }
 
 export interface RootHandlerOptions {
   context: IEditorContext
   canvas: FabricCanvas
+  config: EditorConfig
 }
 
 export interface EditorOptions {
@@ -59,4 +61,13 @@ export interface Template {
     height: number
   }
   objects: any[]
+}
+
+export interface EditorProps {
+  config: EditorConfig
+}
+
+export interface EditorConfig {
+  clipToFrame: boolean
+  scrollLimit: number
 }

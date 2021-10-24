@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Editor, { EditorProvider, useHandlers } from '../src'
+import Editor, { EditorProvider, useHandlers } from '../dist'
 
 const template = {
   name: 'Untitled design',
@@ -47,17 +47,7 @@ const template = {
 }
 const App = () => {
   const handlers = useHandlers()
-  // React.useEffect(() => {
-  //   if (handlers) {
-  //     const object = {
-  //       type: 'StaticImage',
-  //       metadata: {
-  //         src: 'https://i.ibb.co/RNvBJhf/1633810829286.png'
-  //       }
-  //     }
-  //     handlers.objectsHandler.create(object)
-  //   }
-  // }, [handlers])
+
   const handlerDownload = async () => {
     if (handlers) {
       const template = await handlers.designHandler.toDataURL({
@@ -77,8 +67,7 @@ const App = () => {
     const options = {
       type: 'StaticImage',
       metadata: {
-        src:
-          'https://pixabay.com/get/gbb0b07d5209d35482d415bc979a3b78087dab03e86f590cc3af0315eaca9077d3743fbd5aa28a418460c2833e6c4acd6_640.jpg'
+        src: 'https://i.ibb.co/JB3y2ts/mclogo.jpg'
       }
     }
     handlers?.objectsHandler.create(options)
@@ -121,6 +110,10 @@ const App = () => {
     }
   }, [handlers])
 
+  const editorConfig = {
+    clipToFrame: true,
+    scrollLimit: 0
+  }
   return (
     <div
       style={{
@@ -150,7 +143,7 @@ const App = () => {
           Download
         </button>
       </div>
-      <Editor />
+      <Editor config={editorConfig} />
     </div>
   )
 }
