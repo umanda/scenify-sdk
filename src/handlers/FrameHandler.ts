@@ -4,7 +4,6 @@ import { HandlerOptions } from '../common/interfaces'
 import { FrameOptions } from '../objects'
 
 class FrameHandler extends BaseHandler {
-  frame
   options
   sizeFormat
   backgroundimage
@@ -22,7 +21,8 @@ class FrameHandler extends BaseHandler {
       id: '',
       name: 'Initial Frame',
       fill: '#ffffff',
-      hoverCursor: 'default'
+      hoverCursor: 'default',
+      absolutePositioned: this.config.clipToFrame
     })
     this.canvas.add(frame)
     frame.center()

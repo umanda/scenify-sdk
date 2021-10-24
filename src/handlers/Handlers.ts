@@ -29,7 +29,8 @@ class Handlers {
     const handlerOptions: HandlerOptions = {
       root: this,
       canvas: props.canvas,
-      context: props.context
+      context: props.context,
+      config: props.config
     }
     this.canvasHandler = new CanvasHandler(handlerOptions)
     this.frameHandler = new FrameHandler(handlerOptions)

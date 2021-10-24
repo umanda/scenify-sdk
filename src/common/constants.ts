@@ -17,3 +17,8 @@ export enum ObjectTypeAlt {
   DYNAMIC_IMAGE = 'image:dynamic',
   TEXTAREA = 'Textarea'
 }
+
+export const defaultEditorConfig = {
+  clipToFrame: true,
+  scrollLimit: 200
+}
