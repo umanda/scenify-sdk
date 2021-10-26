@@ -45,6 +45,7 @@ export class StaticImageObject extends fabric.Image {
     if (this.selectable && this.canvas) {
       this._editingMode = true
       this.clone((image: fabric.Image) => {
+        image.clipPath = null
         const element = image.getElement()
         const { top = 0, left = 0, cropX = 0, cropY = 0, scaleX = 1, scaleY = 1 } = image
         image.set({

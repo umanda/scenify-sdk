@@ -109,6 +109,8 @@ class ObjectHandler extends BaseHandler {
       activeObject.clone(
         cloned => {
           this.clipboard = cloned
+          // console.log({ cloned })
+          this.clipboard.clipPath = null
         },
         ['metadata', 'subtype']
       )
@@ -117,7 +119,7 @@ class ObjectHandler extends BaseHandler {
 
   public clone = () => {
     const activeObject = this.canvas.getActiveObject()
-
+    const frame = this.root.frameHandler.get()
     if (this.canvas) {
       let objects: fabric.Object[] = [activeObject]
       // if (activeObject) {
@@ -127,10 +129,12 @@ class ObjectHandler extends BaseHandler {
       // }
       objects.forEach(object => {
         object.clone((clone: fabric.Object) => {
+          clone.clipPath = null
           clone.set({
             left: object?.left! + 10,
             top: object?.top! + 10
           })
+          clone.clipPath = frame
           this.canvas.add(clone)
           this.canvas.setActiveObject(clone)
           this.canvas.requestRenderAll()
@@ -141,6 +145,7 @@ class ObjectHandler extends BaseHandler {
 
   public paste = () => {
     const { isCut, clipboard } = this
+    const frame = this.root.frameHandler.get()
     const padding = isCut ? 0 : 10
     if (!clipboard) {
       return false
@@ -157,10 +162,12 @@ class ObjectHandler extends BaseHandler {
           // active selection needs a reference to the canvas.
           clonedObj.canvas = this.canvas
           clonedObj.forEachObject(obj => {
+            obj.clipPath = frame
             this.canvas.add(obj)
           })
           clonedObj.setCoords()
         } else {
+          clonedObj.clipPath = frame
           this.canvas.add(clonedObj)
         }
         clipboard.top += padding

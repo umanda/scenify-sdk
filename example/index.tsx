@@ -110,6 +110,11 @@ const App = () => {
     }
   }, [handlers])
 
+  const handleClone = () => {
+    if (handlers) {
+      handlers.objectsHandler.clone()
+    }
+  }
   const editorConfig = {
     clipToFrame: true,
     scrollLimit: 0
@@ -132,6 +137,9 @@ const App = () => {
         </button>
         <button onClick={addImage} className="btn btn-primary">
           Add image
+        </button>
+        <button onClick={handleClone} className="btn btn-primary">
+          Clone
         </button>
         <button onClick={handleImportTemplate} className="btn btn-primary">
           Import
