@@ -108,12 +108,19 @@ class ObjectToFabric {
         const src = params.image
 
         const image = await loadImageFromURL(src)
-
+        // @ts-ignore
         const element = new fabric.StaticImage(image, {
           ...baseOptions,
+          // @ts-ignore
+          width: image.width,
+          // @ts-ignore
+
+          height: image.height,
           cropX: 0,
           cropY: 0
+          // scaleX: 0.2
         })
+        element.scaleToWidth(item.width)
         resolve(element)
       } catch (err) {
         reject(err)
