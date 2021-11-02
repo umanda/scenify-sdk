@@ -38,7 +38,12 @@ class EventsHandler extends BaseHandler {
     this.canvas.wrapperEl.removeEventListener('keydown', this.onKeyDown.bind(this))
   }
 
-  objectModified = () => {
+  objectModified = event => {
+    const { target } = event
+    if (target instanceof fabric.Textbox) {
+      this.scaleTextbox(target)
+    }
+
     this.root.transactionHandler.save('object:modified')
   }
 
@@ -150,6 +155,16 @@ class EventsHandler extends BaseHandler {
     } else {
       this.context.setActiveObject(null)
     }
+  }
+
+  scaleTextbox = (target: fabric.Textbox) => {
+    const { fontSize, width, scaleX } = target
+    target.set({
+      fontSize: fontSize * scaleX,
+      width: width * scaleX,
+      scaleX: 1,
+      scaleY: 1
+    })
   }
 }
 
