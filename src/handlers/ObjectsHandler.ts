@@ -118,28 +118,52 @@ class ObjectHandler extends BaseHandler {
   }
 
   public clone = () => {
-    const activeObject = this.canvas.getActiveObject()
-    const frame = this.root.frameHandler.get()
     if (this.canvas) {
-      let objects: fabric.Object[] = [activeObject]
-      // if (activeObject) {
-      //   objects = [activeObject]
-      // } else if (!!clipBoards.length) {
-      //   objects = clipBoards
-      // }
-      objects.forEach(object => {
-        object.clone((clone: fabric.Object) => {
+      const activeObject = this.canvas.getActiveObject()
+      const frame = this.root.frameHandler.get()
+
+      this.canvas.discardActiveObject()
+
+      this.duplicate(activeObject, frame, duplicates => {
+        console.log(duplicates)
+        var sel = new fabric.ActiveSelection(duplicates, { canvas: this.canvas })
+        this.canvas.setActiveObject(sel)
+        this.canvas.requestRenderAll()
+      })
+    }
+  }
+
+  private duplicate(
+    object: fabric.Object,
+    frame: fabric.Object,
+    callback: (clones: fabric.Object[]) => void
+  ): void {
+    if (object instanceof fabric.Group) {
+      const objects: fabric.Object[] = (object as fabric.Group).getObjects()
+      const duplicates: fabric.Object[] = []
+      for (let i = 0; i < objects.length; i++) {
+        this.duplicate(objects[i], frame, clones => {
+          duplicates.push(...clones)
+          if (i == objects.length - 1) {
+            callback(duplicates)
+          }
+        })
+      }
+    } else {
+      object.clone(
+        (clone: fabric.Object) => {
           clone.clipPath = null
           clone.set({
-            left: object?.left! + 10,
-            top: object?.top! + 10
+            left: object.left! + 10,
+            top: object.top! + 10
           })
           clone.clipPath = frame
           this.canvas.add(clone)
-          this.canvas.setActiveObject(clone)
-          this.canvas.requestRenderAll()
-        })
-      })
+
+          callback([clone])
+        },
+        ['keyValues', 'src']
+      )
     }
   }
 
