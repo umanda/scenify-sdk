@@ -1,8 +1,9 @@
-import 'react-app-polyfill/ie11'
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import Editor, { EditorProvider, useHandlers } from '../src'
-
+import Editor, { useHandlers } from '../../src'
+import { Button } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import { objects } from './objects'
+import Text from './objectProps/Text'
 const template = {
   name: 'Untitled design',
   objects: [
@@ -117,48 +118,36 @@ const App = () => {
   }
   const editorConfig = {
     clipToFrame: true,
-    scrollLimit: 0
+    scrollLimit: 100
   }
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         height: '100vh',
         width: '100vw',
         display: 'flex',
         flexDirection: 'column'
       }}
     >
-      <div style={{ height: '60px', flex: 'none' }}>
-        <button onClick={addDynamicText} className="btn btn-primary">
-          Add dynamic text
-        </button>
-        <button onClick={addDynamicImage} className="btn btn-primary">
-          Add dynamic image
-        </button>
-        <button onClick={addImage} className="btn btn-primary">
-          Add image
-        </button>
-        <button onClick={handleClone} className="btn btn-primary">
-          Clone
-        </button>
-        <button onClick={handleImportTemplate} className="btn btn-primary">
-          Import
-        </button>
-        <button onClick={exportTemplate} className="btn btn-primary">
-          Export to JSON
-        </button>
-        <button onClick={handlerDownload} className="btn btn-primary">
-          Download
-        </button>
-      </div>
-      <Editor config={editorConfig} />
-    </div>
+      <Box style={{ height: '70px', flex: 'none', backgroundColor: '#25004f' }}></Box>
+      <Box sx={{ display: 'flex', flex: 1 }}>
+        <Box sx={{ width: '320px', display: 'flex', flexDirection: 'column', padding: '2rem', gap: '1rem' }}>
+          <Button onClick={addDynamicText}>Add dynamic text</Button>
+          <Button onClick={() => handlers?.objectsHandler.create(objects.staticText)}>Add static text</Button>
+
+          <Button onClick={addDynamicImage}>Add dynamic image</Button>
+          <Button onClick={addImage}>Add image</Button>
+          <Button onClick={handleClone}>Clone</Button>
+          <Button onClick={handleImportTemplate}>Import</Button>
+          <Button onClick={exportTemplate}>Export to JSON</Button>
+          <Button onClick={handlerDownload}>Download</Button>
+        </Box>
+        <Editor config={editorConfig} />
+        <Box sx={{ width: '320px' }}>
+          <Text />
+        </Box>
+      </Box>
+    </Box>
   )
 }
-
-ReactDOM.render(
-  <EditorProvider>
-    <App />
-  </EditorProvider>,
-  document.getElementById('root')
-)
+export default App

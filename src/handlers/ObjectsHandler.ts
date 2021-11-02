@@ -249,6 +249,14 @@ class ObjectHandler extends BaseHandler {
       activeObject.moveTo(1)
     }
   }
+  public setShadow = (options: any) => {
+    console.log({ options })
+    const activeObject = this.canvas.getActiveObject()
+    if (activeObject) {
+      activeObject.set('shadow', new fabric.Shadow(options))
+      this.canvas.requestRenderAll()
+    }
+  }
 }
 
 export default ObjectHandler
