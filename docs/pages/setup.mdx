@@ -1,0 +1,51 @@
+import Image from 'next/image'
+import Bleed from 'nextra-theme-docs/bleed'
+
+# Setup
+
+### Installation
+
+Scenify SDK is available on npm as @scenify/sdk. This single package contains all components required to build a design editor.
+
+```sh
+# using yarn
+yarn add @scenify/sdk
+
+# using npm
+npm install @scenify/sdk
+```
+
+### Integration
+
+In order to use Scenify SDK, you need to do a small setup and wrap the root of your application with EditorProvider:
+
+```tsx
+import { EditorProvider } from '@scenify/sdk'
+import YourAPP from './App'
+
+export default function App() {
+  return <EditorProvider>Other components</EditorProvider>
+}
+```
+
+Then, you can use Editor component in any part of your application.
+
+```tsx
+import Editor from '@scenify/sdk'
+
+export default function MyEditor() {
+  return (
+    <div style={{ display: 'flex', flex: 1 }}>
+      <Editor />
+    </div>
+  )
+}
+```
+
+
+import Callout from 'nextra-theme-docs/callout'
+
+<Callout emoji="👽️">
+  It is recommended to wrap the Editor component inside a flexible container. It
+  will allow the Editor component to detect resize changes.
+</Callout>
