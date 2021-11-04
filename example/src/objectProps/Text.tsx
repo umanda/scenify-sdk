@@ -4,18 +4,29 @@ import { useActiveObject, useHandlers } from '../../../src'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react'
 import { Checkbox } from '@chakra-ui/react'
 import { Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react'
-import ColorPicker, { RgbaColorPicker } from '../components/ColorPicker'
+import { RgbaColorPicker } from '../components/ColorPicker'
 
 function Text() {
   const handlers = useHandlers()
   const [options, setOptions] = React.useState({
     enabled: true,
-    offsetX: 0,
-    offsetY: 0,
+    offsetX: 15,
+    offsetY: 15,
     blur: 0,
-    color: 'rgba(0,0,0,0)'
+    color: 'rgba(0,0,0,0.45)'
   })
   const activeObject = useActiveObject()
+
+  React.useEffect(() => {
+    if (activeObject) {
+      updateOptions(activeObject)
+    }
+  }, [activeObject])
+
+  const updateOptions = (object: any) => {
+    const { shadow } = object
+    setOptions({ ...options, enabled: !!shadow })
+  }
   if (!activeObject) {
     return <Box>Nothing</Box>
   }
@@ -23,7 +34,7 @@ function Text() {
   const handleChange = (key: string, value: any) => {
     setOptions({ ...options, [key]: value })
     if (handlers) {
-      handlers.objectsHandler.setShadow(options)
+      handlers.objectsHandler.setShadow({ ...options, [key]: value })
     }
   }
 

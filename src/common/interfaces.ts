@@ -71,3 +71,12 @@ export interface EditorConfig {
   clipToFrame: boolean
   scrollLimit: number
 }
+
+export interface GradientOptions {
+  angle: number
+  colors: string[]
+}
+
+export interface ShadowOptions extends fabric.IShadowOptions {
+  enabled: boolean
+}

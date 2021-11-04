@@ -1,5 +1,7 @@
 import { fabric } from 'fabric'
+import { GradientOptions, ShadowOptions } from '../common/interfaces'
 import objectToFabric from '../utils/objectToFabric'
+import { angleToPoint } from '../utils/parser'
 import BaseHandler from './BaseHandler'
 
 class ObjectHandler extends BaseHandler {
@@ -11,12 +13,13 @@ class ObjectHandler extends BaseHandler {
     const options = this.root.frameHandler.getOptions()
     const object: fabric.Object = await objectToFabric.run(item, options)
     if (this.config.clipToFrame) {
-      const frame = this.root.frameHandler.get()
+      const frame = this.root.frameHandler.getFrame()
       object.clipPath = frame
     }
     canvas.add(object)
     object.center()
     canvas.setActiveObject(object)
+    this.root.transactionHandler.save('object:created')
   }
 
   /**
@@ -46,18 +49,14 @@ class ObjectHandler extends BaseHandler {
     this.root.transactionHandler.save('object:removed')
   }
 
-  public clear = (includeFrame = false) => {
-    if (includeFrame) {
-      this.canvas.clear()
-    } else {
-      const frame = this.root.frameHandler.get()
-      this.canvas.getObjects().forEach(object => {
-        if (object.type !== 'Frame') {
-          this.canvas.remove(object)
-        }
-      })
-      frame.set('fill', '#ffffff')
-    }
+  public clear = () => {
+    const frame = this.root.frameHandler.getFrame()
+    this.canvas.getObjects().forEach(object => {
+      if (object.type !== 'Frame') {
+        this.canvas.remove(object)
+      }
+    })
+    frame.set('fill', '#ffffff')
     this.canvas.renderAll()
   }
 
@@ -106,28 +105,20 @@ class ObjectHandler extends BaseHandler {
   public copy = () => {
     const activeObject = this.canvas.getActiveObject()
     if (activeObject) {
-      activeObject.clone(
-        cloned => {
-          this.clipboard = cloned
-          // console.log({ cloned })
-          this.clipboard.clipPath = null
-        },
-        ['metadata', 'subtype']
-      )
+      this.clipboard = activeObject
     }
   }
 
   public clone = () => {
     if (this.canvas) {
       const activeObject = this.canvas.getActiveObject()
-      const frame = this.root.frameHandler.get()
+      const frame = this.root.frameHandler.getFrame()
 
       this.canvas.discardActiveObject()
 
       this.duplicate(activeObject, frame, duplicates => {
-        console.log(duplicates)
-        var sel = new fabric.ActiveSelection(duplicates, { canvas: this.canvas })
-        this.canvas.setActiveObject(sel)
+        const selection = new fabric.ActiveSelection(duplicates, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
         this.canvas.requestRenderAll()
       })
     }
@@ -157,7 +148,12 @@ class ObjectHandler extends BaseHandler {
             left: object.left! + 10,
             top: object.top! + 10
           })
-          clone.clipPath = frame
+
+          if (this.config.clipToFrame) {
+            const frame = this.root.frameHandler.getFrame()
+            clone.clipPath = frame
+          }
+
           this.canvas.add(clone)
 
           callback([clone])
@@ -168,41 +164,16 @@ class ObjectHandler extends BaseHandler {
   }
 
   public paste = () => {
-    const { isCut, clipboard } = this
-    const frame = this.root.frameHandler.get()
-    const padding = isCut ? 0 : 10
-    if (!clipboard) {
-      return false
-    }
-    clipboard.clone(
-      clonedObj => {
-        this.canvas.discardActiveObject()
-        clonedObj.set({
-          left: clonedObj.left + padding,
-          top: clonedObj.top + padding,
-          evented: true
-        })
-        if (clonedObj.type === 'activeSelection') {
-          // active selection needs a reference to the canvas.
-          clonedObj.canvas = this.canvas
-          clonedObj.forEachObject(obj => {
-            obj.clipPath = frame
-            this.canvas.add(obj)
-          })
-          clonedObj.setCoords()
-        } else {
-          clonedObj.clipPath = frame
-          this.canvas.add(clonedObj)
-        }
-        clipboard.top += padding
-        clipboard.left += padding
-        this.canvas.setActiveObject(clonedObj)
+    const object = this.clipboard
+    if (object) {
+      const frame = this.root.frameHandler.getFrame()
+      this.canvas.discardActiveObject()
+      this.duplicate(object, frame, duplicates => {
+        const selection = new fabric.ActiveSelection(duplicates, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
         this.canvas.requestRenderAll()
-      },
-      ['metadata', 'subtype']
-    )
-    this.isCut = false
-    return true
+      })
+    }
   }
 
   public remove = () => {
@@ -238,14 +209,15 @@ class ObjectHandler extends BaseHandler {
       return
     }
     const activeSelection = new fabric.ActiveSelection(filteredObjects, {
-      canvas: this.canvas,
-      //@ts-ignore
-      ...this.activeSelectionOption
+      canvas: this.canvas
     })
     this.canvas.setActiveObject(activeSelection)
     this.canvas.renderAll()
   }
 
+  /**
+   * OBJECT POSITION
+   */
   public bringForward = () => {
     const activeObject = this.canvas.getActiveObject()
     if (activeObject) {
@@ -259,6 +231,7 @@ class ObjectHandler extends BaseHandler {
       this.canvas.bringToFront(activeObject)
     }
   }
+
   public sendBackwards = () => {
     const objects = this.canvas.getObjects()
     const activeObject = this.canvas.getActiveObject()
@@ -267,17 +240,104 @@ class ObjectHandler extends BaseHandler {
       this.canvas.sendBackwards(activeObject)
     }
   }
+
   public sendToBack = () => {
     const activeObject = this.canvas.getActiveObject()
     if (activeObject) {
       activeObject.moveTo(1)
     }
   }
-  public setShadow = (options: any) => {
-    console.log({ options })
+
+  /**
+   * ALIGNMENT TO FRAME
+   */
+  public alignToFrameTop = () => {
+    const activeObject = this.canvas.getActiveObject()
+    const frame = this.root.frameHandler.getFrame()
+    if (activeObject) {
+    }
+  }
+
+  public alignToFrameMiddle = () => {
+    const activeObject = this.canvas.getActiveObject()
+    const frame = this.root.frameHandler.getFrame()
+    if (activeObject) {
+    }
+  }
+
+  public alignToFrameBottom = () => {
+    const activeObject = this.canvas.getActiveObject()
+    const frame = this.root.frameHandler.getFrame()
+    if (activeObject) {
+    }
+  }
+
+  public alignToFrameLeft = () => {
+    const activeObject = this.canvas.getActiveObject()
+    const frame = this.root.frameHandler.getFrame()
+    if (activeObject) {
+    }
+  }
+
+  public alignToFrameCenter = () => {
+    const activeObject = this.canvas.getActiveObject()
+    const frame = this.root.frameHandler.getFrame()
+    if (activeObject) {
+    }
+  }
+
+  public alignToFrameRight = () => {
+    const activeObject = this.canvas.getActiveObject()
+    const frame = this.root.frameHandler.getFrame()
+    if (activeObject) {
+    }
+  }
+
+  /**
+   * SHADOW
+   */
+  public setShadow = (options: ShadowOptions) => {
     const activeObject = this.canvas.getActiveObject()
     if (activeObject) {
-      activeObject.set('shadow', new fabric.Shadow(options))
+      if (options.enabled) {
+        activeObject.set('shadow', new fabric.Shadow(options))
+      } else {
+        activeObject.set('shadow', null)
+      }
+      this.canvas.requestRenderAll()
+    }
+  }
+
+  /**
+   * GRADIENT
+   */
+  public setGradient = ({ angle, colors }: GradientOptions) => {
+    const activeObject = this.canvas.getActiveObject()
+    let odx = activeObject.width >> 1
+    let ody = activeObject.height >> 1
+
+    if (activeObject) {
+      let startPoint = angleToPoint(angle, activeObject.width, activeObject.height)
+      let endPoint = {
+        x: activeObject.width - startPoint.x,
+        y: activeObject.height - startPoint.y
+      }
+      activeObject.set(
+        'fill',
+        new fabric.Gradient({
+          type: 'linear',
+          coords: {
+            x1: startPoint.x - odx,
+            y1: startPoint.y - ody,
+            x2: endPoint.x - odx,
+            y2: endPoint.y - ody
+          },
+          colorStops: [
+            { offset: 0, color: colors[0] },
+            { offset: 1, color: colors[1] }
+          ]
+        })
+      )
       this.canvas.requestRenderAll()
     }
   }
