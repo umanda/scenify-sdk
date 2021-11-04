@@ -28,7 +28,7 @@ class TransactionHandler extends BaseHandler {
           }
         })
         // @ts-ignore
-        this.state = canvasJSON
+        this.state = canvasJSON.objects
       }
     } catch (err) {
       console.log(err)
@@ -42,15 +42,17 @@ class TransactionHandler extends BaseHandler {
   }
 
   undo = throttle(() => {
-    const undo = this.undos.pop()
-    if (!undo) {
-      return
+    if (this.undos.length > 1) {
+      const undo = this.undos.pop()
+      if (!undo) {
+        return
+      }
+      this.redos.push({
+        type: 'redo',
+        json: this.state
+      })
+      this.replay(undo)
     }
-    this.redos.push({
-      type: 'redo',
-      json: this.state
-    })
-    this.replay(undo)
   }, 100)
 
   redo = throttle(() => {
@@ -66,15 +68,22 @@ class TransactionHandler extends BaseHandler {
   }, 100)
 
   replay = async transaction => {
+    this.root.objectsHandler.clear()
     const objects = transaction.json
     this.state = objects
     this.active = true
-    this.root.objectsHandler.clear(true)
-    this.canvas.discardActiveObject()
-    this.canvas.loadFromJSON(objects, () => {
-      this.canvas.renderAll.bind(this.canvas)
-      this.canvas.fire('history:changed')
-    })
+    fabric.util.enlivenObjects(
+      objects,
+      enlivenObjects => {
+        enlivenObjects.forEach(enlivenObject => {
+          if (enlivenObject.type !== 'Frame') {
+            this.canvas.add(enlivenObject)
+          }
+        })
+        this.canvas.fire('history:changed')
+      },
+      null
+    )
     this.active = false
   }
 

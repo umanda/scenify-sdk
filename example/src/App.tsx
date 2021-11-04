@@ -54,7 +54,6 @@ const App = () => {
       const template = await handlers.designHandler.toDataURL({
         image: 'https://i.ibb.co/zb6PMP6/logo.png'
       })
-      console.log(template)
     }
   }
 
@@ -107,7 +106,6 @@ const App = () => {
   const exportTemplate = React.useCallback(() => {
     if (handlers) {
       const template = handlers.templateHandler.exportTemplate()
-      console.log({ template })
     }
   }, [handlers])
 
@@ -118,7 +116,7 @@ const App = () => {
   }
   const editorConfig = {
     clipToFrame: true,
-    scrollLimit: 100
+    scrollLimit: 50
   }
   return (
     <Box
@@ -141,6 +139,11 @@ const App = () => {
           <Button onClick={handleImportTemplate}>Import</Button>
           <Button onClick={exportTemplate}>Export to JSON</Button>
           <Button onClick={handlerDownload}>Download</Button>
+          <Button
+            onClick={() => handlers?.objectsHandler.setGradient({ angle: 0, colors: ['#24C6DC', '#514A9D'] })}
+          >
+            Set gradient
+          </Button>
         </Box>
         <Editor config={editorConfig} />
         <Box sx={{ width: '320px' }}>

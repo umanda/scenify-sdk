@@ -10,7 +10,6 @@ class FrameHandler extends BaseHandler {
 
   constructor(props: HandlerOptions) {
     super(props)
-    // this.options = defaultFrameOptions
     this.initialize()
   }
 
@@ -26,22 +25,32 @@ class FrameHandler extends BaseHandler {
     })
     this.canvas.add(frame)
     frame.center()
-    const interval = setInterval(() => {
+
+    const watchScrollbar = setInterval(() => {
       if (this.root.scrollbarHandler && this.root.scrollbarHandler.updateScrollPosition) {
         this.root.scrollbarHandler.updateScrollPosition()
-        clearInterval(interval)
+        clearInterval(watchScrollbar)
       }
-    }, 100)
+    }, 50)
+
+    const watchZoom = setInterval(() => {
+      if (this.root.zoomHandler && this.root.zoomHandler.zoomToFit) {
+        this.root.zoomHandler.zoomToFit()
+        this.root.scrollbarHandler.updateScrollPosition()
+        this.root.transactionHandler.save('init')
+        clearInterval(watchZoom)
+      }
+    }, 50)
   }
 
-  get = () => {
+  getFrame = () => {
     return this.canvas.getObjects().find(object => object.type === 'Frame')
   }
 
-  update = options => {
+  updateFrame = options => {
     // this.sizeFormat = options
-    const frame = this.get()
-    const { width, height } = this.scaleDimension(options)
+    const frame = this.getFrame()
+    const { width, height } = options
     frame.set('width', width)
     frame.set('height', height)
     frame.center()
@@ -52,7 +61,7 @@ class FrameHandler extends BaseHandler {
   }
 
   setBackgroundColor = (color: string) => {
-    const frame = this.get()
+    const frame = this.getFrame()
     frame.set('fill', color)
     this.canvas.renderAll()
   }
@@ -67,26 +76,6 @@ class FrameHandler extends BaseHandler {
     // this.canvas.add(element)
     // element.center()
     // element.moveTo(1)
-  }
-
-  create = _options => {
-    // const shadow = new fabric.Shadow({
-    //   color: '#afafaf',
-    //   blur: 2.5,
-    // })
-    // this.sizeFormat = options
-    // const scaledSize = this.scaleDimension(this.sizeFormat)
-    const frame = new fabric.Frame({
-      id: '',
-      name: 'Initial Frame',
-      fill: '#ffffff',
-      hoverCursor: 'default',
-      ...this.options
-    })
-    this.canvas.add(frame)
-    frame.center()
-    // this.options = Object.assign(this.options, scaledSize)
-    // this.context.(options)
   }
 
   getBackgroundImage = () => {
@@ -106,21 +95,13 @@ class FrameHandler extends BaseHandler {
   }
 
   setSelectionBorder = () => {
-    // const frame = this.root.frameHandler.get()
+    // const frame = this.root.frameHandler.getFrame()
     // frame.setSelectionBorder()
   }
 
   getOptions = (): FrameOptions => {
-    const frame = this.get()
+    const frame = this.getFrame()
     return frame.toJSON(this.root.propertiesToInclude)
-  }
-
-  scaleDimension = options => {
-    const { width, height } = options
-    return {
-      height: height,
-      width: width
-    }
   }
 
   getFitRatio = () => {
