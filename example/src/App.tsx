@@ -4,6 +4,8 @@ import { Button } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { objects } from './objects'
 import Text from './objectProps/Text'
+import ItemsFactory from './ItemsFactory'
+import Navbar from './components/Navbar'
 const template = {
   name: 'Untitled design',
   objects: [
@@ -127,24 +129,9 @@ const App = () => {
         flexDirection: 'column'
       }}
     >
-      <Box style={{ height: '70px', flex: 'none', backgroundColor: '#25004f' }}></Box>
+      <Navbar />
       <Box sx={{ display: 'flex', flex: 1 }}>
-        <Box sx={{ width: '320px', display: 'flex', flexDirection: 'column', padding: '2rem', gap: '1rem' }}>
-          <Button onClick={addDynamicText}>Add dynamic text</Button>
-          <Button onClick={() => handlers?.objectsHandler.create(objects.staticText)}>Add static text</Button>
-
-          <Button onClick={addDynamicImage}>Add dynamic image</Button>
-          <Button onClick={addImage}>Add image</Button>
-          <Button onClick={handleClone}>Clone</Button>
-          <Button onClick={handleImportTemplate}>Import</Button>
-          <Button onClick={exportTemplate}>Export to JSON</Button>
-          <Button onClick={handlerDownload}>Download</Button>
-          <Button
-            onClick={() => handlers?.objectsHandler.setGradient({ angle: 0, colors: ['#24C6DC', '#514A9D'] })}
-          >
-            Set gradient
-          </Button>
-        </Box>
+        <ItemsFactory />
         <Editor config={editorConfig} />
         <Box sx={{ width: '320px' }}>
           <Text />

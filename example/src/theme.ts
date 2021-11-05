@@ -1,4 +1,6 @@
 export const theme = {
+  initialColorMode: 'dark',
+
   colors: {
     brand: {
       '50': '#f5e3ff',
