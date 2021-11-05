@@ -9,6 +9,33 @@ const handlers = useHandlers()
 const objectsHandler = handlers.objectsHandler
 ```
 
+### Shadow
+
+Allow you to apply a shadow to the selected object.
+
+```tsx
+const options = {
+  enabled: true,
+  offsetX: 15,
+  offsetY: 15,
+  blur: 0,
+  color: 'rgba(0,0,0,0.45)',
+}
+objectsHandler.setShadow(options)
+```
+
+### Gradient
+
+Allow you to apply a gradient fill to the active object.
+
+```tsx
+const options = {
+  angle: 0,
+  colors: ['#24C6DC', '#514A9D'],
+}
+objectsHandler.setGradient(options)
+```
+
 ### Layers
 
 Layer handlers allow you to move objects to back and front.
