@@ -218,6 +218,10 @@ class ObjectHandler extends BaseHandler {
   /**
    * OBJECT POSITION
    */
+
+  /**
+   * Moves an object or a selection up in stack of drawn objects.
+   */
   public bringForward = () => {
     const activeObject = this.canvas.getActiveObject()
     if (activeObject) {
@@ -225,6 +229,9 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
+  /**
+   * Moves an object or the objects of a multiple selection to the top of the stack of drawn objects
+   */
   public bringToFront = () => {
     const activeObject = this.canvas.getActiveObject()
     if (activeObject) {
@@ -232,6 +239,9 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
+  /**
+   * Moves an object or a selection down in stack of drawn objects.
+   */
   public sendBackwards = () => {
     const objects = this.canvas.getObjects()
     const activeObject = this.canvas.getActiveObject()
@@ -241,6 +251,9 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
+  /**
+   * Moves an object to specified level in stack of drawn objects.
+   */
   public sendToBack = () => {
     const activeObject = this.canvas.getActiveObject()
     if (activeObject) {
@@ -250,6 +263,10 @@ class ObjectHandler extends BaseHandler {
 
   /**
    * ALIGNMENT TO FRAME OR GROUP
+   */
+
+  /**
+   * Moves an object to the top of the frame. If multiple objects are selected, will move all objects to the top of the selection.
    */
   public alignTop = () => {
     const activeObject = this.canvas.getActiveObject()
@@ -272,7 +289,9 @@ class ObjectHandler extends BaseHandler {
       this.canvas.requestRenderAll()
     }
   }
-
+  /**
+   * Moves an object to the middle of the frame. If multiple objects are selected, will move all objects to the middle of the selection.
+   */
   public alignToMiddle = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
@@ -298,7 +317,9 @@ class ObjectHandler extends BaseHandler {
       this.canvas.requestRenderAll()
     }
   }
-
+  /**
+   * Moves an object to the bottom of the frame. If multiple objects are selected, will move all objects to the bottom of the selection.
+   */
   public alignBottom = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
@@ -325,6 +346,9 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
+  /**
+   * Moves an object to the left of the frame. If multiple objects are selected, will move all objects to the left of the selection.
+   */
   public alignToLeft = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
@@ -347,6 +371,9 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
+  /**
+   * Moves an object to the center of the frame. If multiple objects are selected, will move all objects to the center of the selection.
+   */
   public alignToCenter = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
@@ -373,6 +400,9 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
+  /**
+   * Moves an object to the right of the frame. If multiple objects are selected, will move all objects to the right of the selection.
+   */
   public alignToRight = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()

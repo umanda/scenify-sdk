@@ -1,0 +1,98 @@
+# Objects
+
+Objects handler is a cointainer for common actions releted to editor elements. You can access to the objects handlers as specified below:
+
+```tsx
+import { useHandlers } from '@scenify/sdk'
+
+const handlers = useHandlers()
+const objectsHandler = handlers.objectsHandler
+```
+
+### Layers
+
+Layer handlers allow you to move objects to back and front.
+
+##### Bring Forward
+
+Moves an object or a selection up in stack of drawn objects.
+
+```tsx
+objectsHandler.bringForward()
+```
+
+##### Bring To Front
+
+Moves an object or the objects of a multiple selection to the top of the stack of drawn objects
+
+```tsx
+objectsHandler.bringToFront()
+```
+
+##### Send Backward
+
+Moves an object or a selection down in stack of drawn objects.
+
+```tsx
+objectsHandler.sendBackwards()
+```
+
+##### Send to back
+
+Moves an object to specified level in stack of drawn objects.
+
+```tsx
+objectsHandler.sendToBack()
+```
+
+### Positioning
+
+Position handlers allow you to move your objects to some specific locations: Top, Middle, Bottom, Left, Center, Right. If only 1 object is selected, it will update the position relatative to frame, otherwise, relative to the selection.
+
+##### Align top
+
+Moves an object to the top of the frame. If multiple objects are selected, will move all objects to the top of the selection.
+
+```tsx
+objectsHandler.alignToTop()
+```
+
+##### Align Middle
+
+Moves an object to the middle of the frame. If multiple objects are selected, will move all objects to the middle of the selection.
+
+```tsx
+objectsHandler.alignToMiddle()
+```
+
+##### Align Bottom
+
+Moves an object to the bottom of the frame. If multiple objects are selected, will move all objects to the bottom of the selection.
+
+```tsx
+objectsHandler.alignToBottom()
+```
+
+##### Align Left
+
+Moves an object to the left of the frame. If multiple objects are selected, will move all objects to the left of the selection.
+
+```tsx
+objectsHandler.alignToLeft()
+```
+
+##### Align Center
+
+Moves an object to the center of the frame. If multiple objects are selected, will move all objects to the center of the selection.
+
+```tsx
+objectsHandler.alignToCenter()
+```
+
+##### Align Right
+
+Moves an object to the right of the frame. If multiple objects are selected, will move all objects to the right of the selection.
+
+```tsx
+objectsHandler.alignToRight()
+```
