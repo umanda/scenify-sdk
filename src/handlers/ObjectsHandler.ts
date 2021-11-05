@@ -249,47 +249,153 @@ class ObjectHandler extends BaseHandler {
   }
 
   /**
-   * ALIGNMENT TO FRAME
+   * ALIGNMENT TO FRAME OR GROUP
    */
-  public alignToFrameTop = () => {
+  public alignTop = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
     if (activeObject) {
+      if (activeObject instanceof fabric.Group) {
+        const selectedObjects = activeObject._objects
+        const refTop = activeObject.top
+        this.canvas.discardActiveObject()
+        selectedObjects.forEach(object => {
+          const currentObject = object
+          currentObject.set('top', refTop)
+        })
+        const selection = new fabric.ActiveSelection(selectedObjects, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
+      } else {
+        const currentObject = activeObject
+        currentObject.set('top', frame.top)
+      }
+      this.canvas.requestRenderAll()
     }
   }
 
-  public alignToFrameMiddle = () => {
+  public alignToMiddle = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
+
     if (activeObject) {
+      if (activeObject instanceof fabric.Group) {
+        const selectedObjects = activeObject._objects
+        const refTop = activeObject.top
+        const refHeight = activeObject.height
+        this.canvas.discardActiveObject()
+        selectedObjects.forEach(object => {
+          const currentObject = object
+          const currentObjectHeight = currentObject.getScaledHeight()
+          currentObject.set('top', refTop + refHeight / 2 - currentObjectHeight / 2)
+        })
+        const selection = new fabric.ActiveSelection(selectedObjects, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
+      } else {
+        const currentObject = activeObject
+        const currentObjectHeight = currentObject.getScaledHeight()
+        currentObject.set('top', frame.top + frame.height / 2 - currentObjectHeight / 2)
+      }
+      this.canvas.requestRenderAll()
     }
   }
 
-  public alignToFrameBottom = () => {
+  public alignBottom = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
+
     if (activeObject) {
+      if (activeObject instanceof fabric.Group) {
+        const selectedObjects = activeObject._objects
+        const refTop = activeObject.top
+        const refHeight = activeObject.height
+        this.canvas.discardActiveObject()
+        selectedObjects.forEach(object => {
+          const currentObject = object
+          const currentObjectHeight = currentObject.getScaledHeight()
+          currentObject.set('top', refTop + refHeight - currentObjectHeight)
+        })
+        const selection = new fabric.ActiveSelection(selectedObjects, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
+      } else {
+        const currentObject = activeObject
+        const currentObjectHeight = currentObject.getScaledHeight()
+        currentObject.set('top', frame.top + frame.height - currentObjectHeight)
+      }
+      this.canvas.requestRenderAll()
     }
   }
 
-  public alignToFrameLeft = () => {
+  public alignToLeft = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
     if (activeObject) {
+      if (activeObject instanceof fabric.Group) {
+        const selectedObjects = activeObject._objects
+        const refLeft = activeObject.left
+        this.canvas.discardActiveObject()
+        selectedObjects.forEach(object => {
+          const currentObject = object
+          currentObject.set('left', refLeft)
+        })
+        const selection = new fabric.ActiveSelection(selectedObjects, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
+      } else {
+        const currentObject = activeObject
+        currentObject.set('left', frame.left)
+      }
+      this.canvas.requestRenderAll()
     }
   }
 
-  public alignToFrameCenter = () => {
+  public alignToCenter = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
+
     if (activeObject) {
+      if (activeObject instanceof fabric.Group) {
+        const selectedObjects = activeObject._objects
+        const refLeft = activeObject.left
+        const refWidth = activeObject.width
+        this.canvas.discardActiveObject()
+        selectedObjects.forEach(object => {
+          const currentObject = object
+          const currentObjectWidth = currentObject.getScaledWidth()
+          currentObject.set('left', refLeft + refWidth / 2 - currentObjectWidth / 2)
+        })
+        const selection = new fabric.ActiveSelection(selectedObjects, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
+      } else {
+        const currentObject = activeObject
+        const currentObjectWidth = currentObject.getScaledWidth()
+        currentObject.set('left', frame.left + frame.width / 2 - currentObjectWidth / 2)
+      }
+      this.canvas.requestRenderAll()
     }
   }
 
-  public alignToFrameRight = () => {
+  public alignToRight = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.root.frameHandler.getFrame()
+
     if (activeObject) {
+      if (activeObject instanceof fabric.Group) {
+        const selectedObjects = activeObject._objects
+        const refLeft = activeObject.left
+        const refWidth = activeObject.width
+        this.canvas.discardActiveObject()
+        selectedObjects.forEach(object => {
+          const currentObject = object
+          const currentObjectWidth = currentObject.getScaledWidth()
+          currentObject.set('left', refLeft + refWidth - currentObjectWidth)
+        })
+        const selection = new fabric.ActiveSelection(selectedObjects, { canvas: this.canvas })
+        this.canvas.setActiveObject(selection)
+      } else {
+        const currentObject = activeObject
+        const currentObjectWidth = currentObject.getScaledWidth()
+        currentObject.set('left', frame.left + frame.width - currentObjectWidth)
+      }
+      this.canvas.requestRenderAll()
     }
   }
 
