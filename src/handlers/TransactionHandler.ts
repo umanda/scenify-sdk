@@ -3,12 +3,22 @@ import throttle from 'lodash/throttle'
 import BaseHandler from './BaseHandler'
 
 class TransactionHandler extends BaseHandler {
-  redos = []
-  undos = []
-  state = []
-  active = false
+  private redos = []
+  private undos = []
+  private state = []
+  public active = false
 
-  save = type => {
+  public getStatus = () => {
+    return {
+      hasUndo: this.undos.length > 1,
+      hasRedo: this.undos.length > 0,
+      undos: this.undos,
+      redos: this.redos,
+      state: this.state
+    }
+  }
+
+  public save = (type: string) => {
     try {
       if (this.state) {
         const json = this.state
@@ -21,7 +31,6 @@ class TransactionHandler extends BaseHandler {
         canvasJSON.objects.forEach(object => {
           if (object.clipPath) {
             // @ts-ignore
-
             fabric.util.enlivenObjects([object.clipPath], function(arg1) {
               object.clipPath = arg1[0]
             })
@@ -33,7 +42,10 @@ class TransactionHandler extends BaseHandler {
     } catch (err) {
       console.log(err)
     }
-    this.canvas.fire('history:changed')
+    this.canvas.fire('history:changed', {
+      hasUndo: this.undos.length > 1,
+      hasRedo: this.redos.length > 0
+    })
   }
 
   clear = () => {
@@ -41,7 +53,7 @@ class TransactionHandler extends BaseHandler {
     this.undos = []
   }
 
-  undo = throttle(() => {
+  public undo = throttle(() => {
     if (this.undos.length > 1) {
       const undo = this.undos.pop()
       if (!undo) {
@@ -55,7 +67,7 @@ class TransactionHandler extends BaseHandler {
     }
   }, 100)
 
-  redo = throttle(() => {
+  public redo = throttle(() => {
     const redo = this.redos.pop()
     if (!redo) {
       return
@@ -67,7 +79,7 @@ class TransactionHandler extends BaseHandler {
     this.replay(redo)
   }, 100)
 
-  replay = async transaction => {
+  private replay = async transaction => {
     this.root.objectsHandler.clear()
     const objects = transaction.json
     this.state = objects
@@ -80,14 +92,17 @@ class TransactionHandler extends BaseHandler {
             this.canvas.add(enlivenObject)
           }
         })
-        this.canvas.fire('history:changed')
+        this.canvas.fire('history:changed', {
+          hasUndo: this.undos.length > 1,
+          hasRedo: this.redos.length > 0
+        })
       },
       null
     )
     this.active = false
   }
 
-  getAll = () => {
+  public getAll = () => {
     return {
       undos: this.undos,
       redos: this.redos,
