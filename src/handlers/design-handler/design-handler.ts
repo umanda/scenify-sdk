@@ -6,7 +6,7 @@ import { Template } from '../../common/interfaces'
 class DesignHandler extends BaseHandler {
   public async toDataURL(params: any) {
     const staticCanvas = new fabric.StaticCanvas(null)
-    const template = this.root.templateHandler.exportTemplate() as Template
+    const template = this.handlers.templateHandler.exportTemplate() as Template
     await this.loadTemplate(staticCanvas, template, params)
     const data = staticCanvas.toDataURL({
       multiplier: 3,

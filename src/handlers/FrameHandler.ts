@@ -26,18 +26,11 @@ class FrameHandler extends BaseHandler {
     this.canvas.add(frame)
     frame.center()
 
-    const watchScrollbar = setInterval(() => {
-      if (this.root.scrollbarHandler && this.root.scrollbarHandler.updateScrollPosition) {
-        this.root.scrollbarHandler.updateScrollPosition()
-        clearInterval(watchScrollbar)
-      }
-    }, 50)
-
     const watchZoom = setInterval(() => {
-      if (this.root.zoomHandler && this.root.zoomHandler.zoomToFit) {
-        this.root.zoomHandler.zoomToFit()
-        this.root.scrollbarHandler.updateScrollPosition()
-        this.root.transactionHandler.save('init')
+      if (this.handlers.zoomHandler.zoomToFit && this.handlers.scrollbarHandler.updateScrollPosition) {
+        this.handlers.zoomHandler.zoomToFit()
+        this.handlers.scrollbarHandler.updateScrollPosition()
+        this.handlers.historyHandler.save('init')
         clearInterval(watchZoom)
       }
     }, 50)
@@ -54,10 +47,10 @@ class FrameHandler extends BaseHandler {
     frame.set('width', width)
     frame.set('height', height)
     frame.center()
-    this.root.zoomHandler.zoomToFit()
+    this.handlers.zoomHandler.zoomToFit()
     // this.context.setSizeFormat(options)
-    // this.root.transactionHandler.save('frame:update')
-    // this.root.gridHandler.draw()
+    // this.handlers.historyHandler.save('frame:update')
+    // this.handlers.gridHandler.draw()
   }
 
   setBackgroundColor = (color: string) => {
@@ -95,13 +88,13 @@ class FrameHandler extends BaseHandler {
   }
 
   setSelectionBorder = () => {
-    // const frame = this.root.frameHandler.getFrame()
+    // const frame = this.handlers.Frame.getFrame()
     // frame.setSelectionBorder()
   }
 
   getOptions = (): FrameOptions => {
     const frame = this.getFrame()
-    return frame.toJSON(this.root.propertiesToInclude)
+    return frame.toJSON(this.handlers.propertiesToInclude)
   }
 
   getFitRatio = () => {

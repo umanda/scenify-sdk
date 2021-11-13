@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 import { EditorContext } from '../context'
 
-export function useHandlers() {
+export function useEditor() {
   const { editor } = useContext(EditorContext)
-
   return editor
 }

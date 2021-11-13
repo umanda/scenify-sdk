@@ -5,8 +5,9 @@ import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIco
 import { Checkbox } from '@chakra-ui/react'
 import { Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react'
 import { RgbaColorPicker } from '../components/ColorPicker'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Button } from '@chakra-ui/react'
 import Position from './components/Position'
+import Gradient from './components/Gradient'
 function Text() {
   const handlers = useHandlers()
   const [options, setOptions] = React.useState({
@@ -126,6 +127,10 @@ function Text() {
               </AccordionItem>
             </Accordion>
             <Position />
+            <Gradient />
+            <Box>
+              <Button onClick={() => handlers?.group()}>Group</Button>
+            </Box>
           </TabPanel>
           <TabPanel>
             <p>two!</p>

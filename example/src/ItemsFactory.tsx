@@ -1,42 +1,20 @@
 import * as React from 'react'
 import { Box } from '@chakra-ui/react'
-import { Images, Text } from './components/Icons'
-import { useHandlers } from '../../src'
+import { Images, Text, Elements } from './components/Icons'
+import { useHandlers, useEditor } from '../../src'
+import { objects } from './objects'
 
 function ItemsFactory() {
-  const handlers = useHandlers()
+  const editor = useEditor()
 
-  const addText = () => {
-    if (handlers) {
-      const options = {
-        type: 'StaticText',
-        width: 320,
-        fontSize: 27,
-        metadata: {
-          text: 'Add some static body text',
-          fontFamily: 'Inconsolata'
-        }
-      }
-      handlers.objectsHandler.create(options)
-    }
-  }
-
-  const addImage = () => {
-    if (handlers) {
-      const options = {
-        type: 'StaticImage',
-        metadata: {
-          src: 'https://i.ibb.co/JB3y2ts/mclogo.jpg'
-        }
-      }
-      handlers.objectsHandler.create(options)
-    }
+  if (!editor) {
+    return <></>
   }
 
   return (
     <Box sx={{ width: '80px' }}>
       <Box
-        onClick={addText}
+        onClick={() => editor.add(objects.staticText)}
         sx={{
           height: '80px',
           display: 'flex',
@@ -47,8 +25,21 @@ function ItemsFactory() {
       >
         <Text size={26} />
       </Box>
+
       <Box
-        onClick={addImage}
+        onClick={() => editor.add(objects.staticPath)}
+        sx={{
+          height: '80px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderBottom: '1px solid rgba(0,0,0,0.2)'
+        }}
+      >
+        <Elements size={26} />
+      </Box>
+      <Box
+        onClick={() => editor.add(objects.staticImage)}
         sx={{
           height: '80px',
           display: 'flex',

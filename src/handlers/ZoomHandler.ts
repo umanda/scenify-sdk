@@ -26,7 +26,7 @@ class ZoomHandler extends BaseHandler {
   }
 
   zoomToFit() {
-    const zoomFitRatio = this.root.frameHandler.getFitRatio()
+    const zoomFitRatio = this.handlers.frameHandler.getFitRatio()
     const center = this.canvas.getCenter()
     this.canvas.setViewportTransform([1, 0, 0, 1, 0, 0])
     this.zoomToPoint(new fabric.Point(center.left, center.top), zoomFitRatio)

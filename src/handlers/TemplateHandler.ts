@@ -4,8 +4,8 @@ import BaseHandler from './BaseHandler'
 
 class TemplateHandler extends BaseHandler {
   exportTemplate() {
-    const canvasJSON: any = this.canvas.toJSON(this.root.propertiesToInclude)
-    const frameOptions = this.root.frameHandler.getOptions()
+    const canvasJSON: any = this.canvas.toJSON(this.handlers.propertiesToInclude)
+    const frameOptions = this.handlers.frameHandler.getOptions()
 
     const template = {
       name: 'Untitled design',
@@ -33,16 +33,16 @@ class TemplateHandler extends BaseHandler {
   }
 
   async importTemplate(template) {
-    this.root.objectsHandler.clear()
+    this.handlers.objectsHandler.clear()
     const frameParams = template.frame
-    this.root.frameHandler.updateFrame(frameParams)
+    this.handlers.frameHandler.updateFrame(frameParams)
 
-    const frameOptions = this.root.frameHandler.getOptions()
+    const frameOptions = this.handlers.frameHandler.getOptions()
     for (const object of template.objects) {
       const element = await objectToFabric.run(object, frameOptions)
       if (element) {
         if (this.config.clipToFrame) {
-          const frame = this.root.frameHandler.getFrame()
+          const frame = this.handlers.frameHandler.getFrame()
           element.clipPath = frame
         }
         this.canvas.add(element)
@@ -50,12 +50,12 @@ class TemplateHandler extends BaseHandler {
         console.log('UNABLE TO LOAD OBJECT: ', object)
       }
     }
-    this.root.frameHandler.setBackgroundColor(
+    this.handlers.frameHandler.setBackgroundColor(
       template.background && template.background.type === 'color' ? template.background.value : '#ffffff'
     )
-    this.root.transactionHandler.save('template:load')
-    this.root.transactionHandler.clear()
-    this.root.zoomHandler.zoomToFit()
+    this.handlers.historyHandler.save('template:load')
+    this.handlers.historyHandler.clear()
+    this.handlers.zoomHandler.zoomToFit()
   }
 }
 export default TemplateHandler

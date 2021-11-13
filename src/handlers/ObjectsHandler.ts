@@ -8,24 +8,21 @@ class ObjectHandler extends BaseHandler {
   public clipboard
   public isCut
 
-  public create = async item => {
+  public add = async item => {
     const { canvas } = this
-    const options = this.root.frameHandler.getOptions()
+    const options = this.handlers.frameHandler.getOptions()
     const object: fabric.Object = await objectToFabric.run(item, options)
     if (this.config.clipToFrame) {
-      const frame = this.root.frameHandler.getFrame()
+      const frame = this.handlers.frameHandler.getFrame()
       object.clipPath = frame
     }
     canvas.add(object)
     object.center()
     canvas.setActiveObject(object)
-    this.root.transactionHandler.save('object:created')
+    this.handlers.historyHandler.save('object:created')
   }
 
-  /**
-   * Get canvas object by id
-   */
-  public updateActive = options => {
+  public update = options => {
     const activeObject = this.canvas.getActiveObject()
     const canvas = this.canvas
     if (activeObject) {
@@ -33,7 +30,7 @@ class ObjectHandler extends BaseHandler {
         activeObject.set(property as keyof fabric.Object, options[property])
         canvas.requestRenderAll()
       }
-      this.root.transactionHandler.save('object:updated')
+      this.handlers.historyHandler.save('object:updated')
     }
   }
 
@@ -46,11 +43,11 @@ class ObjectHandler extends BaseHandler {
       this.canvas.remove(obj)
     })
     this.canvas.discardActiveObject().renderAll()
-    this.root.transactionHandler.save('object:removed')
+    this.handlers.historyHandler.save('object:removed')
   }
 
   public clear = () => {
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
     this.canvas.getObjects().forEach(object => {
       if (object.type !== 'Frame') {
         this.canvas.remove(object)
@@ -63,7 +60,7 @@ class ObjectHandler extends BaseHandler {
   public moveVertical = value => {
     const activeObject = this.canvas.getActiveObject()
     const top = activeObject.top + value
-    this.updateActive({
+    this.update({
       top: top
     })
   }
@@ -71,7 +68,7 @@ class ObjectHandler extends BaseHandler {
   public moveHorizontal = value => {
     const activeObject = this.canvas.getActiveObject()
     const left = activeObject.left + value
-    this.updateActive({
+    this.update({
       left: left
     })
   }
@@ -80,7 +77,7 @@ class ObjectHandler extends BaseHandler {
     const activeObject = this.canvas.getActiveObject() as fabric.ITextOptions
     if (activeObject.type === 'DynamicText') {
       const lineHeight = activeObject.lineHeight + value
-      this.updateActive({
+      this.update({
         lineHeight: lineHeight
       })
     }
@@ -90,7 +87,7 @@ class ObjectHandler extends BaseHandler {
     const activeObject = this.canvas.getActiveObject() as fabric.ITextOptions
     if (activeObject.type === 'DynamicText') {
       const charSpacing = activeObject.charSpacing + value
-      this.updateActive({
+      this.update({
         charSpacing: charSpacing
       })
     }
@@ -112,7 +109,7 @@ class ObjectHandler extends BaseHandler {
   public clone = () => {
     if (this.canvas) {
       const activeObject = this.canvas.getActiveObject()
-      const frame = this.root.frameHandler.getFrame()
+      const frame = this.handlers.frameHandler.getFrame()
 
       this.canvas.discardActiveObject()
 
@@ -150,7 +147,7 @@ class ObjectHandler extends BaseHandler {
           })
 
           if (this.config.clipToFrame) {
-            const frame = this.root.frameHandler.getFrame()
+            const frame = this.handlers.frameHandler.getFrame()
             clone.clipPath = frame
           }
 
@@ -166,7 +163,7 @@ class ObjectHandler extends BaseHandler {
   public paste = () => {
     const object = this.clipboard
     if (object) {
-      const frame = this.root.frameHandler.getFrame()
+      const frame = this.handlers.frameHandler.getFrame()
       this.canvas.discardActiveObject()
       this.duplicate(object, frame, duplicates => {
         const selection = new fabric.ActiveSelection(duplicates, { canvas: this.canvas })
@@ -270,7 +267,7 @@ class ObjectHandler extends BaseHandler {
    */
   public alignTop = () => {
     const activeObject = this.canvas.getActiveObject()
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
     if (activeObject) {
       if (activeObject instanceof fabric.Group) {
         const selectedObjects = activeObject._objects
@@ -294,7 +291,7 @@ class ObjectHandler extends BaseHandler {
    */
   public alignToMiddle = () => {
     const activeObject = this.canvas.getActiveObject()
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
 
     if (activeObject) {
       if (activeObject instanceof fabric.Group) {
@@ -322,7 +319,7 @@ class ObjectHandler extends BaseHandler {
    */
   public alignBottom = () => {
     const activeObject = this.canvas.getActiveObject()
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
 
     if (activeObject) {
       if (activeObject instanceof fabric.Group) {
@@ -351,7 +348,7 @@ class ObjectHandler extends BaseHandler {
    */
   public alignToLeft = () => {
     const activeObject = this.canvas.getActiveObject()
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
     if (activeObject) {
       if (activeObject instanceof fabric.Group) {
         const selectedObjects = activeObject._objects
@@ -376,7 +373,7 @@ class ObjectHandler extends BaseHandler {
    */
   public alignToCenter = () => {
     const activeObject = this.canvas.getActiveObject()
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
 
     if (activeObject) {
       if (activeObject instanceof fabric.Group) {
@@ -405,7 +402,7 @@ class ObjectHandler extends BaseHandler {
    */
   public alignToRight = () => {
     const activeObject = this.canvas.getActiveObject()
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
 
     if (activeObject) {
       if (activeObject instanceof fabric.Group) {
