@@ -14,7 +14,7 @@ class EventsHandler extends BaseHandler {
     this.canvas.wrapperEl.style.outline = 'none'
     // @ts-ignore
     this.canvas.on({
-      'selection:created': this.handleSelection,
+      'mouse:up': this.handleSelection,
       'selection:cleared': this.handleSelection,
       'selection:updated': this.handleSelection,
       'mouse:wheel': this.onMouseWheel,
@@ -27,7 +27,7 @@ class EventsHandler extends BaseHandler {
 
   destroy() {
     this.canvas.off({
-      'selection:created': this.handleSelection,
+      'mouse:up': this.handleSelection,
       'selection:cleared': this.handleSelection,
       'selection:updated': this.handleSelection,
       'mouse:wheel': this.onMouseWheel,
@@ -44,7 +44,7 @@ class EventsHandler extends BaseHandler {
       this.scaleTextbox(target)
     }
 
-    this.root.transactionHandler.save('object:modified')
+    this.handlers.historyHandler.save('object:modified')
   }
 
   onMouseOut = () => {
@@ -66,7 +66,7 @@ class EventsHandler extends BaseHandler {
     } else {
       zoomRatio += 0.02
     }
-    this.root.zoomHandler.zoomToPoint(
+    this.handlers.zoomHandler.zoomToPoint(
       new fabric.Point(this.canvas.getWidth() / 2, this.canvas.getHeight() / 2),
       zoomRatio
     )
@@ -77,81 +77,100 @@ class EventsHandler extends BaseHandler {
   onKeyDown(event) {
     if (shourcutsManager.isCtrlZero(event)) {
       event.preventDefault()
-      this.root.zoomHandler.zoomToFit()
+      this.handlers.zoomHandler.zoomToFit()
     } else if (shourcutsManager.isCtrlMinus(event)) {
       event.preventDefault()
-      this.root.zoomHandler.zoomIn()
+      this.handlers.zoomHandler.zoomIn()
     } else if (shourcutsManager.isCtrlEqual(event)) {
       event.preventDefault()
-      this.root.zoomHandler.zoomOut()
+      this.handlers.zoomHandler.zoomOut()
     } else if (shourcutsManager.isCtrlOne(event)) {
       event.preventDefault()
-      this.root.zoomHandler.zoomToOne()
+      this.handlers.zoomHandler.zoomToOne()
     } else if (shourcutsManager.isCtrlZ(event)) {
-      this.root.transactionHandler.undo()
+      this.handlers.historyHandler.undo()
     } else if (shourcutsManager.isCtrlShiftZ(event)) {
-      this.root.transactionHandler.redo()
+      this.handlers.historyHandler.redo()
     } else if (shourcutsManager.isCtrlY(event)) {
-      this.root.transactionHandler.redo()
+      this.handlers.historyHandler.redo()
     } else if (shourcutsManager.isAltLeft(event)) {
       event.preventDefault()
-      this.root.objectsHandler.updateCharSpacing(-10)
+      this.handlers.objectsHandler.updateCharSpacing(-10)
     } else if (shourcutsManager.isAltRight(event)) {
       event.preventDefault()
-      this.root.objectsHandler.updateCharSpacing(+10)
+      this.handlers.objectsHandler.updateCharSpacing(+10)
     } else if (shourcutsManager.isAltUp(event)) {
       event.preventDefault()
-      this.root.objectsHandler.updateLineHeight(+0.1)
+      this.handlers.objectsHandler.updateLineHeight(+0.1)
     } else if (shourcutsManager.isAltDown(event)) {
       event.preventDefault()
-      this.root.objectsHandler.updateLineHeight(-0.1)
+      this.handlers.objectsHandler.updateLineHeight(-0.1)
     } else if (shourcutsManager.isCtrlA(event)) {
       event.preventDefault()
-      this.root.objectsHandler.selectAll()
+      this.handlers.objectsHandler.selectAll()
     } else if (shourcutsManager.isDelete(event)) {
       event.preventDefault()
-      this.root.objectsHandler.removeActive()
+      this.handlers.objectsHandler.removeActive()
     } else if (shourcutsManager.isCtrlC(event)) {
       event.preventDefault()
-      this.root.objectsHandler.copy()
+      this.handlers.objectsHandler.copy()
     } else if (shourcutsManager.isCtrlV(event)) {
       event.preventDefault()
-      this.root.objectsHandler.paste()
+      this.handlers.objectsHandler.paste()
     } else if (shourcutsManager.isCtrlX(event)) {
       event.preventDefault()
-      this.root.objectsHandler.cut()
+      this.handlers.objectsHandler.cut()
     } else if (shourcutsManager.isArrowUp(event)) {
       let nudgeValue = -1
       if (shourcutsManager.isShift(event)) {
         nudgeValue = -10
       }
-      this.root.objectsHandler.moveVertical(nudgeValue)
+      this.handlers.objectsHandler.moveVertical(nudgeValue)
     } else if (shourcutsManager.isArrowDown(event)) {
       let nudgeValue = 1
       if (shourcutsManager.isShift(event)) {
         nudgeValue = 10
       }
-      this.root.objectsHandler.moveVertical(nudgeValue)
+      this.handlers.objectsHandler.moveVertical(nudgeValue)
     } else if (shourcutsManager.isArrowLeft(event)) {
       let nudgeValue = -1
       if (shourcutsManager.isShift(event)) {
         nudgeValue = -10
       }
-      this.root.objectsHandler.moveHorizontal(nudgeValue)
+      this.handlers.objectsHandler.moveHorizontal(nudgeValue)
     } else if (shourcutsManager.isArrowRight(event)) {
       let nudgeValue = 1
       if (shourcutsManager.isShift(event)) {
         nudgeValue = 10
       }
-      this.root.objectsHandler.moveHorizontal(nudgeValue)
+      this.handlers.objectsHandler.moveHorizontal(nudgeValue)
     }
   }
 
   handleSelection = target => {
     if (target) {
       this.context.setActiveObject(null)
-      const selection = this.canvas.getActiveObject()
-      this.context.setActiveObject(selection)
+      const initialSelection = this.canvas.getActiveObject() as any
+      if (initialSelection && initialSelection._objects) {
+        const filteredObjects = initialSelection._objects.filter(object => !object.locked)
+        this.canvas.discardActiveObject()
+        if (filteredObjects.length > 0) {
+          if (filteredObjects.length === 1) {
+            this.canvas.setActiveObject(filteredObjects[0])
+            this.canvas.renderAll()
+            this.context.setActiveObject(filteredObjects[0])
+          } else {
+            const activeSelection = new fabric.ActiveSelection(filteredObjects, {
+              canvas: this.canvas
+            })
+            this.canvas.setActiveObject(activeSelection)
+            this.canvas.renderAll()
+            this.context.setActiveObject(activeSelection)
+          }
+        }
+      } else {
+        this.context.setActiveObject(initialSelection)
+      }
     } else {
       this.context.setActiveObject(null)
     }

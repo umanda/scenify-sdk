@@ -1,4 +1,5 @@
 import { IEditorContext } from '../context/editor'
+import Editor from '../Editor'
 import Handlers from '../handlers'
 
 export interface FabricWheelEvent {
@@ -20,23 +21,42 @@ export interface FabricWheelEvent {
     | undefined
 }
 
+// export interface RootHandlerOptions
 export interface HandlerOptions {
-  root: Handlers
+  handlers: Handlers
   context: IEditorContext
   canvas: FabricCanvas
   config: EditorConfig
+  editor: Editor
+}
+export interface IHandler {
+  handlers: Handlers
+  context: IEditorContext
+  canvas: FabricCanvas
+  config: EditorConfig
+  editor: Editor
 }
 
 export interface RootHandlerOptions {
   context: IEditorContext
   canvas: FabricCanvas
   config: EditorConfig
+  editor: Editor
 }
 
 export interface EditorOptions {
-  id: string
-  context: any
+  context: IEditorContext
+  canvas: FabricCanvas
+  config: EditorConfig
+  // editor: Editor
 }
+
+// export interface EditorConfig {
+//   config: {
+//     clipToFrame: boolean
+//     scrollLimit: number
+//   }
+// }
 
 export interface CanvasOptions {
   width: number
@@ -63,14 +83,15 @@ export interface Template {
   objects: any[]
 }
 
-export interface EditorProps {
-  config: EditorConfig
-}
-
 export interface EditorConfig {
   clipToFrame: boolean
   scrollLimit: number
 }
+
+// export interface EditorConfig {
+//   clipToFrame: boolean
+//   scrollLimit: number
+// }
 
 export interface GradientOptions {
   angle: number

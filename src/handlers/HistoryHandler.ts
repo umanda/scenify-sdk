@@ -2,7 +2,7 @@ import { fabric } from 'fabric'
 import throttle from 'lodash/throttle'
 import BaseHandler from './BaseHandler'
 
-class TransactionHandler extends BaseHandler {
+class HistoryHandler extends BaseHandler {
   private redos = []
   private undos = []
   private state = []
@@ -26,7 +26,7 @@ class TransactionHandler extends BaseHandler {
           type,
           json
         })
-        const canvasJSON = this.canvas.toJSON(this.root.propertiesToInclude)
+        const canvasJSON = this.canvas.toJSON(this.handlers.propertiesToInclude)
         // @ts-ignore
         canvasJSON.objects.forEach(object => {
           if (object.clipPath) {
@@ -42,13 +42,13 @@ class TransactionHandler extends BaseHandler {
     } catch (err) {
       console.log(err)
     }
-    this.canvas.fire('history:changed', {
+    this.editor.emit('history:changed', {
       hasUndo: this.undos.length > 1,
       hasRedo: this.redos.length > 0
     })
   }
 
-  clear = () => {
+  public clear = () => {
     this.redos = []
     this.undos = []
   }
@@ -80,7 +80,7 @@ class TransactionHandler extends BaseHandler {
   }, 100)
 
   private replay = async transaction => {
-    this.root.objectsHandler.clear()
+    this.handlers.objectsHandler.clear()
     const objects = transaction.json
     this.state = objects
     this.active = true
@@ -92,7 +92,7 @@ class TransactionHandler extends BaseHandler {
             this.canvas.add(enlivenObject)
           }
         })
-        this.canvas.fire('history:changed', {
+        this.editor.emit('history:changed', {
           hasUndo: this.undos.length > 1,
           hasRedo: this.redos.length > 0
         })
@@ -111,4 +111,4 @@ class TransactionHandler extends BaseHandler {
   }
 }
 
-export default TransactionHandler
+export default HistoryHandler

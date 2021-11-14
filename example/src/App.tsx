@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Editor, { useHandlers } from '../../src'
-import { Button } from '@chakra-ui/react'
+// import { Button } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
-import { objects } from './objects'
+// import { objects } from './objects'
 import Text from './objectProps/Text'
 import ItemsFactory from './ItemsFactory'
 import Navbar from './components/Navbar'
@@ -51,71 +51,71 @@ const template = {
 const App = () => {
   const handlers = useHandlers()
 
-  const handlerDownload = async () => {
-    if (handlers) {
-      const template = await handlers.designHandler.toDataURL({
-        image: 'https://i.ibb.co/zb6PMP6/logo.png'
-      })
-    }
-  }
+  // const handlerDownload = async () => {
+  //   if (handlers) {
+  //     const template = await handlers.designHandler.toDataURL({
+  //       image: 'https://i.ibb.co/zb6PMP6/logo.png'
+  //     })
+  //   }
+  // }
 
-  const handleImportTemplate = () => {
-    if (handlers) {
-      handlers.templateHandler.importTemplate(template)
-    }
-  }
+  // const handleImportTemplate = () => {
+  //   if (handlers) {
+  //     handlers.templateHandler.importTemplate(template)
+  //   }
+  // }
 
-  const addImage = () => {
-    const options = {
-      type: 'StaticImage',
-      metadata: {
-        src: 'https://i.ibb.co/JB3y2ts/mclogo.jpg'
-      }
-    }
-    handlers?.objectsHandler.create(options)
-  }
+  // const addImage = () => {
+  //   const options = {
+  //     type: 'StaticImage',
+  //     metadata: {
+  //       src: 'https://i.ibb.co/JB3y2ts/mclogo.jpg'
+  //     }
+  //   }
+  //   handlers?.objectsHandler.create(options)
+  // }
 
-  const addDynamicText = React.useCallback(() => {
-    if (handlers) {
-      const objectOptions = {
-        type: 'DynamicText',
-        width: 120,
-        fontSize: 27,
-        metadata: {
-          text: 'Add some {{cc}} body text'
-        }
-      }
-      handlers.objectsHandler.create(objectOptions)
-    }
-  }, [handlers])
+  // const addDynamicText = React.useCallback(() => {
+  //   if (handlers) {
+  //     const objectOptions = {
+  //       type: 'DynamicText',
+  //       width: 120,
+  //       fontSize: 27,
+  //       metadata: {
+  //         text: 'Add some {{cc}} body text'
+  //       }
+  //     }
+  //     handlers.objectsHandler.create(objectOptions)
+  //   }
+  // }, [handlers])
 
-  const addDynamicImage = React.useCallback(() => {
-    if (handlers) {
-      const objectOptions = {
-        width: 100,
-        height: 100,
-        backgroundColor: '#bdc3c7',
-        type: 'DynamicImage',
+  // const addDynamicImage = React.useCallback(() => {
+  //   if (handlers) {
+  //     const objectOptions = {
+  //       width: 100,
+  //       height: 100,
+  //       backgroundColor: '#bdc3c7',
+  //       type: 'DynamicImage',
 
-        metadata: {
-          keyValues: [{ key: '{{' + 'image' + '}}', value: '' }]
-        }
-      }
-      handlers.objectsHandler.create(objectOptions)
-    }
-  }, [handlers])
+  //       metadata: {
+  //         keyValues: [{ key: '{{' + 'image' + '}}', value: '' }]
+  //       }
+  //     }
+  //     handlers.objectsHandler.create(objectOptions)
+  //   }
+  // }, [handlers])
 
-  const exportTemplate = React.useCallback(() => {
-    if (handlers) {
-      const template = handlers.templateHandler.exportTemplate()
-    }
-  }, [handlers])
+  // const exportTemplate = React.useCallback(() => {
+  //   if (handlers) {
+  //     const template = handlers.templateHandler.exportTemplate()
+  //   }
+  // }, [handlers])
 
-  const handleClone = () => {
-    if (handlers) {
-      handlers.objectsHandler.clone()
-    }
-  }
+  // const handleClone = () => {
+  //   if (handlers) {
+  //     handlers.objectsHandler.clone()
+  //   }
+  // }
   const editorConfig = {
     clipToFrame: true,
     scrollLimit: 50

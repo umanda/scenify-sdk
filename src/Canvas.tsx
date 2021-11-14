@@ -1,16 +1,19 @@
 import { fabric } from 'fabric'
 import React, { useContext, useEffect, useRef } from 'react'
-import { EditorProps, FabricCanvas } from './common/interfaces'
+import { EditorConfig, FabricCanvas } from './common/interfaces'
 import { EditorContext } from './context'
-import Handlers from './handlers'
+import Editor from './Editor'
 import ResizeObserver from 'resize-observer-polyfill'
-import './objects'
 import { defaultEditorConfig } from './common/constants'
+import './objects'
 
-function Editor({ config }: EditorProps) {
+interface ICanvas {
+  config: EditorConfig
+}
+function Canvas({ config }: ICanvas) {
   const containerRef = useRef(null)
   const context = useContext(EditorContext)
-  const { setHandlers } = context
+  const { setEditor } = context
 
   useEffect(() => {
     const editorConfig = Object.assign(defaultEditorConfig, config)
@@ -24,21 +27,21 @@ function Editor({ config }: EditorProps) {
       preserveObjectStacking: true
     }) as FabricCanvas
 
-    const handlers = new Handlers({
+    const editor = new Editor({
       canvas: canvas,
       context: context,
       config: editorConfig
     })
-    setHandlers(handlers)
+    setEditor(editor)
     context.setCanvas(canvas)
 
     const resizeObserver = new ResizeObserver(entries => {
       const { width = clientWidth, height = clientHeight } = (entries[0] && entries[0].contentRect) || {}
-      handlers.canvasHandler.resize(width, height)
+      editor.handlers.canvasHandler.resize(width, height)
     })
     resizeObserver.observe(container)
     return () => {
-      handlers.destroy()
+      editor.handlers.destroy()
       if (container) {
         resizeObserver.unobserve(container)
       }
@@ -64,4 +67,4 @@ function Editor({ config }: EditorProps) {
   )
 }
 
-export default Editor
+export default Canvas

@@ -241,7 +241,7 @@ class ScrollbarHandler extends BaseHandler {
   }
 
   calculateScrollBottom() {
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
     const zoomRatio = this.canvas.getZoom()
 
     const canvasHeight = this.canvas.getHeight()
@@ -302,7 +302,7 @@ class ScrollbarHandler extends BaseHandler {
   }
 
   calculateScrollRight() {
-    const frame = this.root.frameHandler.getFrame()
+    const frame = this.handlers.frameHandler.getFrame()
     const zoomRatio = this.canvas.getZoom()
 
     const canvasWidth = this.canvas.getWidth()

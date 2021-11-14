@@ -9,7 +9,9 @@ export enum ObjectType {
   STATIC_IMAGE = 'StaticImage',
   DYNAMIC_IMAGE = 'DynamicImage',
   STATIC_TEXT = 'StaticText',
-  DYNAMIC_TEXT = 'DynamicText'
+  DYNAMIC_TEXT = 'DynamicText',
+  ACTIVE_SELECTION = 'activeSelection',
+  GROUP = 'group'
 }
 
 export enum ObjectTypeAlt {
