@@ -51,23 +51,6 @@ class Handlers {
   }
 
   destroy = () => {}
-
-  // public group = () => {
-  //   const frame = this.frameHandler.getFrame()
-  //   const activeObject = this.canvas.getActiveObject() as fabric.ActiveSelection
-  //   if (activeObject instanceof fabric.Group) {
-  //     // console.log({ activeObject })
-  //     // console.log('GORUPS')
-  //     activeObject._objects.forEach(object => {
-  //       object.clipPath = null
-  //     })
-  //   }
-  //   const group = activeObject.toGroup()
-  //   group.clipPath = frame
-  //   console.log({ group, canas: this.canvas.toJSON() })
-  //   this.canvas.renderAll()
-  // }
-  // public ungroup = () => {}
 }
 
 export default Handlers

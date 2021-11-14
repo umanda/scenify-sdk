@@ -1,11 +1,19 @@
 import * as React from 'react'
-import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chakra-ui/react'
-import { Box } from '@chakra-ui/react'
-import { Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react'
-import { Checkbox } from '@chakra-ui/react'
+import {
+  Box,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  Checkbox
+} from '@chakra-ui/react'
 import ColorPicker from '../../components/ColorPicker'
 import { useState } from 'react'
-import { useActiveObject, useHandlers } from '../../../../src'
+import { useEditor } from '../../../../src'
 
 interface Options {
   angle: number
@@ -20,19 +28,13 @@ function Gradient() {
     colors: ['#24C6DC', '#514A9D'],
     enabled: false
   })
-  const handlers = useHandlers()
-  const activeObject = useActiveObject()
+  const editor = useEditor()
 
   const handleChange = (type: string, value: any) => {
     setOptions({ ...options, [type]: value })
-    // if(enabled){
-
-    // }
     if (type === 'enabled') {
       if (value) {
-        // console.log({ options })
-        console.log('SET GRADIENCT')
-        handlers?.objectsHandler.setGradient({ angle: 0, colors: ['#24C6DC', '#514A9D'] })
+        editor?.setGradient({ angle: 0, colors: ['#24C6DC', '#514A9D'] })
       }
       // else {
       //   handlers.objectsHandler.updateActive({ strokeWidth: 0 })
@@ -50,7 +52,6 @@ function Gradient() {
       enabled = true
     }
     handleChange('enabled', enabled)
-    // console.log({ idx })
     setOpenItems([idx])
   }
 

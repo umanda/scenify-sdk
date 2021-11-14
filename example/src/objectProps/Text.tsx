@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Box } from '@chakra-ui/react'
-import { useActiveObject, useHandlers } from '../../../src'
+import { useActiveObject, useEditor, useHandlers } from '../../../src'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react'
 import { Checkbox } from '@chakra-ui/react'
 import { Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react'
@@ -19,6 +19,7 @@ function Text() {
   })
   const activeObject = useActiveObject()
 
+  const editor = useEditor()
   React.useEffect(() => {
     if (activeObject) {
       updateOptions(activeObject)
@@ -36,9 +37,10 @@ function Text() {
   const handleChange = (key: string, value: any) => {
     setOptions({ ...options, [key]: value })
     if (handlers) {
-      handlers.objectsHandler.setShadow({ ...options, [key]: value })
+      editor?.setShadow({ ...options, [key]: value })
     }
   }
+  console.log({ activeObject })
 
   return (
     <Box sx={{ padding: '1rem 1.5rem' }}>
@@ -129,7 +131,10 @@ function Text() {
             <Position />
             <Gradient />
             <Box>
-              <Button onClick={() => handlers?.group()}>Group</Button>
+              <Button onClick={() => editor?.group()}>Group</Button>
+              <Button onClick={() => editor?.ungroup()}>ungroup</Button>
+              <Button onClick={() => editor?.lock()}>Lock</Button>
+              <Button onClick={() => editor?.unlock()}>Unlock</Button>
             </Box>
           </TabPanel>
           <TabPanel>

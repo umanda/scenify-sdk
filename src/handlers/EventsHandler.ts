@@ -150,8 +150,27 @@ class EventsHandler extends BaseHandler {
   handleSelection = target => {
     if (target) {
       this.context.setActiveObject(null)
-      const selection = this.canvas.getActiveObject()
-      this.context.setActiveObject(selection)
+      const initialSelection = this.canvas.getActiveObject() as any
+      if (initialSelection && initialSelection._objects) {
+        const filteredObjects = initialSelection._objects.filter(object => !object.locked)
+        this.canvas.discardActiveObject()
+        if (filteredObjects.length > 0) {
+          if (filteredObjects.length === 1) {
+            this.canvas.setActiveObject(filteredObjects[0])
+            this.canvas.renderAll()
+            this.context.setActiveObject(filteredObjects[0])
+          } else {
+            const activeSelection = new fabric.ActiveSelection(filteredObjects, {
+              canvas: this.canvas
+            })
+            this.canvas.setActiveObject(activeSelection)
+            this.canvas.renderAll()
+            this.context.setActiveObject(activeSelection)
+          }
+        }
+      } else {
+        this.context.setActiveObject(initialSelection)
+      }
     } else {
       this.context.setActiveObject(null)
     }

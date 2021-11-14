@@ -1,4 +1,5 @@
 import { fabric } from 'fabric'
+import { ObjectType } from '../common/constants'
 import { GradientOptions, ShadowOptions } from '../common/interfaces'
 import objectToFabric from '../utils/objectToFabric'
 import { angleToPoint } from '../utils/parser'
@@ -203,6 +204,7 @@ class ObjectHandler extends BaseHandler {
     if (filteredObjects.length === 1) {
       this.canvas.setActiveObject(filteredObjects[0])
       this.canvas.renderAll()
+      this.context.setActiveObject(filteredObjects[0])
       return
     }
     const activeSelection = new fabric.ActiveSelection(filteredObjects, {
@@ -210,6 +212,7 @@ class ObjectHandler extends BaseHandler {
     })
     this.canvas.setActiveObject(activeSelection)
     this.canvas.renderAll()
+    this.context.setActiveObject(activeSelection)
   }
 
   /**
@@ -289,7 +292,7 @@ class ObjectHandler extends BaseHandler {
   /**
    * Moves an object to the middle of the frame. If multiple objects are selected, will move all objects to the middle of the selection.
    */
-  public alignToMiddle = () => {
+  public alignMiddle = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.handlers.frameHandler.getFrame()
 
@@ -346,7 +349,7 @@ class ObjectHandler extends BaseHandler {
   /**
    * Moves an object to the left of the frame. If multiple objects are selected, will move all objects to the left of the selection.
    */
-  public alignToLeft = () => {
+  public alignLeft = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.handlers.frameHandler.getFrame()
     if (activeObject) {
@@ -371,7 +374,7 @@ class ObjectHandler extends BaseHandler {
   /**
    * Moves an object to the center of the frame. If multiple objects are selected, will move all objects to the center of the selection.
    */
-  public alignToCenter = () => {
+  public alignCenter = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.handlers.frameHandler.getFrame()
 
@@ -400,7 +403,7 @@ class ObjectHandler extends BaseHandler {
   /**
    * Moves an object to the right of the frame. If multiple objects are selected, will move all objects to the right of the selection.
    */
-  public alignToRight = () => {
+  public alignRight = () => {
     const activeObject = this.canvas.getActiveObject()
     const frame = this.handlers.frameHandler.getFrame()
 
@@ -473,6 +476,89 @@ class ObjectHandler extends BaseHandler {
       )
       this.canvas.requestRenderAll()
     }
+  }
+
+  public group = () => {
+    const frame = this.handlers.frameHandler.getFrame()
+    const activeObject = this.canvas.getActiveObject() as fabric.ActiveSelection
+    if (!activeObject) {
+      return
+    }
+    if (activeObject.type !== ObjectType.ACTIVE_SELECTION) {
+      return
+    }
+
+    if (activeObject instanceof fabric.Group) {
+      activeObject._objects.forEach(object => {
+        object.clipPath = null
+      })
+    }
+    const group = activeObject.toGroup()
+    group.clipPath = frame
+    this.canvas.renderAll()
+    this.handlers.historyHandler.save('group')
+  }
+
+  public ungroup = () => {
+    const frame = this.handlers.frameHandler.getFrame()
+    const activeObject = this.canvas.getActiveObject() as fabric.ActiveSelection
+    if (!activeObject) {
+      return
+    }
+    if (activeObject.type !== ObjectType.GROUP) {
+      return
+    }
+    const activeSelection = activeObject.toActiveSelection()
+    activeSelection._objects.forEach(object => {
+      object.clipPath = frame
+    })
+    this.canvas.renderAll()
+    this.handlers.historyHandler.save('ungroup')
+  }
+
+  public lock = () => {
+    const activeObject = this.canvas.getActiveObject() as fabric.Object | fabric.ActiveSelection
+    if (!activeObject) {
+      return
+    }
+
+    // @ts-ignore
+    if (activeObject._objects) {
+      // @ts-ignore
+      activeObject._objects.forEach(object => {
+        object.set({ hasControls: false, lockMovementY: true, lockMovementX: true, locked: true })
+      })
+      // @ts-ignore
+      activeObject.set({ hasControls: false, lockMovementY: true, lockMovementX: true, locked: true })
+    } else {
+      // @ts-ignore
+
+      activeObject.set({ hasControls: false, lockMovementY: true, lockMovementX: true, locked: true })
+    }
+    this.canvas.renderAll()
+  }
+  public unlock = () => {
+    const activeObject = this.canvas.getActiveObject() as fabric.Object | fabric.ActiveSelection
+    if (!activeObject) {
+      return
+    }
+
+    // @ts-ignore
+    if (activeObject._objects) {
+      // @ts-ignore
+      activeObject._objects.forEach(object => {
+        object.set({ hasControls: true, lockMovementY: false, lockMovementX: false, locked: false })
+      })
+      // @ts-ignore
+      activeObject.set({ hasControls: true, lockMovementY: false, lockMovementX: false, locked: false })
+    } else {
+      // @ts-ignore
+
+      activeObject.set({ hasControls: true, lockMovementY: false, lockMovementX: false, locked: false })
+    }
+    this.canvas.renderAll()
+
+    // console.log(activeObject)
   }
 }
 

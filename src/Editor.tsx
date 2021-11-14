@@ -34,10 +34,6 @@ class Editor extends EventManager {
     this.handlers.objectsHandler.clone()
   }
 
-  public selectAll = () => {
-    this.handlers.objectsHandler.selectAll()
-  }
-
   public clear = () => {
     this.handlers.objectsHandler.clear()
   }
@@ -54,21 +50,79 @@ class Editor extends EventManager {
   public zoomIn = () => {
     this.handlers.zoomHandler.zoomIn()
   }
-
   public zoomOut = () => {
     this.handlers.zoomHandler.zoomOut()
   }
-
   public zoomToOne = () => {
     this.handlers.zoomHandler.zoomToOne()
   }
-
   public zoomToFit = () => {
     this.handlers.zoomHandler.zoomToFit()
   }
-
   public zoomToRatio = (zoomRatio: number) => {
     this.handlers.zoomHandler.zoomToRatio(zoomRatio)
+  }
+
+  // ALIGMENT
+  public alignTop = () => {
+    this.handlers.objectsHandler.alignTop()
+  }
+  public alignMiddle = () => {
+    this.handlers.objectsHandler.alignMiddle()
+  }
+  public alignBottom = () => {
+    this.handlers.objectsHandler.alignBottom()
+  }
+  public alignLeft = () => {
+    this.handlers.objectsHandler.alignLeft()
+  }
+  public alignCenter = () => {
+    this.handlers.objectsHandler.alignCenter()
+  }
+  public alignRight = () => {
+    this.handlers.objectsHandler.alignRight()
+  }
+
+  //LAYERS
+  public bringForward = () => {
+    this.handlers.objectsHandler.bringForward()
+  }
+  public bringToFront = () => {
+    this.handlers.objectsHandler.bringToFront()
+  }
+  public sendBackwards = () => {
+    this.handlers.objectsHandler.sendBackwards()
+  }
+  public sendToBack = () => {
+    this.handlers.objectsHandler.sendToBack()
+  }
+
+  // GROUP
+  public group = () => {
+    this.handlers.objectsHandler.group()
+  }
+
+  public ungroup = () => {
+    this.handlers.objectsHandler.ungroup()
+  }
+
+  // LOCK - UNLOCK
+  public lock = () => {
+    this.handlers.objectsHandler.lock()
+  }
+
+  public unlock = () => {
+    this.handlers.objectsHandler.unlock()
+  }
+
+  // GRADIENT
+  public setGradient = options => {
+    this.handlers.objectsHandler.setGradient(options)
+  }
+
+  // SHADOW
+  public setShadow = options => {
+    this.handlers.objectsHandler.setShadow(options)
   }
 }
 
