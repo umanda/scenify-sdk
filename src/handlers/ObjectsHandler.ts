@@ -35,18 +35,6 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
-  /**
-   * Remove active object
-   */
-
-  public removeActive = () => {
-    this.canvas.getActiveObjects().forEach(obj => {
-      this.canvas.remove(obj)
-    })
-    this.canvas.discardActiveObject().renderAll()
-    this.handlers.historyHandler.save('object:removed')
-  }
-
   public clear = () => {
     const frame = this.handlers.frameHandler.getFrame()
     this.canvas.getObjects().forEach(object => {
@@ -174,15 +162,16 @@ class ObjectHandler extends BaseHandler {
     }
   }
 
+  /**
+   * Remove active object
+   */
+
   public remove = () => {
-    const activeObjects = this.canvas.getActiveObjects()
-    if (!activeObjects) {
-      return
-    }
-    activeObjects.forEach(obj => {
+    this.canvas.getActiveObjects().forEach(obj => {
       this.canvas.remove(obj)
     })
     this.canvas.discardActiveObject().renderAll()
+    this.handlers.historyHandler.save('object:removed')
   }
 
   public selectAll = () => {

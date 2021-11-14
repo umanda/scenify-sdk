@@ -30,8 +30,6 @@ export interface Emitter<Events extends Record<EventType, unknown>> {
 
 type Events = Record<EventType, unknown>
 
-type GenericEventHandler = Handler<Events[keyof Events]> | WildcardHandler<Events>
-
 class EventManager implements Emitter<Record<EventType, unknown>> {
   public all = new Map()
 
@@ -41,12 +39,12 @@ class EventManager implements Emitter<Record<EventType, unknown>> {
    * @param {Function} handler Function to call in response to given event
    * @memberOf EventManager
    */
-  public on<Key extends keyof Events>(type: Key, handler: GenericEventHandler) {
-    const handlers: Array<GenericEventHandler> | undefined = this.all!.get(type)
+  public on<Key extends keyof Events>(type: Key, handler: Function) {
+    const handlers: Array<Function> | undefined = this.all!.get(type)
     if (handlers) {
       handlers.push(handler)
     } else {
-      this.all!.set(type, [handler] as EventHandlerList<Events[keyof Events]>)
+      this.all!.set(type, [handler] as Function[])
     }
   }
 
@@ -57,8 +55,8 @@ class EventManager implements Emitter<Record<EventType, unknown>> {
    * @param {Function} [handler] Handler function to remove
    * @memberOf EventManager
    */
-  public off<Key extends keyof Events>(type: Key, handler?: GenericEventHandler) {
-    const handlers: Array<GenericEventHandler> | undefined = this.all!.get(type)
+  public off<Key extends keyof Events>(type: Key, handler?: Function) {
+    const handlers: Array<Function> | undefined = this.all!.get(type)
     if (handlers) {
       if (handler) {
         handlers.splice(handlers.indexOf(handler) >>> 0, 1)
@@ -81,7 +79,7 @@ class EventManager implements Emitter<Record<EventType, unknown>> {
   public emit<Key extends keyof Events>(type: Key, evt?: Events[Key]) {
     let handlers = this.all!.get(type)
     if (handlers) {
-      ;(handlers as EventHandlerList<Events[keyof Events]>).slice().map(handler => {
+      ;(handlers as Function[]).slice().map(handler => {
         handler(evt!)
       })
     }

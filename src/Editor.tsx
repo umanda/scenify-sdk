@@ -34,6 +34,10 @@ class Editor extends EventManager {
     this.handlers.objectsHandler.clone()
   }
 
+  public delete = () => {
+    this.handlers.objectsHandler.remove()
+  }
+
   public clear = () => {
     this.handlers.objectsHandler.clear()
   }

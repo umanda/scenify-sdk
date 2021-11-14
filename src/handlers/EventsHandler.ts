@@ -110,7 +110,7 @@ class EventsHandler extends BaseHandler {
       this.handlers.objectsHandler.selectAll()
     } else if (shourcutsManager.isDelete(event)) {
       event.preventDefault()
-      this.handlers.objectsHandler.removeActive()
+      this.handlers.objectsHandler.remove()
     } else if (shourcutsManager.isCtrlC(event)) {
       event.preventDefault()
       this.handlers.objectsHandler.copy()
