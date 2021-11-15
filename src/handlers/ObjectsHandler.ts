@@ -546,8 +546,6 @@ class ObjectHandler extends BaseHandler {
       activeObject.set({ hasControls: true, lockMovementY: false, lockMovementX: false, locked: false })
     }
     this.canvas.renderAll()
-
-    // console.log(activeObject)
   }
 }
 

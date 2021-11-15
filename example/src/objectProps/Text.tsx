@@ -40,7 +40,6 @@ function Text() {
       editor?.setShadow({ ...options, [key]: value })
     }
   }
-  console.log({ activeObject })
 
   return (
     <Box sx={{ padding: '1rem 1.5rem' }}>
