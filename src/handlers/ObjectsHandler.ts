@@ -20,6 +20,7 @@ class ObjectHandler extends BaseHandler {
     canvas.add(object)
     object.center()
     canvas.setActiveObject(object)
+    this.context.setActiveObject(object)
     this.handlers.historyHandler.save('object:created')
   }
 
