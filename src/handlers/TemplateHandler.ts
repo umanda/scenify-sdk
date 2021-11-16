@@ -3,7 +3,7 @@ import objectToFabric from '../utils/objectToFabric'
 import BaseHandler from './BaseHandler'
 
 class TemplateHandler extends BaseHandler {
-  exportTemplate() {
+  exportToJSON() {
     const canvasJSON: any = this.canvas.toJSON(this.handlers.propertiesToInclude)
     const frameOptions = this.handlers.frameHandler.getOptions()
 
@@ -32,7 +32,7 @@ class TemplateHandler extends BaseHandler {
     return template
   }
 
-  async importTemplate(template) {
+  async importFromJSON(template) {
     this.handlers.objectsHandler.clear()
     const frameParams = template.frame
     this.handlers.frameHandler.updateFrame(frameParams)

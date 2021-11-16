@@ -46,6 +46,11 @@ class ObjectHandler extends BaseHandler {
     this.canvas.renderAll()
   }
 
+  public deselect = () => {
+    this.canvas.discardActiveObject()
+    this.canvas.requestRenderAll()
+  }
+
   public moveVertical = value => {
     const activeObject = this.canvas.getActiveObject()
     const top = activeObject.top + value

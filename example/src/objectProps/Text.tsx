@@ -134,6 +134,7 @@ function Text() {
               <Button onClick={() => editor?.ungroup()}>ungroup</Button>
               <Button onClick={() => editor?.lock()}>Lock</Button>
               <Button onClick={() => editor?.unlock()}>Unlock</Button>
+              <Button onClick={() => editor?.deselect()}>Deselect</Button>
             </Box>
           </TabPanel>
           <TabPanel>

@@ -42,6 +42,10 @@ class Editor extends EventManager {
     this.handlers.objectsHandler.clear()
   }
 
+  public deselect = () => {
+    this.handlers.objectsHandler.deselect()
+  }
+
   // HISTORY
   public undo = () => {
     this.handlers.historyHandler.undo()
@@ -128,6 +132,16 @@ class Editor extends EventManager {
   public setShadow = options => {
     this.handlers.objectsHandler.setShadow(options)
   }
+
+  // DESIGN
+  public exportToJSON = () => {
+    this.handlers.templateHandler.exportToJSON()
+  }
+  public importFromJSON = data => {
+    this.handlers.templateHandler.importFromJSON(data)
+  }
+  public toSVG = () => {}
+  public toPNG = () => {}
 }
 
 export default Editor
