@@ -142,6 +142,11 @@ class Editor extends EventManager {
   }
   public toSVG = () => {}
   public toPNG = () => {}
+
+  // CONTEXT MENU
+  public cancelContextMenu = () => {
+    this.handlers.personalizationHandler.context.setContextMenuRequest(null)
+  }
 }
 
 export default Editor
