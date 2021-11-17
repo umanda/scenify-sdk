@@ -24,7 +24,8 @@ function Canvas({ config }: ICanvas) {
       backgroundColor: '#f6f7f9',
       height: clientHeight,
       width: clientWidth,
-      preserveObjectStacking: true
+      preserveObjectStacking: true,
+      fireRightClick: true
     }) as FabricCanvas
 
     const editor = new Editor({

@@ -3,6 +3,11 @@ import { FC, createContext, useState } from 'react'
 import { fabric } from 'fabric'
 import Editor from '../Editor'
 
+export interface ContextMenuRequest {
+  target: any
+  left: number
+  top: number
+}
 export interface IEditorContext {
   canvas: fabric.Canvas | null
   setCanvas: (canvas: fabric.Canvas) => void
@@ -12,6 +17,8 @@ export interface IEditorContext {
   setEditor: (handlers: Editor) => void
   zoomRatio: number
   setZoomRatio: (value: number) => void
+  contextMenuRequest: ContextMenuRequest
+  setContextMenuRequest: (value: ContextMenuRequest) => void
 }
 
 export const EditorContext = createContext<IEditorContext>({
@@ -22,7 +29,9 @@ export const EditorContext = createContext<IEditorContext>({
   editor: null,
   setEditor: () => {},
   zoomRatio: 1,
-  setZoomRatio: () => {}
+  setZoomRatio: () => {},
+  contextMenuRequest: null,
+  setContextMenuRequest: () => {}
 })
 
 export const EditorProvider: FC = ({ children }) => {
@@ -30,7 +39,7 @@ export const EditorProvider: FC = ({ children }) => {
   const [activeObject, setActiveObject] = useState<fabric.Object | null>(null)
   const [editor, setEditor] = useState<Editor | null>(null)
   const [zoomRatio, setZoomRatio] = useState(1)
-
+  const [contextMenuRequest, setContextMenuRequest] = useState<ContextMenuRequest>(null)
   const context = {
     canvas,
     setCanvas,
@@ -39,7 +48,9 @@ export const EditorProvider: FC = ({ children }) => {
     editor,
     setEditor,
     zoomRatio,
-    setZoomRatio
+    setZoomRatio,
+    contextMenuRequest,
+    setContextMenuRequest
   }
 
   return <EditorContext.Provider value={context}>{children}</EditorContext.Provider>

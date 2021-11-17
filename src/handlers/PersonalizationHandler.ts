@@ -11,10 +11,16 @@ class PersonalizationHandler extends BaseHandler {
   }
 
   init() {
+    //Disable context menu
+    //@ts-ignore
+    fabric.util.addListener(document.getElementsByClassName('upper-canvas')[0], 'contextmenu', function(e) {
+      e.preventDefault()
+    })
+
     fabric.Object.prototype.transparentCorners = false
     fabric.Object.prototype.cornerColor = '#20bf6b'
     fabric.Object.prototype.cornerStyle = 'circle'
-    fabric.Object.prototype.borderColor = 'rgb(52, 231, 228)'
+    fabric.Object.prototype.borderColor = '#3782F7'
     fabric.Object.prototype.cornerSize = 12
     fabric.Object.prototype.borderScaleFactor = 2.75
     fabric.Object.prototype.borderOpacityWhenMoving = 0
@@ -166,8 +172,8 @@ class PersonalizationHandler extends BaseHandler {
       withConnection: false
     })
 
-    this.canvas.selectionColor = 'rgba(52, 231, 228, 0.15)'
-    this.canvas.selectionBorderColor = 'rgb(52, 231, 228)'
+    this.canvas.selectionColor = 'rgba(55, 130, 247, 0.15)'
+    this.canvas.selectionBorderColor = '#3782F7'
     this.canvas.selectionLineWidth = 1.5
     this.canvas.on('selection:created', ev => {
       const objects = this.canvas.getActiveObjects()
@@ -187,7 +193,7 @@ class PersonalizationHandler extends BaseHandler {
       if (target && activeObjects !== target) {
         const bound = target.getBoundingRect()
         const ctx = this.canvas.getContext()
-        ctx.strokeStyle = 'rgb(52, 231, 228)'
+        ctx.strokeStyle = '#3782F7'
         ctx.lineWidth = 2.5
         ctx.strokeRect(bound.left, bound.top, bound.width, bound.height)
       }

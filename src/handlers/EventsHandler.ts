@@ -15,6 +15,7 @@ class EventsHandler extends BaseHandler {
     this.canvas.wrapperEl.style.outline = 'none'
     // @ts-ignore
     this.canvas.on({
+      'mouse:down': this.onMouseDown,
       'mouse:up': this.handleSelection,
       'selection:cleared': this.handleSelection,
       'selection:updated': this.handleSelection,
@@ -28,6 +29,7 @@ class EventsHandler extends BaseHandler {
 
   destroy() {
     this.canvas.off({
+      'mouse:down': this.onMouseDown,
       'mouse:up': this.handleSelection,
       'selection:cleared': this.handleSelection,
       'selection:updated': this.handleSelection,
@@ -38,7 +40,16 @@ class EventsHandler extends BaseHandler {
 
     this.canvas.wrapperEl.removeEventListener('keydown', this.onKeyDown.bind(this))
   }
-
+  onMouseDown = (e: fabric.IEvent) => {
+    //@ts-ignore
+    e.e.preventDefault()
+    if (e.button === 3) {
+      // @ts-ignore
+      this.context.setContextMenuRequest({ left: e.e.offsetX, top: e.e.offsetY, target: e.target })
+    } else {
+      this.context.setContextMenuRequest(null)
+    }
+  }
   objectModified = event => {
     const { target } = event
     if (target instanceof fabric.Textbox) {
