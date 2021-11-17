@@ -1,51 +1,53 @@
 import { fabric } from 'fabric'
 
-export function drawCircleIcon(ctx, left, top, __styleOverride, fabricObject) {
+export function drawCircleIcon(ctx: CanvasRenderingContext2D, left, top, __styleOverride, fabricObject) {
   ctx.save()
   ctx.translate(left, top)
   ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle))
   ctx.beginPath()
   ctx.lineCap = 'round'
-  ctx.lineWidth = 3
-  ctx.shadowBlur = 2
-  ctx.shadowColor = 'black'
-  ctx.arc(0, 0, 5.5, 0, 2 * Math.PI)
+  ctx.lineWidth = 5
+  ctx.arc(0, 0, 5, 0, 2 * Math.PI)
+  ctx.strokeStyle = '#3782F7'
+  ctx.stroke()
   ctx.fillStyle = '#ffffff'
   ctx.fill()
   ctx.restore()
 }
 
-export function drawVerticalLineIcon(ctx, left, top, _styleOverride, fabricObject) {
-  const size = this.cornerSize
+export function drawVerticalLineIcon(ctx: CanvasRenderingContext2D, left, top, _styleOverride, fabricObject) {
   ctx.save()
   ctx.translate(left, top)
   ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle))
-  ctx.beginPath()
-  ctx.lineCap = 'round'
-  ctx.lineWidth = 3
-  ctx.shadowBlur = 2
-  ctx.shadowColor = 'black'
-  ctx.moveTo(-0.5, -size / 4)
-  ctx.lineTo(-0.5, -size / 4 + size / 2)
-  ctx.strokeStyle = '#ffffff'
+  drawRectRounded(ctx, -2, -14, 4, 18, 2)
+  ctx.lineWidth = 4
+  ctx.strokeStyle = '#3782F7'
   ctx.stroke()
+  ctx.fillStyle = '#ffffff'
+  ctx.fill()
   ctx.restore()
 }
 
+function drawRectRounded(ctx: CanvasRenderingContext2D, x, y, w, h, radius) {
+  ctx.beginPath()
+  ctx.moveTo(x + radius, y)
+  ctx.arcTo(x + w, y, x + w, y + h, radius)
+  ctx.arcTo(x + w, y + h, x, y + h, radius)
+  ctx.arcTo(x, y + h, x, y, radius)
+  ctx.arcTo(x, y, x + w, y, radius)
+  ctx.closePath()
+}
+
 export function drawHorizontalLineIcon(ctx, left, top, _styleOverride, fabricObject) {
-  const size = this.cornerSize
   ctx.save()
   ctx.translate(left, top)
   ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle))
-  ctx.beginPath()
-  ctx.lineCap = 'round'
-  ctx.lineWidth = 3
-  ctx.shadowBlur = 2
-  ctx.shadowColor = 'black'
-  ctx.moveTo(-size / 4, -0.5)
-  ctx.lineTo(-size / 4 + size / 2, -0.5)
-  ctx.strokeStyle = '#ffffff'
+  drawRectRounded(ctx, -14, -2, 18, 4, 2)
+  ctx.lineWidth = 4
+  ctx.strokeStyle = '#3782F7'
   ctx.stroke()
+  ctx.fillStyle = '#ffffff'
+  ctx.fill()
   ctx.restore()
 }
 
