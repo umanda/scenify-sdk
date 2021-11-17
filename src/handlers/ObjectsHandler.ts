@@ -29,6 +29,37 @@ class ObjectHandler extends BaseHandler {
     const canvas = this.canvas
     if (activeObject) {
       for (const property in options) {
+        if (property === 'angle' || property === 'top' || property === 'left') {
+          if (property === 'angle') {
+            activeObject.rotate(options['angle'])
+            canvas.requestRenderAll()
+          } else {
+            activeObject.set(property, options[property])
+            canvas.requestRenderAll()
+          }
+        } else {
+          // @ts-ignore
+          if (activeObject._objects) {
+            // @ts-ignore
+            activeObject._objects.forEach(object => {
+              if (property === 'metadata') {
+                object.set('metadata', { ...object.metadata, ...options['metadata'] })
+              } else {
+                object.set(property, options[property])
+              }
+              object.setCoords()
+            })
+          } else {
+            if (property === 'metadata') {
+              // @ts-ignore
+              activeObject.set('metadata', { ...activeObject.metadata, ...options[property] })
+            } else {
+              // @ts-ignore
+              activeObject.set(property, options[property])
+            }
+            activeObject.setCoords()
+          }
+        }
         activeObject.set(property as keyof fabric.Object, options[property])
         canvas.requestRenderAll()
       }
@@ -429,13 +460,21 @@ class ObjectHandler extends BaseHandler {
    */
   public setShadow = (options: ShadowOptions) => {
     const activeObject = this.canvas.getActiveObject()
-    if (activeObject) {
-      if (options.enabled) {
-        activeObject.set('shadow', new fabric.Shadow(options))
-      } else {
-        activeObject.set('shadow', null)
-      }
-      this.canvas.requestRenderAll()
+    if (activeObject instanceof fabric.Group) {
+      activeObject._objects.forEach(object => {
+        this.setObjectShadow(object, options)
+      })
+    } else {
+      this.setObjectShadow(activeObject, options)
+    }
+    this.canvas.requestRenderAll()
+  }
+
+  private setObjectShadow = (object: fabric.Object, options: ShadowOptions) => {
+    if (options.enabled) {
+      object.set('shadow', new fabric.Shadow(options))
+    } else {
+      object.set('shadow', null)
     }
   }
 
@@ -444,35 +483,41 @@ class ObjectHandler extends BaseHandler {
    */
   public setGradient = ({ angle, colors }: GradientOptions) => {
     const activeObject = this.canvas.getActiveObject()
-    let odx = activeObject.width >> 1
-    let ody = activeObject.height >> 1
-
-    if (activeObject) {
-      let startPoint = angleToPoint(angle, activeObject.width, activeObject.height)
-      let endPoint = {
-        x: activeObject.width - startPoint.x,
-        y: activeObject.height - startPoint.y
-      }
-      activeObject.set(
-        'fill',
-        new fabric.Gradient({
-          type: 'linear',
-          coords: {
-            x1: startPoint.x - odx,
-            y1: startPoint.y - ody,
-            x2: endPoint.x - odx,
-            y2: endPoint.y - ody
-          },
-          colorStops: [
-            { offset: 0, color: colors[0] },
-            { offset: 1, color: colors[1] }
-          ]
-        })
-      )
-      this.canvas.requestRenderAll()
+    if (activeObject instanceof fabric.Group) {
+      activeObject._objects.forEach(object => {
+        this.setObjectGradient(object, angle, colors)
+      })
+    } else {
+      this.setObjectGradient(activeObject, angle, colors)
     }
+    this.canvas.requestRenderAll()
   }
 
+  private setObjectGradient = (object: fabric.Object, angle, colors) => {
+    let odx = object.width >> 1
+    let ody = object.height >> 1
+    let startPoint = angleToPoint(angle, object.width, object.height)
+    let endPoint = {
+      x: object.width - startPoint.x,
+      y: object.height - startPoint.y
+    }
+    object.set(
+      'fill',
+      new fabric.Gradient({
+        type: 'linear',
+        coords: {
+          x1: startPoint.x - odx,
+          y1: startPoint.y - ody,
+          x2: endPoint.x - odx,
+          y2: endPoint.y - ody
+        },
+        colorStops: [
+          { offset: 0, color: colors[0] },
+          { offset: 1, color: colors[1] }
+        ]
+      })
+    )
+  }
   public group = () => {
     const frame = this.handlers.frameHandler.getFrame()
     const activeObject = this.canvas.getActiveObject() as fabric.ActiveSelection

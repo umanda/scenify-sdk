@@ -165,7 +165,13 @@ class EventsHandler extends BaseHandler {
       const initialSelection = this.canvas.getActiveObject() as any
       const isGroup = initialSelection && initialSelection.type === ObjectType.GROUP
       if (initialSelection && !isGroup && initialSelection._objects) {
-        const filteredObjects = initialSelection._objects.filter(object => !object.locked)
+        const filteredObjects = initialSelection._objects.filter(object => {
+          // console.log(object.type, !object.locked || object.type !== 'Background')
+          if (object.type === 'Background') {
+            return false
+          }
+          return !object.locked
+        })
         this.canvas.discardActiveObject()
         if (filteredObjects.length > 0) {
           if (filteredObjects.length === 1) {

@@ -1,36 +1,29 @@
 import { fabric } from 'fabric'
-
-class BackgroundObject extends fabric.Image {
+// @ts-ignore
+export class BackgroundObject extends fabric.Rect {
   static type = 'Background'
-  //   @ts-ignore
-  initialize(element, options) {
-    //   @ts-ignore
-    super.initialize(element, {
+  initialize(options: BackgroundOptions) {
+    super.initialize({
       ...options,
-      crossOrigin: 'anonymous',
+      // selectable: false,
       hasControls: false,
       lockMovementY: true,
       lockMovementX: true,
-      hoverCursor: 'default',
       strokeWidth: 0,
-      selectable: false,
       evented: false
     })
     return this
   }
 
-  static fromObject(options: BackgroundOptions, callback) {
-    fabric.util.loadImage(options.src, function(img) {
-      //   @ts-ignore
-      return callback && callback(new fabric.Background(img, options))
-    })
+  toObject(propertiesToInclude: string[] = []) {
+    return super.toObject(propertiesToInclude)
+  }
+  toJSON(propertiesToInclude: string[] = []) {
+    return super.toObject(propertiesToInclude)
   }
 
-  toObject(propertiesToInclude = []) {
-    return super.toObject(propertiesToInclude)
-  }
-  toJSON(propertiesToInclude = []) {
-    return super.toObject(propertiesToInclude)
+  static fromObject(options: BackgroundOptions, callback) {
+    return callback && callback(new fabric.Background(options))
   }
 }
 
@@ -39,11 +32,10 @@ fabric.Background = fabric.util.createClass(BackgroundObject, {
 })
 fabric.Background.fromObject = BackgroundObject.fromObject
 
-export interface BackgroundOptions extends fabric.IImageOptions {
+export interface BackgroundOptions extends fabric.IRectOptions {
   id: string
-  name?: string
+  name: string
   description?: string
-  src: string
 }
 
 declare module 'fabric' {

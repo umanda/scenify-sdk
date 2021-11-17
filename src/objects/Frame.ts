@@ -10,7 +10,8 @@ export class FrameObject extends fabric.Rect {
       lockMovementY: true,
       lockMovementX: true,
       strokeWidth: 0,
-      padding: 0
+      padding: 0,
+      evented: false
     })
     return this
   }

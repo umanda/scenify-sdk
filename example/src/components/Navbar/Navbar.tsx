@@ -35,10 +35,16 @@ function Navbar() {
         <Logo size={44} />
       </Box>
       <Box sx={{ color: '#ffffff', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <Box sx={{ color: historyStatus.hasUndo ? '#ffffff' : 'rgba(255,255,255,0.5)' }}>
+        <Box
+          onClick={() => editor?.undo()}
+          sx={{ color: historyStatus.hasUndo ? '#ffffff' : 'rgba(255,255,255,0.5)' }}
+        >
           <Undo size={24} />
         </Box>
-        <Box sx={{ color: historyStatus.hasRedo ? '#ffffff' : 'rgba(255,255,255,0.5)' }}>
+        <Box
+          onClick={() => editor?.redo()}
+          sx={{ color: historyStatus.hasRedo ? '#ffffff' : 'rgba(255,255,255,0.5)' }}
+        >
           <Redo size={24} />
         </Box>
       </Box>

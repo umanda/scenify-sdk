@@ -8,6 +8,8 @@ import { RgbaColorPicker } from '../components/ColorPicker'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Button } from '@chakra-ui/react'
 import Position from './components/Position'
 import Gradient from './components/Gradient'
+import ColorPicker from '../components/ColorPicker'
+
 function Text() {
   const handlers = useHandlers()
   const [options, setOptions] = React.useState({
@@ -31,7 +33,16 @@ function Text() {
     setOptions({ ...options, enabled: !!shadow })
   }
   if (!activeObject) {
-    return <Box>Nothing</Box>
+    return (
+      <Box>
+        <ColorPicker
+          value="#afafaf"
+          onChange={color => {
+            editor?.handlers.frameHandler.setBackgroundColor(color)
+          }}
+        />
+      </Box>
+    )
   }
 
   const handleChange = (key: string, value: any) => {
@@ -135,6 +146,7 @@ function Text() {
               <Button onClick={() => editor?.lock()}>Lock</Button>
               <Button onClick={() => editor?.unlock()}>Unlock</Button>
               <Button onClick={() => editor?.deselect()}>Deselect</Button>
+              <Button onClick={() => editor?.update({ textAlign: 'center' })}>textAlign</Button>
             </Box>
           </TabPanel>
           <TabPanel>
