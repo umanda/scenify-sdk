@@ -155,8 +155,10 @@ class ExportObject {
   }
 
   getBaseOptions(item, options) {
-    const { top, left, width, height, scaleX, scaleY, originX, originY, type } = item
+    const { top, left, width, height, scaleX, scaleY, originX, originY, type, stroke, strokeWidth } = item
     const baseOptions = {
+      stroke: stroke ? stroke : '#ffffff',
+      strokeWidth: strokeWidth ? strokeWidth : 0,
       left: left - options.left,
       top: top - options.top,
       width: width,

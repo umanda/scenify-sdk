@@ -218,7 +218,7 @@ class ObjectToFabric {
   }
 
   getBaseOptions(item, options) {
-    const { left, top, width, height, scaleX, scaleY } = item
+    const { left, top, width, height, scaleX, scaleY, stroke, strokeWidth } = item
     let metadata = item.metadata ? item.metadata : {}
     const { fill, angle, originX, originY } = metadata
     let baseOptions = {
@@ -232,6 +232,8 @@ class ObjectToFabric {
       scaleX: scaleX || 1,
       scaleY: scaleY || 1,
       fill: fill || '#000000',
+      stroke: stroke ? stroke : '#ffffff',
+      strokeWidth: strokeWidth ? strokeWidth : 0,
       metadata: metadata
     }
     return baseOptions
