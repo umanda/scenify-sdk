@@ -468,6 +468,7 @@ class ObjectHandler extends BaseHandler {
       this.setObjectShadow(activeObject, options)
     }
     this.canvas.requestRenderAll()
+    this.handlers.historyHandler.save('object:updated')
   }
 
   private setObjectShadow = (object: fabric.Object, options: ShadowOptions) => {
@@ -491,6 +492,7 @@ class ObjectHandler extends BaseHandler {
       this.setObjectGradient(activeObject, angle, colors)
     }
     this.canvas.requestRenderAll()
+    this.handlers.historyHandler.save('object:updated')
   }
 
   private setObjectGradient = (object: fabric.Object, angle, colors) => {
@@ -576,6 +578,7 @@ class ObjectHandler extends BaseHandler {
       activeObject.set({ hasControls: false, lockMovementY: true, lockMovementX: true, locked: true })
     }
     this.canvas.renderAll()
+    this.handlers.historyHandler.save('object:updated')
   }
   public unlock = () => {
     const activeObject = this.canvas.getActiveObject() as fabric.Object | fabric.ActiveSelection
@@ -597,6 +600,7 @@ class ObjectHandler extends BaseHandler {
       activeObject.set({ hasControls: true, lockMovementY: false, lockMovementX: false, locked: false })
     }
     this.canvas.renderAll()
+    this.handlers.historyHandler.save('object:updated')
   }
 }
 
