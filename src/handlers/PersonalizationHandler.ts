@@ -190,7 +190,7 @@ class PersonalizationHandler extends BaseHandler {
     this.canvas.on('mouse:over', event => {
       const target = event.target
       const activeObjects = this.canvas.getActiveObject()
-      if (target && activeObjects !== target) {
+      if (target && activeObjects !== target && target.type !== 'Background') {
         const bound = target.getBoundingRect()
         const ctx = this.canvas.getContext()
         ctx.strokeStyle = '#3782F7'

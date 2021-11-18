@@ -5,12 +5,14 @@ export class BackgroundObject extends fabric.Rect {
   initialize(options: BackgroundOptions) {
     super.initialize({
       ...options,
-      // selectable: false,
-      hasControls: false,
+      selectable: false,
+      hasControls: true,
+      hasBorders: false,
       lockMovementY: true,
       lockMovementX: true,
       strokeWidth: 0,
-      evented: false
+      evented: true,
+      hoverCursor: 'default'
     })
     return this
   }
