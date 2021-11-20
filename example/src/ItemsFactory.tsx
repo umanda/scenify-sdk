@@ -20,7 +20,7 @@ function ItemsFactory() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderBottom: '1px solid rgba(0,0,0,0.2)'
+          borderBottom: '1px solid rgba(0,0,0,0.1)'
         }}
       >
         <Text size={26} />
@@ -33,7 +33,7 @@ function ItemsFactory() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderBottom: '1px solid rgba(0,0,0,0.2)'
+          borderBottom: '1px solid rgba(0,0,0,0.1)'
         }}
       >
         <Elements size={26} />
@@ -45,7 +45,7 @@ function ItemsFactory() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderBottom: '1px solid rgba(0,0,0,0.2)'
+          borderBottom: '1px solid rgba(0,0,0,0.1)'
         }}
       >
         <Images size={26} />

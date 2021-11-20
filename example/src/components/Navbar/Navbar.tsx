@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Box } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { Logo, Undo, Redo } from '../Icons'
 import { useEditor } from '../../../../src'
-
+import template from '../../template'
 function Navbar() {
   const editor = useEditor()
   const [historyStatus, setHistoryStatus] = React.useState({ hasUndo: false, hasRedo: false })
@@ -21,32 +21,63 @@ function Navbar() {
     }
   }, [editor])
   return (
-    <Box style={{ height: '70px', flex: 'none', backgroundColor: '#25004f', display: 'flex', gap: '1rem' }}>
-      <Box
-        sx={{
-          color: '#ffffff',
-          height: '70px',
-          width: '80px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <Logo size={44} />
+    <Box
+      style={{
+        height: '70px',
+        flex: 'none',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '0 1rem'
+      }}
+    >
+      <Box sx={{ display: 'flex' }}>
+        <Box
+          sx={{
+            height: '70px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingRight: '1rem'
+          }}
+        >
+          <Logo size={44} />
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <Box onClick={() => editor?.undo()} sx={{ color: historyStatus.hasUndo ? '#333333' : '#c9c9c9' }}>
+            <Undo size={24} />
+          </Box>
+          <Box onClick={() => editor?.redo()} sx={{ color: historyStatus.hasRedo ? '#333333' : '#c9c9c9' }}>
+            <Redo size={24} />
+          </Box>
+        </Box>
       </Box>
-      <Box sx={{ color: '#ffffff', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <Box
-          onClick={() => editor?.undo()}
-          sx={{ color: historyStatus.hasUndo ? '#ffffff' : 'rgba(255,255,255,0.5)' }}
+      <Box>
+        <Button
+          onClick={async () => {
+            const data = await editor?.toPNG()
+            console.log(data)
+          }}
         >
-          <Undo size={24} />
-        </Box>
-        <Box
-          onClick={() => editor?.redo()}
-          sx={{ color: historyStatus.hasRedo ? '#ffffff' : 'rgba(255,255,255,0.5)' }}
+          Download
+        </Button>
+
+        <Button
+          onClick={() => {
+            const exported = editor?.exportToJSON()
+            console.log(exported)
+          }}
         >
-          <Redo size={24} />
-        </Box>
+          Export
+        </Button>
+
+        <Button
+          onClick={() => {
+            const exported = editor?.importFromJSON(template)
+          }}
+        >
+          import
+        </Button>
       </Box>
     </Box>
   )

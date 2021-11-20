@@ -28,9 +28,9 @@ export const theme = {
     }
   },
   fonts: {
-    body: 'Inconsolata, sans-serif',
-    heading: 'Inconsolata, serif',
-    mono: 'Inconsolata, monospace'
+    body: "'Catamaran'",
+    heading: "'Catamaran'",
+    mono: "'Catamaran'"
   },
   styles: {
     global: function(_ref) {

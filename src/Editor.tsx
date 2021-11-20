@@ -135,13 +135,15 @@ class Editor extends EventManager {
 
   // DESIGN
   public exportToJSON = () => {
-    this.handlers.templateHandler.exportToJSON()
+    return this.handlers.templateHandler.exportToJSON()
   }
   public importFromJSON = data => {
     this.handlers.templateHandler.importFromJSON(data)
   }
   public toSVG = () => {}
-  public toPNG = () => {}
+  public toPNG = () => {
+    return this.handlers.designHandler.toDataURL({})
+  }
 
   // CONTEXT MENU
   public cancelContextMenu = () => {

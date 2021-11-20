@@ -4,35 +4,41 @@ import { loadImageFromURL } from './image-loader'
 import isNaN from 'lodash/isNaN'
 
 class ObjectToFabric {
-  async run(item, options) {
+  async run(item, options, inGroup = false) {
     let object
     switch (item.type) {
       case ObjectType.STATIC_TEXT:
-        object = await this[ObjectType.STATIC_TEXT](item, options)
+        object = await this[ObjectType.STATIC_TEXT](item, options, inGroup)
         break
       case ObjectType.STATIC_IMAGE:
-        object = await this[ObjectType.STATIC_IMAGE](item, options)
+        object = await this[ObjectType.STATIC_IMAGE](item, options, inGroup)
         break
       case ObjectType.STATIC_VECTOR:
-        object = await this[ObjectType.STATIC_VECTOR](item, options)
+        object = await this[ObjectType.STATIC_VECTOR](item, options, inGroup)
         break
       case ObjectType.STATIC_PATH:
-        object = await this[ObjectType.STATIC_PATH](item, options)
+        object = await this[ObjectType.STATIC_PATH](item, options, inGroup)
         break
       case ObjectType.DYNAMIC_TEXT:
-        object = await this[ObjectType.DYNAMIC_TEXT](item, options)
+        object = await this[ObjectType.DYNAMIC_TEXT](item, options, inGroup)
         break
       case ObjectType.DYNAMIC_IMAGE:
-        object = await this[ObjectType.DYNAMIC_IMAGE](item, options)
+        object = await this[ObjectType.DYNAMIC_IMAGE](item, options, inGroup)
+        break
+      case ObjectType.BACKGROUND:
+        object = await this[ObjectType.BACKGROUND](item, options, inGroup)
+        break
+      case ObjectType.GROUP:
+        object = await this[ObjectType.GROUP](item, options, inGroup)
         break
     }
     return object
   }
 
-  [ObjectType.STATIC_TEXT](item, options) {
+  [ObjectType.STATIC_TEXT](item, options, inGroup) {
     return new Promise((resolve, reject) => {
       try {
-        const baseOptions = this.getBaseOptions(item, options)
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
         const metadata = item.metadata
         const { textAlign, fontFamily, fontSize, fontWeight, charSpacing, lineheight, text } = metadata
         const textOptions = {
@@ -63,10 +69,10 @@ class ObjectToFabric {
     })
   }
 
-  [ObjectType.DYNAMIC_TEXT](item, options) {
+  [ObjectType.DYNAMIC_TEXT](item, options, inGroup) {
     return new Promise((resolve, reject) => {
       try {
-        const baseOptions = this.getBaseOptions(item, options)
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
         const metadata = item.metadata
         const {
           textAlign,
@@ -110,11 +116,11 @@ class ObjectToFabric {
     })
   }
 
-  [ObjectType.DYNAMIC_IMAGE](item, options) {
+  [ObjectType.DYNAMIC_IMAGE](item, options, inGroup) {
     return new Promise((resolve, reject) => {
       try {
         const { metadata } = item
-        const baseOptions = this.getBaseOptions(item, options)
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
         const { keyValues } = metadata
         // @ts-ignore
         const element = new fabric.DynamicImage({
@@ -129,10 +135,10 @@ class ObjectToFabric {
     })
   }
 
-  [ObjectType.STATIC_IMAGE](item, options) {
+  [ObjectType.STATIC_IMAGE](item, options, inGroup) {
     return new Promise(async (resolve, reject) => {
       try {
-        const baseOptions = this.getBaseOptions(item, options)
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
         const src = item.metadata.src
         const image: any = await loadImageFromURL(src)
 
@@ -164,10 +170,10 @@ class ObjectToFabric {
     })
   }
 
-  [ObjectType.STATIC_PATH](item, options) {
+  [ObjectType.STATIC_PATH](item, options, inGroup) {
     return new Promise(async (resolve, reject) => {
       try {
-        const baseOptions = this.getBaseOptions(item, options)
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
         const path = item.metadata.value
         const fill = item.metadata.fill
         const element = new fabric.StaticPath({ ...baseOptions, path, fill: fill ? fill : '#000000' })
@@ -188,10 +194,56 @@ class ObjectToFabric {
     })
   }
 
-  [ObjectType.STATIC_VECTOR](item, options) {
+  [ObjectType.GROUP](item, options, inGroup) {
     return new Promise(async (resolve, reject) => {
       try {
-        const baseOptions = this.getBaseOptions(item, options)
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
+        let objects = []
+        for (const object of item.objects) {
+          console.log(object)
+          objects = objects.concat(await this.run(object, options, true))
+        }
+        const element = new fabric.Group(objects, baseOptions)
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.BACKGROUND](item, options, inGroup) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
+        // const path = item.metadata.value
+        const fill = item.metadata.fill
+        const element = new fabric.Background({
+          ...baseOptions,
+          fill: fill ? fill : '#000000',
+          id: 'background',
+          name: ''
+        })
+
+        const { top, left } = element
+
+        if (isNaN(top) || isNaN(left)) {
+          element.set({
+            top: options.top,
+            left: options.left
+          })
+          element.scaleToWidth(320)
+        }
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.STATIC_VECTOR](item, options, inGroup) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
         const src = item.metadata.src
         fabric.loadSVGFromURL(src, (objects, opts) => {
           const { width, height, top, left } = baseOptions
@@ -217,14 +269,14 @@ class ObjectToFabric {
     })
   }
 
-  getBaseOptions(item, options) {
+  getBaseOptions(item, options, inGroup) {
     const { left, top, width, height, scaleX, scaleY, stroke, strokeWidth } = item
     let metadata = item.metadata ? item.metadata : {}
     const { fill, angle, originX, originY } = metadata
     let baseOptions = {
       angle: angle ? angle : 0,
-      top: options.top + top,
-      left: options.left + left,
+      top: inGroup ? top : options.top + top,
+      left: inGroup ? left : options.left + left,
       width: width,
       height: height,
       originX: originX || 'left',

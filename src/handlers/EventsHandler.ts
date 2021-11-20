@@ -42,7 +42,7 @@ class EventsHandler extends BaseHandler {
   }
   onMouseDown = (e: fabric.IEvent) => {
     //@ts-ignore
-    e.e.preventDefault()
+    // e.e.preventDefault()
     if (e.button === 3) {
       // @ts-ignore
       this.context.setContextMenuRequest({ left: e.e.offsetX, top: e.e.offsetY, target: e.target })

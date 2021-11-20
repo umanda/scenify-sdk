@@ -28,7 +28,6 @@ class TemplateHandler extends BaseHandler {
       template.objects = template.objects.concat(exportedObject)
     })
 
-    // return template
     return template
   }
 

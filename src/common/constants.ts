@@ -11,6 +11,7 @@ export enum ObjectType {
   STATIC_TEXT = 'StaticText',
   DYNAMIC_TEXT = 'DynamicText',
   ACTIVE_SELECTION = 'activeSelection',
+  BACKGROUND = 'Background',
   GROUP = 'group'
 }
 
@@ -23,4 +24,16 @@ export enum ObjectTypeAlt {
 export const defaultEditorConfig = {
   clipToFrame: true,
   scrollLimit: 200
+}
+
+export const commonParams = {
+  backgroundColor: '',
+  fillRule: 'nonzero',
+  globalCompositeOperation: 'source-over',
+  strokeDashArray: null,
+  strokeDashOffset: 0,
+  strokeLineCap: 'butt',
+  strokeLineJoin: 'miter',
+  strokeMiterLimit: 4,
+  strokeUniform: false
 }
