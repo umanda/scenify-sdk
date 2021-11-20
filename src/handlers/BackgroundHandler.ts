@@ -16,15 +16,19 @@ class BackgroundHandler extends BaseHandler {
 
   public setBackgroundColor = (color: string) => {
     const background = this.getBackground()
-    background.set('fill', color)
-    this.canvas.requestRenderAll()
-    this.handlers.historyHandler.save('background:fill')
+    if (background) {
+      background.set('fill', color)
+      this.canvas.requestRenderAll()
+      this.handlers.historyHandler.save('background:fill')
+    }
   }
   public setGradient = ({ angle, colors }: GradientOptions) => {
     const background = this.getBackground()
-    this.setObjectGradient(background, angle, colors)
-    this.canvas.requestRenderAll()
-    this.handlers.historyHandler.save('background:gradient')
+    if (background) {
+      this.setObjectGradient(background, angle, colors)
+      this.canvas.requestRenderAll()
+      this.handlers.historyHandler.save('background:gradient')
+    }
   }
 
   private setObjectGradient = (object: fabric.Object, angle, colors) => {
