@@ -2,6 +2,7 @@ import { fabric } from 'fabric'
 import BaseHandler from './BaseHandler'
 import { HandlerOptions } from '../common/interfaces'
 import { FrameOptions } from '../objects'
+import { ObjectType } from '../common/constants'
 
 class FrameHandler extends BaseHandler {
   options
@@ -45,59 +46,22 @@ class FrameHandler extends BaseHandler {
   }
 
   getFrame = () => {
-    return this.canvas.getObjects().find(object => object.type === 'Frame')
+    return this.canvas.getObjects().find(object => object.type === ObjectType.FRAME)
   }
 
   updateFrame = options => {
-    // this.sizeFormat = options
     const frame = this.getFrame()
     const { width, height } = options
     frame.set('width', width)
     frame.set('height', height)
     frame.center()
     this.handlers.zoomHandler.zoomToFit()
-    // this.context.setSizeFormat(options)
-    // this.handlers.historyHandler.save('frame:update')
-    // this.handlers.gridHandler.draw()
   }
 
   setBackgroundColor = (color: string) => {
     const frame = this.getFrame()
     frame.set('fill', color)
     this.canvas.renderAll()
-  }
-
-  setBackgroundImageURL = async _url => {
-    // this.removeBackgroundImage()
-    // const frame = this.get()
-    // const image = await loadImageFromURL(url)
-    // const element = new fabric.BackgroundImage(image)
-    // element.clipPath = frame
-    // element.scaleToWidth(frame.width)
-    // this.canvas.add(element)
-    // element.center()
-    // element.moveTo(1)
-  }
-
-  getBackgroundImage = () => {
-    // return this.canvas.getObjects().find(object => object.type === 'BackgroundImage')
-  }
-
-  removeBackgroundImage = () => {
-    // const backgroundImage = this.getBackgroundImage()
-    // if (backgroundImage) {
-    //   this.canvas.remove(backgroundImage)
-    // }
-  }
-
-  reset = () => {
-    // const frame = this.get()
-    // frame.set('fill', defaultFrameOptions.fill)
-  }
-
-  setSelectionBorder = () => {
-    // const frame = this.handlers.Frame.getFrame()
-    // frame.setSelectionBorder()
   }
 
   getOptions = (): FrameOptions => {

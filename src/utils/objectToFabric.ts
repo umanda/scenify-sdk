@@ -215,7 +215,6 @@ class ObjectToFabric {
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
-        // const path = item.metadata.value
         const fill = item.metadata.fill
         const element = new fabric.Background({
           ...baseOptions,
@@ -270,9 +269,26 @@ class ObjectToFabric {
   }
 
   getBaseOptions(item, options, inGroup) {
-    const { left, top, width, height, scaleX, scaleY, stroke, strokeWidth } = item
+    const {
+      left,
+      top,
+      width,
+      height,
+      scaleX,
+      scaleY,
+      stroke,
+      strokeWidth,
+      angle,
+      opacity,
+      flipX,
+      flipY,
+      skewX,
+      skewY,
+      originX,
+      originY
+    } = item
     let metadata = item.metadata ? item.metadata : {}
-    const { fill, angle, originX, originY } = metadata
+    const { fill } = metadata
     let baseOptions = {
       angle: angle ? angle : 0,
       top: inGroup ? top : options.top + top,
@@ -286,6 +302,11 @@ class ObjectToFabric {
       fill: fill || '#000000',
       stroke: stroke ? stroke : '#ffffff',
       strokeWidth: strokeWidth ? strokeWidth : 0,
+      opacity: opacity ? opacity : 1,
+      flipX: flipX ? flipX : false,
+      flipY: flipY ? flipY : false,
+      skewX: skewX ? skewX : 0,
+      skewY: skewY ? skewY : 0,
       metadata: metadata
     }
     return baseOptions

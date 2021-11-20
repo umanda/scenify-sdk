@@ -12,7 +12,8 @@ export enum ObjectType {
   DYNAMIC_TEXT = 'DynamicText',
   ACTIVE_SELECTION = 'activeSelection',
   BACKGROUND = 'Background',
-  GROUP = 'group'
+  GROUP = 'group',
+  FRAME = 'Frame'
 }
 
 export enum ObjectTypeAlt {

@@ -20,6 +20,7 @@ function Navbar() {
       }
     }
   }, [editor])
+
   return (
     <Box
       style={{

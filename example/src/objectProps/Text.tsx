@@ -38,7 +38,7 @@ function Text() {
         <ColorPicker
           value="#afafaf"
           onChange={color => {
-            editor?.handlers.frameHandler.setBackgroundColor(color)
+            editor?.background.setBackgroundColor(color)
           }}
         />
       </Box>

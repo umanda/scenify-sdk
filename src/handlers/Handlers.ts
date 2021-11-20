@@ -11,7 +11,7 @@ import TemplateHandler from './TemplateHandler'
 import ScrollbarHandler from './ScrollbarHandler'
 import DesignHandler from './design-handler/design-handler'
 import GuidelinesHandler from './GuidelinesHandler'
-
+import BackgroundHandler from './BackgroundHandler'
 class Handlers {
   canvas: FabricCanvas
   public frameHandler: FrameHandler
@@ -26,6 +26,7 @@ class Handlers {
   public personalizationHandler: PersonalizationHandler
   public designHandler: DesignHandler
   public guidelinesHandler: GuidelinesHandler
+  public backgroundHandler: BackgroundHandler
 
   constructor(props: RootHandlerOptions) {
     this.propertiesToInclude = PROPERTIES_TO_INCLUDE
@@ -48,6 +49,7 @@ class Handlers {
     this.scrollbarHandler = new ScrollbarHandler(handlerOptions)
     this.designHandler = new DesignHandler(handlerOptions)
     this.guidelinesHandler = new GuidelinesHandler(handlerOptions)
+    this.backgroundHandler = new BackgroundHandler(handlerOptions)
   }
 
   destroy = () => {}

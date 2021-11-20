@@ -204,11 +204,11 @@ class ObjectToFabric {
   }
 
   getBaseOptions(item: any) {
-    const { left, top, width, height, scaleX, scaleY } = item
+    const { left, top, width, height, scaleX, scaleY, opacity, flipX, flipY, skewX, skewY, visible } = item
     let metadata = item.metadata ? item.metadata : {}
     const { fill, angle, originX, originY } = metadata
     let baseOptions = {
-      angle: angle ? angle : 0,
+      angle: angle,
       top: top,
       left: left,
       width: width,
@@ -218,6 +218,11 @@ class ObjectToFabric {
       scaleX: scaleX || 1,
       scaleY: scaleY || 1,
       fill: fill || '#000000',
+      opacity: opacity ? opacity : 1,
+      flipX: flipX ? flipX : false,
+      flipY: flipY ? flipY : false,
+      skewX: skewX ? skewX : 0,
+      skewY: skewY ? skewY : 0,
       metadata: metadata
     }
     return baseOptions

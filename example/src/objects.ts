@@ -29,6 +29,7 @@ export const objects = {
     height: 60,
     originX: 'left',
     originY: 'top',
+    opacity: 0.5,
     scaleX: 4,
     scaleY: 4,
     type: 'StaticPath',

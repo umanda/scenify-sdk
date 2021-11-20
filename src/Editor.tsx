@@ -1,12 +1,20 @@
 import { EditorOptions } from './common/interfaces'
 import Handlers from './handlers'
 import EventManager from './EventManager'
-
+import ZoomController from './controllers/ZoomController'
+import BackgroundController from './controllers/BackgroundController'
+import { IEditorContext } from '.'
 class Editor extends EventManager {
-  public handlers: Handlers
+  private handlers: Handlers
+  private context: IEditorContext
+  public zoom: ZoomController
+  public background: BackgroundController
   constructor(props: EditorOptions) {
     super()
+    this.context = props.context
     this.handlers = new Handlers({ ...props, editor: this })
+    this.zoom = new ZoomController(this.handlers.zoomHandler)
+    this.background = new BackgroundController(this.handlers.backgroundHandler)
   }
 
   // BASIC FUNCTIONS
@@ -147,7 +155,7 @@ class Editor extends EventManager {
 
   // CONTEXT MENU
   public cancelContextMenu = () => {
-    this.handlers.personalizationHandler.context.setContextMenuRequest(null)
+    this.context.setContextMenuRequest(null)
   }
 }
 

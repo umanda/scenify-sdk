@@ -1,3 +1,4 @@
+import { ObjectType } from '../common/constants'
 import exportObject from '../utils/fabricToObject'
 import objectToFabric from '../utils/objectToFabric'
 import BaseHandler from './BaseHandler'
@@ -20,9 +21,7 @@ class TemplateHandler extends BaseHandler {
       }
     }
 
-    const objects = canvasJSON.objects.filter(
-      object => object.type !== 'Frame' && object.type !== 'BackgroundImage'
-    )
+    const objects = canvasJSON.objects.filter(object => object.type !== ObjectType.FRAME)
     objects.forEach(object => {
       const exportedObject = exportObject.run(object, frameOptions)
       template.objects = template.objects.concat(exportedObject)
