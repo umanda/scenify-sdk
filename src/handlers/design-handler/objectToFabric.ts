@@ -25,6 +25,12 @@ class ObjectToFabric {
       case ObjectType.STATIC_PATH:
         object = await this[ObjectType.STATIC_PATH](item)
         break
+      case ObjectType.BACKGROUND:
+        object = await this[ObjectType.BACKGROUND](item)
+        break
+      case ObjectType.GROUP:
+        object = await this[ObjectType.GROUP](item, params)
+        break
     }
     return object as fabric.Object
   }
@@ -134,6 +140,41 @@ class ObjectToFabric {
         const baseOptions = this.getBaseOptions(item)
         const value = item.metadata.value
         const element = new fabric.Path(value, baseOptions)
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.GROUP](item, params: any) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item)
+        let objects = []
+        for (const object of item.objects) {
+          objects = objects.concat(await this.run(object, params))
+        }
+        const element = new fabric.Group(objects, baseOptions)
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  [ObjectType.BACKGROUND](item) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item)
+        // const path = item.metadata.value
+        const fill = item.metadata.fill
+        const element = new fabric.Background({
+          ...baseOptions,
+          fill: fill ? fill : '#000000',
+          id: 'background',
+          name: ''
+        })
         resolve(element)
       } catch (err) {
         reject(err)
