@@ -19,7 +19,7 @@ npm install @scenify/sdk
 ## Join us on Discord
 
 <p>
-    <a href="https://discord.gg/2gutDZHb">
+    <a href="https://discord.gg/HqyXEhkXNZ">
         <img src="https://discordapp.com/api/guilds/898955692491309126/widget.png?style=banner2" alt="Discord Banner 2"/>
     </a>
 </p>
