@@ -5,12 +5,14 @@ import ZoomController from './controllers/ZoomController'
 import BackgroundController from './controllers/BackgroundController'
 import { IEditorContext } from '.'
 import CanvasController from './controllers/CanvasController'
+import FrameController from './controllers/FrameController'
 class Editor extends EventManager {
   private handlers: Handlers
   private context: IEditorContext
   public zoom: ZoomController
   public background: BackgroundController
   public canvas: CanvasController
+  public frame: FrameController
   constructor(props: EditorOptions) {
     super()
     this.context = props.context
@@ -18,6 +20,7 @@ class Editor extends EventManager {
     this.zoom = new ZoomController(this.handlers.zoomHandler)
     this.background = new BackgroundController(this.handlers.backgroundHandler)
     this.canvas = new CanvasController(this.handlers.canvasHandler)
+    this.frame = new FrameController(this.handlers.frameHandler)
   }
 
   // BASIC FUNCTIONS
@@ -156,8 +159,8 @@ class Editor extends EventManager {
     this.handlers.templateHandler.importFromJSON(data)
   }
   public toSVG = () => {}
-  public toPNG = () => {
-    return this.handlers.designHandler.toDataURL({})
+  public toPNG = (options: any) => {
+    return this.handlers.designHandler.toDataURL(options)
   }
 
   // CONTEXT MENU

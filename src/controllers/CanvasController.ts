@@ -1,6 +1,6 @@
 import CanvasHandler from '../handlers/CanvasHandler'
 
-class CanvasContainerController {
+class CanvasController {
   private handler: CanvasHandler
   constructor(handler: CanvasHandler) {
     this.handler = handler
@@ -11,4 +11,4 @@ class CanvasContainerController {
   }
 }
 
-export default CanvasContainerController
+export default CanvasController

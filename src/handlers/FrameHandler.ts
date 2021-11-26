@@ -49,7 +49,7 @@ class FrameHandler extends BaseHandler {
     return this.canvas.getObjects().find(object => object.type === ObjectType.FRAME)
   }
 
-  updateFrame = options => {
+  update = options => {
     const frame = this.getFrame()
     const { width, height } = options
     frame.set('width', width)
