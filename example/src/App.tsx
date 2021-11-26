@@ -6,7 +6,7 @@ import { Box } from '@chakra-ui/react'
 import Text from './objectProps/Text'
 import ItemsFactory from './ItemsFactory'
 import Navbar from './components/Navbar'
-
+import Toolbox from './Toolbox'
 const App = () => {
   // const handlers = useHandlers()
   const contextMenuRequest = useContextMenuRequest()
@@ -49,9 +49,7 @@ const App = () => {
           )}
           <Editor config={editorConfig} />
         </Box>
-        <Box sx={{ width: '320px' }}>
-          <Text />
-        </Box>
+        <Toolbox />
       </Box>
     </Box>
   )

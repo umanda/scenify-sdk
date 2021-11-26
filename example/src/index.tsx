@@ -6,10 +6,11 @@ import App from './App'
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
 import { theme } from './theme'
+import 'focus-visible'
 const extendedTheme = extendTheme(theme)
 
 ReactDOM.render(
-  <ChakraProvider theme={extendedTheme}>
+  <ChakraProvider>
     <EditorProvider>
       <App />
     </EditorProvider>{' '}

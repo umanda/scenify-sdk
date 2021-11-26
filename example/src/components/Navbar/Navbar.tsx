@@ -1,11 +1,25 @@
 import * as React from 'react'
-import { Box, Button } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Image
+} from '@chakra-ui/react'
 import { Logo, Undo, Redo } from '../Icons'
 import { useEditor } from '../../../../src'
 import template from '../../template'
 function Navbar() {
+  const [previewImage, setPreviewImage] = React.useState<any>(null)
   const editor = useEditor()
   const [historyStatus, setHistoryStatus] = React.useState({ hasUndo: false, hasRedo: false })
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   React.useEffect(() => {
     const handleHistoryChange = data => {
@@ -20,6 +34,13 @@ function Navbar() {
       }
     }
   }, [editor])
+
+  const handlePreview = async () => {
+    // @ts-ignore
+    const image = await editor.toPNG({})
+    setPreviewImage(image)
+    onOpen()
+  }
 
   return (
     <Box
@@ -54,32 +75,16 @@ function Navbar() {
         </Box>
       </Box>
       <Box>
-        <Button
-          onClick={async () => {
-            const data = await editor?.toPNG()
-            console.log(data)
-          }}
-        >
-          Download
-        </Button>
-
-        <Button
-          onClick={() => {
-            const exported = editor?.exportToJSON()
-            console.log(exported)
-          }}
-        >
-          Export
-        </Button>
-
-        <Button
-          onClick={() => {
-            const exported = editor?.importFromJSON(template)
-          }}
-        >
-          import
+        <Button colorScheme="gray" onClick={handlePreview}>
+          Preview
         </Button>
       </Box>
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <Image src={previewImage} />
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }

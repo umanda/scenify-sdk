@@ -11,6 +11,7 @@
     "@chakra-ui/react": "^1.6.10",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "focus-visible": "^5.2.0",
     "framer-motion": "^4",
     "react-app-polyfill": "^1.0.0",
     "react-colorful": "^5.5.0"

@@ -14,6 +14,16 @@ class BackgroundHandler extends BaseHandler {
     return this.canvas.getObjects().find(object => object.type === ObjectType.BACKGROUND)
   }
 
+  setSize = options => {
+    const background = this.getBackground()
+    if (background) {
+      const { width, height } = options
+      background.set('width', width)
+      background.set('height', height)
+      background.center()
+    }
+  }
+
   public setBackgroundColor = (color: string) => {
     const background = this.getBackground()
     if (background) {
