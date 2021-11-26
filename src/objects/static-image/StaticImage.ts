@@ -48,6 +48,7 @@ export class StaticImageObject extends fabric.Image {
         image.clipPath = null
         const element = image.getElement()
         const { top = 0, left = 0, cropX = 0, cropY = 0, scaleX = 1, scaleY = 1 } = image
+        console.log({ image })
         image.set({
           top: top - cropY * scaleY,
           left: left - cropX * scaleX,

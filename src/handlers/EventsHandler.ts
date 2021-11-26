@@ -41,6 +41,7 @@ class EventsHandler extends BaseHandler {
     this.canvas.wrapperEl.removeEventListener('keydown', this.onKeyDown.bind(this))
   }
   onMouseDown = (e: fabric.IEvent) => {
+    this.handlers.objectsHandler.pasteStyle()
     //@ts-ignore
     // e.e.preventDefault()
     if (e.button === 3) {

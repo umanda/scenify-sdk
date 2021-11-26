@@ -33,6 +33,10 @@ class Editor extends EventManager {
     this.handlers.objectsHandler.copy()
   }
 
+  public copyStyle = () => {
+    this.handlers.objectsHandler.copyStyle()
+  }
+
   public cut = () => {
     this.handlers.objectsHandler.cut()
   }

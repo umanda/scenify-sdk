@@ -27,6 +27,13 @@ class BackgroundHandler extends BaseHandler {
     this.handlers.historyHandler.save('background:gradient')
   }
 
+  public setHoverCursor = (cursor: string) => {
+    const background = this.getBackground()
+    if (background) {
+      background.set('hoverCursor', cursor)
+    }
+  }
+
   private setObjectGradient = (object: fabric.Object, angle, colors) => {
     let odx = object.width >> 1
     let ody = object.height >> 1

@@ -1,14 +1,14 @@
 import { fabric } from 'fabric'
-import { ObjectType } from '../common/constants'
+import { copyStyleProps, getCopyStyleCursor, ObjectType } from '../common/constants'
 import { GradientOptions, ShadowOptions } from '../common/interfaces'
 import objectToFabric from '../utils/objectToFabric'
 import { angleToPoint } from '../utils/parser'
 import BaseHandler from './BaseHandler'
-
+import pick from 'lodash/pick'
 class ObjectHandler extends BaseHandler {
-  public clipboard
+  private clipboard
   public isCut
-
+  private copyStyleClipboard
   public add = async item => {
     const { canvas } = this
     const options = this.handlers.frameHandler.getOptions()
@@ -241,6 +241,44 @@ class ObjectHandler extends BaseHandler {
     this.context.setActiveObject(activeSelection)
   }
 
+  public copyStyle = () => {
+    const activeObject = this.canvas.getActiveObject()
+    if (activeObject) {
+      const clonableProps = copyStyleProps[activeObject.type]
+      const clonedProps = pick(activeObject.toJSON(), clonableProps)
+
+      this.copyStyleClipboard = {
+        objectType: activeObject.type,
+        props: clonedProps
+      }
+
+      this.handlers.backgroundHandler.setHoverCursor(getCopyStyleCursor())
+      this.canvas.hoverCursor = getCopyStyleCursor()
+      this.canvas.defaultCursor = getCopyStyleCursor()
+    }
+  }
+
+  public pasteStyle = () => {
+    const activeObject = this.canvas.getActiveObject()
+    if (activeObject && this.copyStyleClipboard) {
+      if (activeObject.type === this.copyStyleClipboard.objectType) {
+        const { fill, ...basicProps } = this.copyStyleClipboard.props
+        activeObject.set(basicProps)
+
+        if (fill) {
+          if (fill.type) {
+            activeObject.set({ fill: new fabric.Gradient(fill) })
+          } else {
+            activeObject.set({ fill })
+          }
+        }
+      }
+    }
+    this.copyStyleClipboard = null
+    this.handlers.backgroundHandler.setHoverCursor('default')
+    this.canvas.hoverCursor = 'move'
+    this.canvas.defaultCursor = 'default'
+  }
   /**
    * OBJECT POSITION
    */

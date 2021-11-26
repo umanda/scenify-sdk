@@ -147,6 +147,7 @@ function Text() {
               <Button onClick={() => editor?.unlock()}>Unlock</Button>
               <Button onClick={() => editor?.deselect()}>Deselect</Button>
               <Button onClick={() => editor?.update({ textAlign: 'center' })}>textAlign</Button>
+              <Button onClick={() => editor?.copyStyle()}>Copy Style</Button>
             </Box>
           </TabPanel>
           <TabPanel>
