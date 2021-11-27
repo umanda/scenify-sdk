@@ -1,8 +1,10 @@
 {
-  "index": "What is Scenify",
+  "index": "Intro",
   "setup": "Setup",
-  "objects": "Objects",
-  "handlers": "Handlers",
   "hooks": "Hooks",
-  "blog": "Blog"
+  "objects": "Objects",
+  "history": "History",
+  "zoom": "Zoom",
+  "events": "Events",
+  "design": "Design"
 }

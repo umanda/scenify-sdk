@@ -1,6 +1,8 @@
-# Illustrations
+# Adding objects
 
-### Adding illustrations
+## Text
+
+### Adding Text
 
 Nextra supports [Next.js i18n](https://nextjs.org/docs/advanced-features/i18n-routing) out of the box.
 
@@ -15,7 +17,7 @@ const imageOptions = {
 }
 ```
 
-### Updating illustrations
+### Updating Text
 
 To add multi-language pages to your Nextra application, just need to config `i18n` in `next.config.js`:
 

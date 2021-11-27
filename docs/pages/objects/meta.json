@@ -1,6 +1,5 @@
 {
-  "text":"Text",
-  "images":"Images",
-  "objects":"Objects",
-  "illustrations":"Illustrations"
+  "create": "Create",
+  "update": "Update",
+  "group": "Group"
 }
