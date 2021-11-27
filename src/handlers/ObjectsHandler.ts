@@ -593,6 +593,7 @@ class ObjectHandler extends BaseHandler {
       object.clipPath = frame
     })
     this.canvas.renderAll()
+    this.context.setActiveObject(activeSelection)
     this.handlers.historyHandler.save('ungroup')
   }
 
