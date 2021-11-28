@@ -1,0 +1,206 @@
+# useEditor
+
+Get access to editor controllers
+
+### Usage
+
+```tsx
+import { useEditor } from '@scenify/sdk'
+
+export default function App() {
+  const editor = useEditor()
+
+  const handleAction = () => {
+    editor.do(...)
+  }
+  return <>...</>
+}
+```
+
+## Add
+
+Add objects to the editor.
+
+```tsx
+const options = {
+  type: 'StaticText',
+  width: 160,
+  metadata: {
+    fontWeight: 700,
+    fontFamily: 'Noto Sans KR',
+    textAlign: 'center',
+    fontSize: 28,
+    text: 'Add heading',
+  },
+}
+const handleAdd = () => {
+  editor.add(options)
+}
+```
+
+## Update
+
+Update selected object properties
+
+```tsx
+const handleUpdate = () => {
+  editor.update({
+    fontWeight: 500,
+    fontSize: 100,
+  })
+}
+```
+
+## Copy
+
+Add select object to clipboard
+
+```tsx
+const handleCopy = () => {
+  editor.copy()
+}
+```
+
+## Cut
+
+Cuts sel object and adds it to clipboard.
+
+```tsx
+const handleCut = () => {
+  editor.cut()
+}
+```
+
+## Paste
+
+Paste object from clipboard
+
+```tsx
+const handlePaste = () => {
+  editor.paste()
+}
+```
+
+## Copy Style
+
+Will add selected object properties to clipboard. User needs to click another object to apply these properties. It works for same object types.
+
+```tsx
+const handleCopyStyle = () => {
+  editor.copyStyle()
+}
+```
+
+## Clone
+
+Clone selected object
+
+```tsx
+const handleClone = () => {
+  editor.clone()
+}
+```
+
+## Delete
+
+Delete selected object.
+
+```tsx
+const handleDelete = () => {
+  editor.delete()
+}
+```
+
+## Clear
+
+Will remove all objects from editor
+
+```tsx
+const handleClear = () => {
+  editor.clear()
+}
+```
+
+## Deselect
+
+Will deselect selected object
+
+```tsx
+const handleDeselect = () => {
+  editor.deselect()
+}
+```
+
+## Undo
+
+Reverses the last action
+
+```tsx
+const handleUndo = () => {
+  editor.undo()
+}
+```
+
+## Redo
+
+Re-applies reversed changes
+
+```tsx
+const handleRedo = () => {
+  editor.redo()
+}
+```
+
+## ZoomIn
+
+## ZoomOut
+
+## ZoomToOne
+
+## ZoomToFit
+
+## ZoomToRatio
+
+## alignTop
+
+## alignMiddle
+
+## alignBottom
+
+## alignLeft
+
+## alignCenter
+
+## alignRight
+
+## bringForward
+
+## bringToFront
+
+## sendBackwards
+
+## sendToBack
+
+## group
+
+## ungroup
+
+## lock
+
+## unlock
+
+## setGradient
+
+## setShadow
+
+## exportToJSON
+
+## importFromJSON
+
+## toSVG
+
+## toPNG
+
+## cancelContextMenu
+
+## destroy

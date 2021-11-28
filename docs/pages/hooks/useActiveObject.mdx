@@ -1,0 +1,18 @@
+# useActiveObject
+
+Will receive the selecte object
+
+### Usage
+
+```tsx
+import { useActiveObject } from '@scenify/sdk'
+
+export default function App() {
+  const activeObject = useActiveObject()
+
+  useEffect(() => {
+    console.log(activeObject)
+  }, [activeObject])
+  return <>...</>
+}
+```

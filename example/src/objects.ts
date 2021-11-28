@@ -22,6 +22,13 @@ export const objects = {
       src: 'https://i.ibb.co/JB3y2ts/mclogo.jpg'
     }
   },
+  StaticVector: {
+    type: 'StaticVector',
+    metadata: {
+      src:
+        'https://d2g16cura83u2t.cloudfront.net/illustration/free/additional-file/3659325/1.svg?token=eyJhbGciOiJoczI1NiIsImtpZCI6ImRlZmF1bHQifQ__.eyJpc3MiOiJkMmcxNmN1cmE4M3UydC5jbG91ZGZyb250Lm5ldCIsImV4cCI6MTYzODMyNDM3MiwicSI6bnVsbCwiaWF0IjoxNjM4MDY1MTcyfQ__.9623723af575d072d9ee6d6b8406c3edfad18b26759779a4038b30e557058148'
+    }
+  },
   staticPath: {
     left: 0,
     top: 0,

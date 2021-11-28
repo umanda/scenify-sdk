@@ -24,10 +24,12 @@ class Editor extends EventManager {
   }
 
   // BASIC FUNCTIONS
+
+  // Add objects to editor
   public add = (options: any) => {
     this.handlers.objectsHandler.add(options)
   }
-
+  // Update selected object properties
   public update = (options: any) => {
     this.handlers.objectsHandler.update(options)
   }
