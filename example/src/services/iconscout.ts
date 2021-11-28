@@ -4,8 +4,8 @@ import axios from 'axios'
 const iconscoutClient = axios.create({
   baseURL: 'https://api.iconscout.com/v3/',
   headers: {
-    'Client-ID': process.env.REACT_APP_ICONSCOUT_CLIENT_ID,
-    'Client-Secret': process.env.REACT_APP_ICONSCOUT_SECRET
+    'Client-ID': '148500809558785',
+    'Client-Secret': 'yOjZGSOOyglJYWH1RsZsXs7MyLOcaaHR'
   }
 })
 

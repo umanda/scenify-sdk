@@ -7,6 +7,7 @@ import { useEditor } from '@scenify/sdk'
 import { HexColorPicker } from 'react-colorful'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
 import { Plus } from 'baseui/icon'
+// @ts-ignore
 import throttle from 'lodash/throttle'
 
 const colors = [
