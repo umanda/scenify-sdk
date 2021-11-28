@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import useAppContext from '../../../../../hooks/useAppContext'
 import { useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
@@ -32,7 +34,7 @@ function Templates() {
                   alignItems: 'center',
                   cursor: 'pointer',
                   border: '1px solid rgba(0,0,0,0.2)',
-                  padding: '5px',
+                  padding: '5px'
                 }}
                 onClick={() => editor.importFromJSON(template)}
               >

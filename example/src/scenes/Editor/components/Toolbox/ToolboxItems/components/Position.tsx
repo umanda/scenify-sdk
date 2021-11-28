@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Icons from '../../../icons'
 import { Button, KIND, SIZE } from 'baseui/button'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
@@ -20,7 +21,7 @@ function Position() {
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: '2rem',
-              padding: '1.5rem',
+              padding: '1.5rem'
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>

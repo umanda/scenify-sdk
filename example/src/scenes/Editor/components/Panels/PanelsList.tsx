@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { panelListItems } from '../../../../constants/app-options'
 import useAppContext from '../../../../hooks/useAppContext'
 import { styled } from 'baseui'
@@ -5,7 +6,7 @@ import PanelListItem from './PanelListItem'
 
 const Container = styled('div', props => ({
   width: '84px',
-  backgroundColor: props.$theme.colors.primary100,
+  backgroundColor: props.$theme.colors.primary100
 }))
 
 function PanelsList() {

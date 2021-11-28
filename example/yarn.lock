@@ -841,7 +841,7 @@
   resolved "https://registry.yarnpkg.com/@types/fabric/-/fabric-4.5.5.tgz#0ee4254fae40edc9fe90271111d2d26ff715fac8"
   integrity sha512-+bYGKrqsQuKVby2v84x4OMavY28Ur9DgrsqSXtyAgvd1c8oKLkMku4KVESDQoGmRiDwpjlPOwG3B8qM6IVeJ3w==
 
-"@types/lodash@^4.14.175":
+"@types/lodash@^4.14.175", "@types/lodash@^4.14.177":
   version "4.14.177"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.177.tgz#f70c0d19c30fab101cad46b52be60363c43c4578"
   integrity sha512-0fDwydE2clKe9MNfvXHBHF9WEahRuj+msTuQqOmAApNORFvhMYZKNGGJdCzuhheVjMps/ti0Ak/iJPACMaevvw==

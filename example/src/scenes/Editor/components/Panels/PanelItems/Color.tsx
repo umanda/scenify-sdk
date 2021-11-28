@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Input } from 'baseui/input'
@@ -6,6 +7,7 @@ import { useEditor } from '@scenify/sdk'
 import { HexColorPicker } from 'react-colorful'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
 import { Plus } from 'baseui/icon'
+// @ts-ignore
 import throttle from 'lodash/throttle'
 
 const colors = [
@@ -18,7 +20,7 @@ const colors = [
   '#f78fb3',
   '#3dc1d3',
   '#e66767',
-  '#303952',
+  '#303952'
 ]
 function Color() {
   const editor = useEditor()
@@ -56,7 +58,7 @@ function Color() {
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '1rem',
-                    textAlign: 'center',
+                    textAlign: 'center'
                   }}
                 >
                   <HexColorPicker onChange={updateObjectFill} />
@@ -82,7 +84,7 @@ function Color() {
                     justifyContent: 'center',
                     cursor: 'pointer',
                     backgroundImage:
-                      'url("https://static.canva.com/web/images/788ee7a68293bd0264fc31f22c31e62d.png")',
+                      'url("https://static.canva.com/web/images/788ee7a68293bd0264fc31f22c31e62d.png")'
                   }}
                 >
                   <div
@@ -93,7 +95,7 @@ function Color() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '1.3rem',
+                      fontSize: '1.3rem'
                     }}
                   >
                     <Plus size={24} />
@@ -111,7 +113,7 @@ function Color() {
               display: 'grid',
               gap: '0.5rem',
               padding: '0 2rem 2rem',
-              gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
+              gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr'
             }}
           >
             {colors.map(color => (

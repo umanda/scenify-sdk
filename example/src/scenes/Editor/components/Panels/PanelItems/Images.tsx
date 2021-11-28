@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import { useEffect, useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Input } from 'baseui/input'
@@ -28,7 +30,7 @@ function Images() {
   const addImageToCanvas = url => {
     const options = {
       type: 'StaticImage',
-      metadata: { src: url },
+      metadata: { src: url }
     }
     editor.add(options)
   }
@@ -55,7 +57,7 @@ function Images() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  cursor: 'pointer',
+                  cursor: 'pointer'
                 }}
                 onClick={() => addImageToCanvas(img.webformatURL)}
               >

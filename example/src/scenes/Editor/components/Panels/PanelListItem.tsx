@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useStyletron } from 'baseui'
 import Icons from '../../../../components/icons'
 import useAppContext from '../../../../hooks/useAppContext'
@@ -26,8 +27,8 @@ function PanelListItem({ label, icon, activePanel }: any) {
         ':hover': {
           cursor: 'pointer',
           backgroundColor: theme.colors.background,
-          transition: 'all 1s',
-        },
+          transition: 'all 1s'
+        }
       })}
     >
       <Icon size={24} />

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Icons from '../../icons'
 import { Button, SHAPE, KIND, SIZE } from 'baseui/button'
 import useAppContext from '../../../../../hooks/useAppContext'
@@ -17,7 +18,7 @@ function Image() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 1rem',
+        padding: '0 1rem'
       }}
     >
       <Button

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Input } from 'baseui/input'
@@ -42,7 +43,7 @@ const FontItem = styled('div', props => ({
   cursor: 'pointer',
   padding: '10px 5px 5px 5px',
   ':hover': {
-    background: 'rgba(0,0,0,0.045)',
-  },
+    background: 'rgba(0,0,0,0.045)'
+  }
 }))
 export default FontFamily

@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import { useEditor } from '@scenify/sdk'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Input } from 'baseui/input'
@@ -17,8 +19,8 @@ function Panel() {
         fontFamily: 'Lexend',
         textAlign: 'center',
         fontSize: 80,
-        value: 'Add a heading',
-      },
+        value: 'Add a heading'
+      }
     }
     editor.add(options)
   }
@@ -32,8 +34,8 @@ function Panel() {
         fontSize: 60,
         fontWeight: 500,
         fontFamily: 'Lexend',
-        textAlign: 'center',
-      },
+        textAlign: 'center'
+      }
     }
     editor.add(options)
   }
@@ -47,8 +49,8 @@ function Panel() {
         fontSize: 40,
         fontWeight: 300,
         fontFamily: 'Lexend',
-        textAlign: 'center',
-      },
+        textAlign: 'center'
+      }
     }
     editor.add(options)
   }
@@ -70,7 +72,7 @@ function Panel() {
               display: 'grid',
               gridTemplateRows: '50px 50px 50px',
               padding: '0 2rem',
-              gap: '0.5rem',
+              gap: '0.5rem'
             }}
           >
             <div
@@ -81,7 +83,7 @@ function Panel() {
                 alignItems: 'center',
                 background: 'rgba(0,0,0,0.045)',
                 fontWeight: 700,
-                cursor: 'pointer',
+                cursor: 'pointer'
               }}
               onClick={addHeading}
             >
@@ -95,7 +97,7 @@ function Panel() {
                 alignItems: 'center',
                 background: 'rgba(0,0,0,0.045)',
                 fontWeight: 500,
-                cursor: 'pointer',
+                cursor: 'pointer'
               }}
               onClick={addSubheading}
             >
@@ -109,7 +111,7 @@ function Panel() {
                 alignItems: 'center',
                 background: 'rgba(0,0,0,0.045)',
                 fontWeight: 300,
-                cursor: 'pointer',
+                cursor: 'pointer'
               }}
               onClick={addTextBody}
             >

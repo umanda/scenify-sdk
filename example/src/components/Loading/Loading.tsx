@@ -1,3 +1,4 @@
+import * as React from 'react'
 function Loading() {
   return (
     <div
@@ -5,7 +6,7 @@ function Loading() {
         flex: 1,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
       }}
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" viewBox="0 0 100 100">

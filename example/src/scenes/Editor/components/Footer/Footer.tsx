@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Button, KIND, SHAPE, SIZE } from 'baseui/button'
 import { styled } from 'baseui'
 import { Plus, CheckIndeterminate } from 'baseui/icon'
@@ -10,7 +11,7 @@ const Container = styled('div', props => ({
   display: 'flex',
   position: 'absolute',
   bottom: '20px',
-  right: '20px',
+  right: '20px'
 }))
 
 const zoomValues = [0.27, 0.5, 0.75, 0.92, 1, 1.25, 1.5, 1.75, 2, 3, 4, 5]
@@ -23,8 +24,8 @@ const ZoomItemContainer = styled('div', () => ({
   paddingLeft: '1rem',
   ':hover': {
     backgroundColor: 'rgba(0,0,0,0.075)',
-    cursor: 'pointer',
-  },
+    cursor: 'pointer'
+  }
 }))
 function Footer() {
   const editor = useEditor()
@@ -45,7 +46,7 @@ function Footer() {
                 width: '130px',
                 fontFamily: 'system-ui',
                 height: '240px',
-                padding: '0.5rem 0',
+                padding: '0.5rem 0'
               }}
             >
               <Scrollbars>
@@ -82,9 +83,9 @@ function Footer() {
                   borderLeftColor: 'rgba(0,0,0,0.1)',
                   borderLeftStyle: 'solid',
                   borderLeftWidth: '1px',
-                  fontSize: '14px',
-                },
-              },
+                  fontSize: '14px'
+                }
+              }
             }}
             shape={SHAPE.default}
             size={SIZE.compact}

@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import { Button, KIND } from 'baseui/button'
 import { styled, ThemeProvider, LightTheme } from 'baseui'
 import { Select, Value } from 'baseui/select'
@@ -21,7 +23,7 @@ const Container = styled('div', props => ({
   color: props.$theme.colors.primary,
   width: '320px',
   fontFamily: 'Uber Move Text',
-  padding: '2rem 2rem',
+  padding: '2rem 2rem'
 }))
 
 export default function Resize() {

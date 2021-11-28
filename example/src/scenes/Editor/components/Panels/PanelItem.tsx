@@ -1,3 +1,5 @@
+// @ts-nocheck
+import * as React from 'react'
 import useAppContext from '../../../../hooks/useAppContext'
 import { useEditorContext } from '@scenify/sdk'
 import { styled } from 'baseui'
@@ -8,7 +10,7 @@ const Container = styled('div', props => ({
   background: '#ffffff',
   width: '360px',
   flex: 'none',
-  boxShadow: '1px 0px 1px rgba(0, 0, 0, 0.15)',
+  boxShadow: '1px 0px 1px rgba(0, 0, 0, 0.15)'
 }))
 
 function PanelsList() {

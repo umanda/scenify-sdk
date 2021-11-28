@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useEditorContext } from '@scenify/sdk'
 import { styled } from 'baseui'
 import ToolboxItems from './ToolboxItems'
@@ -7,7 +8,7 @@ const Container = styled('div', props => ({
   backgroundColor: props.$theme.colors.background,
   boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
   marginLeft: '1px',
-  display: 'flex',
+  display: 'flex'
 }))
 function EditorToolbox() {
   const { activeObject } = useEditorContext()

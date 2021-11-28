@@ -1,4 +1,5 @@
 import * as React from 'react'
+// @ts-ignore
 import FullColor from '../../../../assets/images/full-color.png'
 
 function FillColor({ color = '#000000' }: { size?: number; color: string }) {

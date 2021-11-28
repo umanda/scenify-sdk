@@ -1,3 +1,5 @@
+// @ts-nocheck
+import * as React from 'react'
 import Icons from '../../../icons'
 import { Button, SHAPE, KIND, SIZE } from 'baseui/button'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
@@ -39,7 +41,7 @@ function Opacity() {
           style={{
             width: '380px',
             background: '#ffffff',
-            fontFamily: 'Uber Move Text',
+            fontFamily: 'Uber Move Text'
           }}
         >
           <div
@@ -47,7 +49,7 @@ function Opacity() {
               display: 'flex',
               flexDirection: 'row',
               padding: '1.5rem 2rem',
-              alignItems: 'center',
+              alignItems: 'center'
             }}
           >
             <div>Transparency</div>
@@ -59,9 +61,9 @@ function Opacity() {
                 Thumb: {
                   style: {
                     height: '20px',
-                    width: '20px',
-                  },
-                },
+                    width: '20px'
+                  }
+                }
               }}
               min={0}
               max={100}

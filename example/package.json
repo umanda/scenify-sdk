@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "@scenify/sdk": "^0.2.16",
+    "@types/lodash": "^4.14.177",
     "@types/styletron-engine-atomic": "^1.1.1",
     "@types/styletron-react": "^5.0.3",
     "@types/styletron-standard": "^2.0.2",
     "axios": "^0.24.0",
     "baseui": "^10.6.0",
+    "lodash": "^4.17.21",
     "nanoid": "^3.1.30",
     "react-app-polyfill": "^1.0.0",
     "react-colorful": "^5.5.0",

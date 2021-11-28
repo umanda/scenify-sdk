@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Input } from 'baseui/input'
 import Icons from '../../../../../components/icons'
 import { Scrollbars } from 'react-custom-scrollbars'
@@ -34,7 +35,7 @@ function Panel() {
                   padding: '10px',
                   // background: 'red',
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'center'
                 }}
                 onClick={() => editor.add(shape)}
               >

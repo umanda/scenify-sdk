@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Input } from 'baseui/input'
@@ -30,7 +31,7 @@ function Illustrations() {
       .then(url => {
         const options = {
           type: 'StaticVector',
-          metadata: { src: url },
+          metadata: { src: url }
         }
         editor.add(options)
       })
@@ -60,7 +61,7 @@ function Illustrations() {
                   display: 'flex',
                   alignItems: 'center',
                   cursor: 'pointer',
-                  justifyContent: 'center',
+                  justifyContent: 'center'
                 }}
                 onClick={() => downloadImage(obj.uuid)}
               >

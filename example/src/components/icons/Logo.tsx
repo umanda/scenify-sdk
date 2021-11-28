@@ -1,3 +1,4 @@
+import * as React from 'react'
 function Logo({ size }: { size: number }) {
   return (
     <svg viewBox="0 0 86.02 86.02" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height={size}>

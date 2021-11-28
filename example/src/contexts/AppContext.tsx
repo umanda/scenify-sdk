@@ -1,6 +1,7 @@
+import * as React from 'react'
 import { PanelType } from '../constants/app-options'
 import { SubMenuType } from '../constants/editor'
-import React, { createContext, useState, FC } from 'react'
+import { createContext, useState, FC } from 'react'
 
 type Template = any
 interface IAppContext {
@@ -26,7 +27,7 @@ export const AppContext = createContext<IAppContext>({
   activePanel: PanelType.TEMPLATES,
   setActivePanel: () => {},
   activeSubMenu: null,
-  setActiveSubMenu: (value: SubMenuType) => {},
+  setActiveSubMenu: (value: SubMenuType) => {}
 })
 
 export const AppProvider: FC = ({ children }) => {
@@ -45,7 +46,7 @@ export const AppProvider: FC = ({ children }) => {
     shapes,
     setShapes,
     activeSubMenu,
-    setActiveSubMenu,
+    setActiveSubMenu
   }
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>
 }

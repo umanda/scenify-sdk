@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import { Button, KIND } from 'baseui/button'
 import { styled, ThemeProvider, LightTheme } from 'baseui'
 import { ListItem, ListItemLabel } from 'baseui/list'
@@ -9,7 +11,7 @@ const Container = styled('div', props => ({
   color: props.$theme.colors.primary,
   width: '240px',
   fontFamily: 'Uber Move Text',
-  padding: '1rem 1rem',
+  padding: '1rem 1rem'
 }))
 export default function Resize() {
   return (
