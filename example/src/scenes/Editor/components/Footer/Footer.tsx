@@ -4,7 +4,7 @@ import { styled } from 'baseui'
 import { Plus, CheckIndeterminate } from 'baseui/icon'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { useEditor, useEditorContext } from '@scenify/sdk'
+import { useEditor, useEditorContext } from '../../../../../../src'
 
 const Container = styled('div', props => ({
   backgroundColor: '#f6f7f9',

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import * as React from 'react'
 import useAppContext from '../../../../hooks/useAppContext'
-import { useEditorContext } from '@scenify/sdk'
+import { useEditorContext } from '../../../../../../src'
 import { styled } from 'baseui'
 import { useEffect } from 'react'
 import PanelItems from './PanelItems'

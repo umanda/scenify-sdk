@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEditorContext } from '@scenify/sdk'
+import { useEditorContext } from '../../../../../../src'
 import { styled } from 'baseui'
 import ToolboxItems from './ToolboxItems'
 

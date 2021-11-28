@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEditor } from '@scenify/sdk'
+import { useEditor } from '../../../../../../../../src'
 import { Button, SHAPE, KIND, SIZE } from 'baseui/button'
 import Icons from '../../../icons'
 

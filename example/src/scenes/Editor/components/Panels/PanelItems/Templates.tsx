@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Input } from 'baseui/input'
 import Icons from '../../../../../components/icons'
-import { useEditor } from '@scenify/sdk'
+import { useEditor } from '../../../../../../../src'
 
 function Templates() {
   const editor = useEditor()

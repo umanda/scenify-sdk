@@ -3,7 +3,7 @@ import { styled, ThemeProvider, DarkTheme } from 'baseui'
 import { Button, SHAPE, KIND, SIZE } from 'baseui/button'
 import Icons from '../icons'
 import Logo from '../../components/icons/Logo'
-import { useEditor } from '@scenify/sdk'
+import { useEditor } from '../../../../../../src'
 import Resize from './components/Resize'
 
 const Container = styled('div', props => ({

@@ -6,7 +6,7 @@ import Navbar from './components/Navbar'
 import Panels from './components/Panels'
 import Toolbox from './components/Toolbox'
 import Footer from './components/Footer'
-import Editor from '@scenify/sdk'
+import Editor from '../../../../src'
 
 function App() {
   const { setTemplates, setShapes } = useAppContext()

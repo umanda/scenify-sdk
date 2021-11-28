@@ -5,7 +5,7 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import { Input } from 'baseui/input'
 import Icons from '../../../../../components/icons'
 import { getPixabayImages, PixabayImage } from '../../../../../services/pixabay'
-import { useEditor } from '@scenify/sdk'
+import { useEditor } from '../../../../../../../src'
 import { useDebounce } from 'use-debounce'
 
 function Images() {

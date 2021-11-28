@@ -2,7 +2,7 @@ import * as React from 'react'
 import Icons from '../../../icons'
 import { Button, KIND, SIZE } from 'baseui/button'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
-import { useEditor } from '@scenify/sdk'
+import { useEditor } from '../../../../../../../../src'
 
 function Position() {
   const editor = useEditor()

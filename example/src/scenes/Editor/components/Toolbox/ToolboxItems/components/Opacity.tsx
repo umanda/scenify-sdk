@@ -4,7 +4,7 @@ import Icons from '../../../icons'
 import { Button, SHAPE, KIND, SIZE } from 'baseui/button'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
 import { Slider } from 'baseui/slider'
-import { useActiveObject, useEditor } from '@scenify/sdk'
+import { useActiveObject, useEditor } from '../../../../../../../../src'
 import { useEffect, useState } from 'react'
 
 function Opacity() {
