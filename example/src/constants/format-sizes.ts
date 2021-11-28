@@ -5,8 +5,8 @@ const formatSizes = [
     description: '1200 x 1200',
     size: {
       width: 1200,
-      height: 1200
-    }
+      height: 1200,
+    },
   },
   {
     id: 2,
@@ -14,8 +14,8 @@ const formatSizes = [
     description: '1200 x 627',
     size: {
       width: 1200,
-      height: 627
-    }
+      height: 627,
+    },
   },
   {
     id: 3,
@@ -23,8 +23,8 @@ const formatSizes = [
     description: '820 x 312',
     size: {
       width: 820,
-      height: 312
-    }
+      height: 312,
+    },
   },
   {
     id: 4,
@@ -32,8 +32,8 @@ const formatSizes = [
     description: '640 x 360',
     size: {
       width: 640,
-      height: 360
-    }
+      height: 360,
+    },
   },
   {
     id: 5,
@@ -41,8 +41,8 @@ const formatSizes = [
     description: '1080 x 1920',
     size: {
       width: 1080,
-      height: 1920
-    }
+      height: 1920,
+    },
   },
   {
     id: 6,
@@ -50,8 +50,8 @@ const formatSizes = [
     description: '1080 x 1920',
     size: {
       width: 1080,
-      height: 1920
-    }
+      height: 1920,
+    },
   },
   {
     id: 7,
@@ -59,8 +59,8 @@ const formatSizes = [
     description: '1080 x 1080',
     size: {
       width: 1080,
-      height: 1080
-    }
+      height: 1080,
+    },
   },
   {
     id: 8,
@@ -68,8 +68,8 @@ const formatSizes = [
     description: '1024 x 521',
     size: {
       width: 1024,
-      height: 512
-    }
+      height: 512,
+    },
   },
   {
     id: 9,
@@ -77,8 +77,8 @@ const formatSizes = [
     description: '1500 x 500',
     size: {
       width: 1500,
-      height: 500
-    }
+      height: 500,
+    },
   },
   {
     id: 10,
@@ -86,8 +86,8 @@ const formatSizes = [
     description: '736 x 1128',
     size: {
       width: 736,
-      height: 1128
-    }
+      height: 1128,
+    },
   },
   {
     id: 11,
@@ -95,8 +95,8 @@ const formatSizes = [
     description: '600 x 300',
     size: {
       width: 600,
-      height: 300
-    }
+      height: 300,
+    },
   },
   {
     id: 12,
@@ -104,8 +104,8 @@ const formatSizes = [
     description: '1024 x 768',
     size: {
       width: 1024,
-      height: 768
-    }
+      height: 768,
+    },
   },
   {
     id: 13,
@@ -113,9 +113,9 @@ const formatSizes = [
     description: '1800 x 750',
     size: {
       width: 1800,
-      height: 750
-    }
-  }
+      height: 750,
+    },
+  },
 ]
 
 export default formatSizes

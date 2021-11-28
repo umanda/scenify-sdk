@@ -1,19 +1,15 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { EditorProvider } from '../../src'
-import App from './App'
-import { ChakraProvider } from '@chakra-ui/react'
-import { extendTheme } from '@chakra-ui/react'
-import { theme } from './theme'
-import 'focus-visible'
-const extendedTheme = extendTheme(theme)
+import Providers from './Providers'
+import Editor from './scenes/Editor'
+import Container from './Container'
 
 ReactDOM.render(
-  <ChakraProvider>
-    <EditorProvider>
-      <App />
-    </EditorProvider>{' '}
-  </ChakraProvider>,
+  <Providers>
+    <Container>
+      <Editor />
+    </Container>
+  </Providers>,
   document.getElementById('root')
 )

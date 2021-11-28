@@ -8,13 +8,19 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.10",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "focus-visible": "^5.2.0",
-    "framer-motion": "^4",
+    "@scenify/sdk": "^0.2.16",
+    "@types/styletron-engine-atomic": "^1.1.1",
+    "@types/styletron-react": "^5.0.3",
+    "@types/styletron-standard": "^2.0.2",
+    "axios": "^0.24.0",
+    "baseui": "^10.6.0",
+    "nanoid": "^3.1.30",
     "react-app-polyfill": "^1.0.0",
-    "react-colorful": "^5.5.0"
+    "react-colorful": "^5.5.0",
+    "react-custom-scrollbars": "^4.2.1",
+    "styletron-engine-atomic": "^1.4.8",
+    "styletron-react": "^6.0.2",
+    "use-debounce": "^7.0.1"
   },
   "alias": {
     "react": "../node_modules/react",
