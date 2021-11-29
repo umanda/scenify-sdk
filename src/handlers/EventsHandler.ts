@@ -164,11 +164,13 @@ class EventsHandler extends BaseHandler {
     if (target) {
       this.context.setActiveObject(null)
       const initialSelection = this.canvas.getActiveObject() as any
-      const isGroup = initialSelection && initialSelection.type === ObjectType.GROUP
-      if (initialSelection && !isGroup && initialSelection._objects) {
+      const isNotMultipleSelection =
+        (initialSelection && initialSelection.type === ObjectType.GROUP) ||
+        (initialSelection && initialSelection.type === ObjectType.STATIC_VECTOR)
+
+      if (initialSelection && !isNotMultipleSelection && initialSelection._objects) {
         const filteredObjects = initialSelection._objects.filter(object => {
-          // console.log(object.type, !object.locked || object.type !== 'Background')
-          if (object.type === 'Background') {
+          if (object.type === ObjectType.BACKGROUND) {
             return false
           }
           return !object.locked
