@@ -200,7 +200,6 @@ class ObjectToFabric {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
         let objects = []
         for (const object of item.objects) {
-          console.log(object)
           objects = objects.concat(await this.run(object, options, true))
         }
         const element = new fabric.Group(objects, baseOptions)
@@ -270,6 +269,8 @@ class ObjectToFabric {
 
   getBaseOptions(item, options, inGroup) {
     const {
+      id,
+      name,
       left,
       top,
       width,
@@ -290,6 +291,8 @@ class ObjectToFabric {
     let metadata = item.metadata ? item.metadata : {}
     const { fill } = metadata
     let baseOptions = {
+      id,
+      name,
       angle: angle ? angle : 0,
       top: inGroup ? top : options.top + top,
       left: inGroup ? left : options.left + left,

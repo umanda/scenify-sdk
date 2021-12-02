@@ -66,6 +66,23 @@ class Editor extends EventManager {
     this.handlers.objectsHandler.deselect()
   }
 
+  // QUERY
+  public findByName = (name: string) => {
+    return this.handlers.objectsHandler.findByName(name)
+  }
+
+  public removeByName = (name: string) => {
+    this.handlers.objectsHandler.removeByName(name)
+  }
+
+  public findById = (id: string) => {
+    return this.handlers.objectsHandler.findById(id)
+  }
+
+  public removeById = (id: string) => {
+    this.handlers.objectsHandler.removeById(id)
+  }
+
   // HISTORY
   public undo = () => {
     this.handlers.historyHandler.undo()
