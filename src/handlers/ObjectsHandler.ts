@@ -609,11 +609,8 @@ class ObjectHandler extends BaseHandler {
       activeObject._objects.forEach(object => {
         object.set({ hasControls: false, lockMovementY: true, lockMovementX: true, locked: true })
       })
-      // @ts-ignore
       activeObject.set({ hasControls: false, lockMovementY: true, lockMovementX: true, locked: true })
     } else {
-      // @ts-ignore
-
       activeObject.set({ hasControls: false, lockMovementY: true, lockMovementX: true, locked: true })
     }
     this.canvas.renderAll()
@@ -640,6 +637,34 @@ class ObjectHandler extends BaseHandler {
     }
     this.canvas.renderAll()
     this.handlers.historyHandler.save('object:updated')
+  }
+
+  public findByName = (name: string) => {
+    return this.canvas.getObjects().filter(o => o.name === name)
+  }
+
+  public removeByName = (name: string) => {
+    this.canvas.getObjects().forEach(o => {
+      if (o.name === name) {
+        this.canvas.remove(o)
+        this.handlers.historyHandler.save('object:removed')
+      }
+    })
+    this.canvas.requestRenderAll()
+  }
+
+  public findById = (id: string) => {
+    return this.canvas.getObjects().filter(o => o.id === id)
+  }
+
+  public removeById = (id: string) => {
+    this.canvas.getObjects().forEach(o => {
+      if (o.id === id) {
+        this.canvas.remove(o)
+        this.handlers.historyHandler.save('object:removed')
+      }
+    })
+    this.canvas.requestRenderAll()
   }
 }
 

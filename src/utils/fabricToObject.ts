@@ -176,7 +176,6 @@ class ExportObject {
 
   [ObjectType.GROUP](item, options, inGroup) {
     const baseOptions = this.getBaseOptions(item, options, inGroup)
-    console.log({ baseOptions })
     const groupObjects = item.objects.map(object => {
       return this.run(object, options, true)
     })
@@ -188,6 +187,8 @@ class ExportObject {
 
   getBaseOptions(item, options, inGroup = false) {
     const {
+      id,
+      name,
       top,
       left,
       width,
@@ -208,6 +209,8 @@ class ExportObject {
       visible
     } = item
     const baseOptions = {
+      id,
+      name,
       angle,
       stroke,
       strokeWidth,

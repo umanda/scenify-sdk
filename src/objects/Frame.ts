@@ -44,5 +44,10 @@ declare module 'fabric' {
     class Frame extends FrameObject {
       constructor(options: FrameOptions)
     }
+    interface Object {
+      id: string
+      name: string
+      locked: boolean
+    }
   }
 }

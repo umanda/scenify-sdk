@@ -7,6 +7,7 @@ class DesignHandler extends BaseHandler {
   public async toDataURL(params: any) {
     const staticCanvas = new fabric.StaticCanvas(null)
     const template = this.handlers.templateHandler.exportToJSON() as Template
+    console.log({ template })
     await this.loadTemplate(staticCanvas, template, params)
     const data = staticCanvas.toDataURL({
       multiplier: 3,

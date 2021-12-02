@@ -48,7 +48,6 @@ export class StaticImageObject extends fabric.Image {
         image.clipPath = null
         const element = image.getElement()
         const { top = 0, left = 0, cropX = 0, cropY = 0, scaleX = 1, scaleY = 1 } = image
-        console.log({ image })
         image.set({
           top: top - cropY * scaleY,
           left: left - cropX * scaleX,
@@ -56,16 +55,16 @@ export class StaticImageObject extends fabric.Image {
           width: element.width,
           cropX: 0,
           cropY: 0,
-          opacity: 0.4,
-          selectable: false,
+          opacity: 0.6,
+          selectable: true,
           evented: false,
           excludeFromExport: true
         })
         this.__editingImage = image
         this.canvas!.add(this.__editingImage)
-        this.on('moving', (this.__editingOnMoving = this.__editingOnMoving.bind(this)))
+        // this.on('moving', (this.__editingOnMoving = this.__editingOnMoving.bind(this)))
         this.controls = this.__editingControls()
-        this.fire('enter:editing', { target: this })
+        // this.fire('enter:editing', { target: this })
         this.canvas?.requestRenderAll()
       })
     }
