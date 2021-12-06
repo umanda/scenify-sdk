@@ -190,6 +190,11 @@ class Editor extends EventManager {
   public destroy = () => {
     this.handlers.destroy()
   }
+
+  // ANIMATIONS
+  public animate = () => {
+    this.handlers.animationHandler.animate('PAN')
+  }
 }
 
 export default Editor

@@ -37,7 +37,7 @@ function Panel() {
                   display: 'flex',
                   justifyContent: 'center'
                 }}
-                onClick={() => editor.add(shape)}
+                onClick={() => editor.add({ ...shape, originX: 'center', originY: 'center' })}
               >
                 <img
                   width="80px"
