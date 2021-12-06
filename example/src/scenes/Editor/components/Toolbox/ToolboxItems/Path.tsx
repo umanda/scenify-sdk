@@ -32,10 +32,17 @@ function Path() {
           <Icons.FillColor size={24} color="#000000" />
         </Button>
         <Button
-          onClick={() => editor.animate()}
+          overrides={{
+            StartEnhancer: {
+              style: {
+                marginRight: '8px'
+              }
+            }
+          }}
+          startEnhancer={() => <Icons.TimeFast size={24} />}
+          onClick={() => setActiveSubMenu(SubMenuType.ANIMATIONS)}
           size={SIZE.compact}
           kind={KIND.tertiary}
-          shape={SHAPE.square}
         >
           Animate
         </Button>

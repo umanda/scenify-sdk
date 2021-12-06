@@ -7,6 +7,7 @@ import FontFamily from './FontFamily'
 import Color from './Color'
 import Images from './Images'
 import Illustrations from './Illustrations'
+import Animations from './Animations'
 
 class PanelItems {
   static Background = Background
@@ -18,6 +19,7 @@ class PanelItems {
   static Color = Color
   static Images = Images
   static Illustrations = Illustrations
+  static Animations = Animations
 }
 
 export default PanelItems

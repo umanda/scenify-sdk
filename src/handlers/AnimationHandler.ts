@@ -1,4 +1,4 @@
-import gsap, { Bounce, Linear, Expo, Circ, SteppedEase, Elastic } from 'gsap'
+import gsap, { Linear } from 'gsap'
 import { HandlerOptions } from '../common/interfaces'
 import BaseHandler from './BaseHandler'
 
@@ -59,69 +59,6 @@ class AnimationHandler extends BaseHandler {
     if (activeObject) {
       gsap.from(activeObject, {
         ...animations[animation],
-        onUpdate: () => {
-          this.canvas.requestRenderAll()
-        },
-        onComplete: () => {
-          activeObject.setCoords()
-        }
-      })
-    }
-  }
-
-  public breathe = () => {
-    const activeObject = this.canvas.getActiveObject()
-    if (activeObject) {
-      activeObject.set({
-        originX: 'center',
-        originY: 'center'
-      })
-      console.log(activeObject.scaleY)
-      gsap.from(activeObject, {
-        duration: 1,
-        scaleX: activeObject.scaleX - activeObject.scaleX / 2,
-        scaleY: activeObject.scaleY - activeObject.scaleY / 2,
-        ease: 'slow(0.7, 0.7, false)',
-        onUpdate: () => {
-          this.canvas.requestRenderAll()
-        },
-        onComplete: () => {
-          activeObject.setCoords()
-        }
-      })
-    }
-  }
-
-  public stop = () => {
-    const activeObject = this.canvas.getActiveObject()
-    if (activeObject) {
-      activeObject.set({
-        originX: 'center',
-        originY: 'center'
-      })
-      console.log(activeObject.scaleY)
-      gsap.from(activeObject, {
-        duration: 1,
-        scaleX: activeObject.scaleX + activeObject.scaleX / 2,
-        scaleY: activeObject.scaleY + activeObject.scaleY / 2,
-        ease: 'slow(0.7, 0.7, false)',
-        onUpdate: () => {
-          this.canvas.requestRenderAll()
-        },
-        onComplete: () => {
-          activeObject.setCoords()
-        }
-      })
-    }
-  }
-
-  public default = () => {
-    const activeObject = this.canvas.getActiveObject()
-    if (activeObject) {
-      gsap.from(activeObject, {
-        duration: 1.5,
-        top: 0 - activeObject.height,
-        ease: Bounce.easeInOut,
         onUpdate: () => {
           this.canvas.requestRenderAll()
         },

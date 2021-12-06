@@ -192,8 +192,8 @@ class Editor extends EventManager {
   }
 
   // ANIMATIONS
-  public animate = () => {
-    this.handlers.animationHandler.animate('PAN')
+  public animate = (name: any) => {
+    this.handlers.animationHandler.animate(name)
   }
 }
 
