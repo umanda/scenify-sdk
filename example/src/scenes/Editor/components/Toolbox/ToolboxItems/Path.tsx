@@ -7,11 +7,9 @@ import Delete from './components/Delete'
 import Duplicate from './components/Duplicate'
 import Opacity from './components/Opacity'
 import Position from './components/Position'
-import { useEditor } from '../../../../../../../src'
-
+import Animate from './components/Animate'
 function Path() {
   const { setActiveSubMenu } = useAppContext()
-  const editor = useEditor()
   return (
     <div
       style={{
@@ -31,21 +29,7 @@ function Path() {
         >
           <Icons.FillColor size={24} color="#000000" />
         </Button>
-        <Button
-          overrides={{
-            StartEnhancer: {
-              style: {
-                marginRight: '8px'
-              }
-            }
-          }}
-          startEnhancer={() => <Icons.TimeFast size={24} />}
-          onClick={() => setActiveSubMenu(SubMenuType.ANIMATIONS)}
-          size={SIZE.compact}
-          kind={KIND.tertiary}
-        >
-          Animate
-        </Button>
+        <Animate />
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Position />

@@ -25,11 +25,13 @@ function NavbarEditor() {
   const editor = useEditor()
   const downloadImage = async () => {
     if (editor) {
-      const data = await editor.toPNG({})
+      // editor.toGif({})
+      const data = await editor.toGif({})
       if (data) {
         const a = document.createElement('a')
+        // @ts-ignore
         a.href = data
-        a.download = 'drawing.png'
+        a.download = 'drawing.gif'
         a.click()
       }
     }

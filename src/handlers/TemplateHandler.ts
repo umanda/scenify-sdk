@@ -5,6 +5,7 @@ import BaseHandler from './BaseHandler'
 
 class TemplateHandler extends BaseHandler {
   exportToJSON() {
+    let animated = false
     const canvasJSON: any = this.canvas.toJSON(this.handlers.propertiesToInclude)
     const frameOptions = this.handlers.frameHandler.getOptions()
     const template = {
@@ -17,6 +18,9 @@ class TemplateHandler extends BaseHandler {
       frame: {
         width: frameOptions.width,
         height: frameOptions.height
+      },
+      metadata: {
+        animated
       }
     }
 
@@ -24,8 +28,13 @@ class TemplateHandler extends BaseHandler {
     objects.forEach(object => {
       const exportedObject = exportObject.run(object, frameOptions)
       template.objects = template.objects.concat(exportedObject)
+      if (object.animations && object.animations !== 'NONE') {
+        animated = true
+      }
     })
-    console.log({ template })
+    template.metadata = {
+      animated
+    }
     return template
   }
 
@@ -53,7 +62,7 @@ class TemplateHandler extends BaseHandler {
     this.handlers.historyHandler.save('template:load')
     this.handlers.historyHandler.clear()
     this.handlers.zoomHandler.zoomToFit()
-    this.handlers.animationHandler.apply()
+    this.handlers.animationHandler.setTemplateAnimations()
   }
 }
 export default TemplateHandler

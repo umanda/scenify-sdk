@@ -2,7 +2,6 @@ import { ObjectType } from '../common/constants'
 
 class ExportObject {
   run(item, options, inGroup = false) {
-    // console.log({ inGroup })
     let object
     switch (item.type) {
       case ObjectType.STATIC_IMAGE:

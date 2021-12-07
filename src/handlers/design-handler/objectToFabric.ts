@@ -217,10 +217,13 @@ class ObjectToFabric {
       skewX,
       skewY,
       stroke,
-      strokeWidth
+      strokeWidth,
+      animation,
+      originX,
+      originY
     } = item
     let metadata = item.metadata ? item.metadata : {}
-    const { fill, angle, originX, originY } = metadata
+    const { fill, angle } = metadata
     let baseOptions = {
       angle: angle,
       top: top,
@@ -239,7 +242,8 @@ class ObjectToFabric {
       skewY: skewY ? skewY : 0,
       metadata: metadata,
       stroke,
-      strokeWidth
+      strokeWidth,
+      animation
     }
     return baseOptions
   }

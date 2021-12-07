@@ -13,6 +13,7 @@ import Delete from './components/Delete'
 import Duplicate from './components/Duplicate'
 import Opacity from './components/Opacity'
 import Position from './components/Position'
+import Animate from './components/Animate'
 
 interface TextOptions {
   fontFamily: string
@@ -263,6 +264,7 @@ function Text() {
           <Button onClick={toggleTextAlign} size={SIZE.compact} kind={KIND.tertiary} shape={SHAPE.square}>
             <TextAlignIcon size={24} />
           </Button>
+          <Animate />
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>

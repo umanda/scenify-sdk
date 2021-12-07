@@ -8,10 +8,10 @@ import Duplicate from './components/Duplicate'
 import Opacity from './components/Opacity'
 import Position from './components/Position'
 import { useEditor } from '../../../../../../../src'
+import Animate from './components/Animate'
 
 function Image() {
   const { setActiveSubMenu } = useAppContext()
-  const editor = useEditor()
   return (
     <div
       style={{
@@ -31,14 +31,7 @@ function Image() {
         >
           <Icons.FillColor size={24} color="#000000" />
         </Button>
-        <Button
-          onClick={() => editor.animate()}
-          size={SIZE.compact}
-          kind={KIND.tertiary}
-          shape={SHAPE.square}
-        >
-          Animate
-        </Button>
+        <Animate />
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Position />
