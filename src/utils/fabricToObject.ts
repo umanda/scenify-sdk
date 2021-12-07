@@ -2,7 +2,6 @@ import { ObjectType } from '../common/constants'
 
 class ExportObject {
   run(item, options, inGroup = false) {
-    // console.log({ inGroup })
     let object
     switch (item.type) {
       case ObjectType.STATIC_IMAGE:
@@ -206,7 +205,8 @@ class ExportObject {
       flipY,
       skewX,
       skewY,
-      visible
+      visible,
+      animation
     } = item
     const baseOptions = {
       id,
@@ -228,7 +228,8 @@ class ExportObject {
       flipY,
       skewX,
       skewY,
-      visible
+      visible,
+      animation
     }
     return baseOptions
   }

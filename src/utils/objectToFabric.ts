@@ -286,7 +286,8 @@ class ObjectToFabric {
       skewX,
       skewY,
       originX,
-      originY
+      originY,
+      animation
     } = item
     let metadata = item.metadata ? item.metadata : {}
     const { fill } = metadata
@@ -310,7 +311,8 @@ class ObjectToFabric {
       flipY: flipY ? flipY : false,
       skewX: skewX ? skewX : 0,
       skewY: skewY ? skewY : 0,
-      metadata: metadata
+      metadata: metadata,
+      animation
     }
     return baseOptions
   }

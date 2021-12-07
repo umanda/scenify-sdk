@@ -10,8 +10,10 @@ import PersonalizationHandler from './PersonalizationHandler'
 import TemplateHandler from './TemplateHandler'
 import ScrollbarHandler from './ScrollbarHandler'
 import DesignHandler from './design-handler/design-handler'
+import GifHandler from './gif-handler/gif-handler'
 import GuidelinesHandler from './GuidelinesHandler'
 import BackgroundHandler from './BackgroundHandler'
+import AnimationHandler from './AnimationHandler'
 class Handlers {
   canvas: FabricCanvas
   public frameHandler: FrameHandler
@@ -25,8 +27,10 @@ class Handlers {
   public propertiesToInclude: string[]
   public personalizationHandler: PersonalizationHandler
   public designHandler: DesignHandler
+  public gifHandler: GifHandler
   public guidelinesHandler: GuidelinesHandler
   public backgroundHandler: BackgroundHandler
+  public animationHandler: AnimationHandler
 
   constructor(props: RootHandlerOptions) {
     this.propertiesToInclude = PROPERTIES_TO_INCLUDE
@@ -48,8 +52,10 @@ class Handlers {
     this.templateHandler = new TemplateHandler(handlerOptions)
     this.scrollbarHandler = new ScrollbarHandler(handlerOptions)
     this.designHandler = new DesignHandler(handlerOptions)
+    this.gifHandler = new GifHandler(handlerOptions)
     this.guidelinesHandler = new GuidelinesHandler(handlerOptions)
     this.backgroundHandler = new BackgroundHandler(handlerOptions)
+    this.animationHandler = new AnimationHandler(handlerOptions)
   }
 
   destroy = () => {}

@@ -23,6 +23,8 @@ import ToBack from './ToBack'
 import Backward from './Backward'
 import Undo from './Undo'
 import Redo from './Redo'
+import TimeFast from './TimeFast'
+
 class Icons {
   static Background = Background
   static Elements = Elements
@@ -49,6 +51,7 @@ class Icons {
   static Backward = Backward
   static Undo = Undo
   static Redo = Redo
+  static TimeFast = TimeFast
 }
 
 export default Icons

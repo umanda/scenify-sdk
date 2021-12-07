@@ -182,6 +182,10 @@ class Editor extends EventManager {
     return this.handlers.designHandler.toDataURL(options)
   }
 
+  public toGif = options => {
+    return this.handlers.gifHandler.toGif(options)
+  }
+
   // CONTEXT MENU
   public cancelContextMenu = () => {
     this.context.setContextMenuRequest(null)
@@ -189,6 +193,11 @@ class Editor extends EventManager {
 
   public destroy = () => {
     this.handlers.destroy()
+  }
+
+  // ANIMATIONS
+  public animate = (name: any) => {
+    this.handlers.animationHandler.animate(name)
   }
 }
 

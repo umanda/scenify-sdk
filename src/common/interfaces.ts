@@ -1,3 +1,4 @@
+import fabric from 'fabric/fabric-impl'
 import { IEditorContext } from '../context/editor'
 import Editor from '../Editor'
 import Handlers from '../handlers'
@@ -81,17 +82,15 @@ export interface Template {
     height: number
   }
   objects: any[]
+  metadata: {
+    animated: boolean
+  }
 }
 
 export interface EditorConfig {
   clipToFrame: boolean
   scrollLimit: number
 }
-
-// export interface EditorConfig {
-//   clipToFrame: boolean
-//   scrollLimit: number
-// }
 
 export interface GradientOptions {
   angle: number
@@ -101,3 +100,38 @@ export interface GradientOptions {
 export interface ShadowOptions extends fabric.IShadowOptions {
   enabled: boolean
 }
+
+// ANIMATIONS
+
+export enum Animations {
+  NONE = 'NONE',
+  STOMP = 'STOMP',
+  TUMBLE = 'TUMBLE',
+  RISE = 'RISE',
+  PAN = 'PAN',
+  FADE = 'FADE',
+  BREATHE = 'BREATHE'
+}
+export type AnimationType = keyof typeof Animations
+
+// GIF RENDERER
+
+interface BaseConfig {
+  silent?: boolean
+}
+
+type makeSceneFunction = (
+  fabricInstance: typeof fabric,
+  canvas: fabric.StaticCanvas,
+  anim: gsap.core.Timeline,
+  compose: () => void
+) => void
+
+interface RenderedConfig extends BaseConfig {
+  width: number
+  height: number
+  fps: number
+  makeScene: makeSceneFunction
+}
+
+export type Renderer = (config: RenderedConfig) => Promise<{ frames: string[]; frameDuration: number }>

@@ -7,7 +7,7 @@ import Delete from './components/Delete'
 import Duplicate from './components/Duplicate'
 import Opacity from './components/Opacity'
 import Position from './components/Position'
-
+import Animate from './components/Animate'
 function Illustration() {
   const { setActiveSubMenu } = useAppContext()
 
@@ -29,6 +29,7 @@ function Illustration() {
       >
         <Icons.FillColor size={24} color="#000000" />
       </Button>
+      <Animate />
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Position />
         <Opacity />

@@ -5,7 +5,7 @@ import Icons from '../icons'
 import Logo from '../../components/icons/Logo'
 import { useEditor } from '../../../../../../src'
 import Resize from './components/Resize'
-
+import { template } from './template'
 const Container = styled('div', props => ({
   height: '70px',
   background: props.$theme.colors.background,
@@ -25,11 +25,13 @@ function NavbarEditor() {
   const editor = useEditor()
   const downloadImage = async () => {
     if (editor) {
-      const data = await editor.toPNG({})
+      // editor.toGif({})
+      const data = await editor.toGif({})
       if (data) {
         const a = document.createElement('a')
+        // @ts-ignore
         a.href = data
-        a.download = 'drawing.png'
+        a.download = 'drawing.gif'
         a.click()
       }
     }
@@ -68,6 +70,9 @@ function NavbarEditor() {
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
+          <Button onClick={() => editor.importFromJSON(template)} kind={KIND.secondary}>
+            Load template
+          </Button>
           <Button onClick={downloadImage} kind={KIND.primary}>
             Download
           </Button>
