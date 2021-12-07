@@ -1,4 +1,5 @@
 import { fabric } from 'fabric'
+import { AnimationType } from '../common/interfaces'
 // @ts-ignore
 export class FrameObject extends fabric.Rect {
   static type = 'Frame'
@@ -48,6 +49,7 @@ declare module 'fabric' {
       id: string
       name: string
       locked: boolean
+      animation: AnimationType
     }
   }
 }

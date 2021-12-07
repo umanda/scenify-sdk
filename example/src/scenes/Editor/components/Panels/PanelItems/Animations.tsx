@@ -2,11 +2,15 @@ import * as React from 'react'
 import { StatefulTabs, Tab } from 'baseui/tabs'
 import { useEditor } from '../../../../../../../src'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { Input } from 'baseui/input'
-import Icons from '../../../../../components/icons'
+
 import { useState } from 'react'
 
 const animations = [
+  {
+    type: 'NONE',
+    name: 'None',
+    preview: ' '
+  },
   {
     type: 'STOMP',
     name: 'Stomp',
@@ -38,6 +42,7 @@ const animations = [
     preview: ' '
   }
 ]
+
 function Panel() {
   const [value, setValue] = useState('')
   const editor = useEditor()

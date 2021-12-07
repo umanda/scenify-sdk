@@ -206,7 +206,8 @@ class ExportObject {
       flipY,
       skewX,
       skewY,
-      visible
+      visible,
+      animation
     } = item
     const baseOptions = {
       id,
@@ -228,7 +229,8 @@ class ExportObject {
       flipY,
       skewX,
       skewY,
-      visible
+      visible,
+      animation
     }
     return baseOptions
   }

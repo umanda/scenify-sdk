@@ -5,7 +5,7 @@ import Icons from '../icons'
 import Logo from '../../components/icons/Logo'
 import { useEditor } from '../../../../../../src'
 import Resize from './components/Resize'
-
+import { template } from './template'
 const Container = styled('div', props => ({
   height: '70px',
   background: props.$theme.colors.background,
@@ -68,6 +68,9 @@ function NavbarEditor() {
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
+          <Button onClick={() => editor.importFromJSON(template)} kind={KIND.secondary}>
+            Load template
+          </Button>
           <Button onClick={downloadImage} kind={KIND.primary}>
             Download
           </Button>

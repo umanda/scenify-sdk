@@ -88,11 +88,6 @@ export interface EditorConfig {
   scrollLimit: number
 }
 
-// export interface EditorConfig {
-//   clipToFrame: boolean
-//   scrollLimit: number
-// }
-
 export interface GradientOptions {
   angle: number
   colors: string[]
@@ -101,3 +96,16 @@ export interface GradientOptions {
 export interface ShadowOptions extends fabric.IShadowOptions {
   enabled: boolean
 }
+
+// ANIMATIONS
+
+export enum Animations {
+  NONE = 'NONE',
+  STOMP = 'STOMP',
+  TUMBLE = 'TUMBLE',
+  RISE = 'RISE',
+  PAN = 'PAN',
+  FADE = 'FADE',
+  BREATHE = 'BREATHE'
+}
+export type AnimationType = keyof typeof Animations
