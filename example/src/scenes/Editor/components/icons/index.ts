@@ -24,6 +24,7 @@ import Backward from './Backward'
 import Undo from './Undo'
 import Redo from './Redo'
 import TimeFast from './TimeFast'
+import Search from './Search'
 
 class Icons {
   static Background = Background
@@ -52,6 +53,7 @@ class Icons {
   static Undo = Undo
   static Redo = Redo
   static TimeFast = TimeFast
+  static Search = Search
 }
 
 export default Icons

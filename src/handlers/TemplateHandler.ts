@@ -26,6 +26,7 @@ class TemplateHandler extends BaseHandler {
 
     const objects = canvasJSON.objects.filter(object => object.type !== ObjectType.FRAME)
     objects.forEach(object => {
+      console.log({ object })
       const exportedObject = exportObject.run(object, frameOptions)
       template.objects = template.objects.concat(exportedObject)
       if (object.animations && object.animations !== 'NONE') {
@@ -33,8 +34,10 @@ class TemplateHandler extends BaseHandler {
       }
     })
     template.metadata = {
+      ...template.metadata,
       animated
     }
+    console.log({ template })
     return template
   }
 
