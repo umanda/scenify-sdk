@@ -26,7 +26,6 @@ const renderer: Renderer = config =>
           frames.push(canvas.toDataURL())
           renderFrames()
         } else {
-          if (!silent) console.log('\nRendering complete...')
           resolve({ frames, frameDuration: frameDuration })
         }
       }
@@ -38,8 +37,7 @@ const renderer: Renderer = config =>
       })
     } catch (err) {
       console.log(err)
-      // reject(new Error('An error occured in the renderer.'))
-      return ''
+      reject(new Error('An error occured in the renderer.'))
     }
   })
 

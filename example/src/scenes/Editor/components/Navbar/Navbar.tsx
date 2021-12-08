@@ -37,6 +37,42 @@ function NavbarEditor() {
     }
   }
 
+  const handleLoadTemplate = async () => {
+    const fonts = []
+    template.objects.forEach(object => {
+      if (object.type === 'StaticText' || object.type === 'DynamicText') {
+        fonts.push({
+          name: object.metadata.fontFamily,
+          url: object.metadata.fontURL,
+          options: { style: 'normal', weight: 400 }
+        })
+      }
+    })
+    await loadFonts(fonts)
+    editor.importFromJSON(template)
+  }
+
+  const loadFonts = fonts => {
+    const promisesList = fonts.map(font => {
+      // @ts-ignore
+      return new FontFace(font.name, `url(${font.url})`, font.options).load().catch(err => err)
+    })
+    return new Promise((resolve, reject) => {
+      Promise.all(promisesList)
+        .then(res => {
+          res.forEach(uniqueFont => {
+            // @ts-ignore
+            if (uniqueFont && uniqueFont.family) {
+              // @ts-ignore
+              document.fonts.add(uniqueFont)
+              resolve(true)
+            }
+          })
+        })
+        .catch(err => reject(err))
+    })
+  }
+
   return (
     <ThemeProvider theme={DarkTheme}>
       <Container>
@@ -70,7 +106,7 @@ function NavbarEditor() {
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <Button onClick={() => editor.importFromJSON(template)} kind={KIND.secondary}>
+          <Button onClick={handleLoadTemplate} kind={KIND.secondary}>
             Load template
           </Button>
           <Button onClick={downloadImage} kind={KIND.primary}>
