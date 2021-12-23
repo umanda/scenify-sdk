@@ -9,7 +9,6 @@ class DesignHandler extends BaseHandler {
     const template = this.handlers.templateHandler.exportToJSON() as Template
     await this.loadTemplate(staticCanvas, template, params)
     const data = staticCanvas.toDataURL({
-      multiplier: 3,
       top: 0,
       left: 0,
       height: staticCanvas.getHeight(),
