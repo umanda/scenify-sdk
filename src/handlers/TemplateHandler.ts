@@ -42,7 +42,7 @@ class TemplateHandler extends BaseHandler {
   async importFromJSON(template) {
     this.handlers.objectsHandler.clear()
     const frameParams = template.frame
-    this.handlers.frameHandler.update(frameParams)
+    this.handlers.frameHandler.setSize(frameParams)
 
     const frameOptions = this.handlers.frameHandler.getOptions()
     for (const object of template.objects) {
