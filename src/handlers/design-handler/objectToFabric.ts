@@ -220,10 +220,11 @@ class ObjectToFabric {
       strokeWidth,
       animation,
       originX,
-      originY
+      originY,
+      angle
     } = item
     let metadata = item.metadata ? item.metadata : {}
-    const { fill, angle } = metadata
+    const { fill } = metadata
     let baseOptions = {
       angle: angle,
       top: top,
